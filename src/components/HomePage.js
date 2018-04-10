@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { css } from 'glamor'
 import glamorous from 'glamorous';
+import Hamburger from './Hamburger';
 
 const blueColors = [
     '#BBDEFB',
