@@ -102,7 +102,6 @@ export default class Hamburger extends PureComponent {
 
                                         </div>
                                     ))
-
                                 }
                             </div>
 
