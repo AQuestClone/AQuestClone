@@ -55,8 +55,43 @@ let Photo = glamorous.div(
 let PhotoWrapper = glamorous.div(
     {
         gridColumnEnd: 'span 2',
-        overflow: 'hidden'
+        overflow: 'hidden',
+        position: 'relative'
     }
+)
+
+let PhotoTitle = glamorous.h1(
+    {
+        position: 'absolute',
+        left: 50,
+        zIndex: '5',
+        fontFamily: "'Montserrat', 'sans-serif'",
+        color: 'white',
+        fontSize: '12px',
+        fontWeight: '500',
+        letterSpacing: '0.25em',
+    },
+    (props) => ({
+        top: props.top,
+        bottom: props.bottom
+    })
+)
+
+let HashTag = glamorous.h2(
+    {
+        position: 'absolute',
+        left: 50,
+        zIndex: '5',
+        fontFamily: "'Libre Baskerville', 'serif'",
+        fontSize: '15px',
+        fontWeight: '400',
+        letterSpacing: '0.05em',
+        color: '#e6e6e6'
+    },
+    (props) => ({
+        top: props.top,
+        bottom: props.bottom
+    })
 )
 
 
@@ -66,10 +101,18 @@ export default class ProjLink extends Component {
         let {
             color,
             image,
-            rowSpan
+            rowSpan,
+            title,
+            hashtag,
+            titleTop,
+            titleBottom,
+            hashtagTop,
+            hashtagBottom
         } = this.props
         return (
             <PhotoWrapper style={{ gridRowEnd: `span ${rowSpan}` }}>
+                <PhotoTitle top={titleTop} bottom={titleBottom}>{title}</PhotoTitle>
+                <HashTag top={hashtagTop} bottom={hashtagBottom}>{hashtag}</HashTag>
                 <Photo rowSpan={rowSpan} color={color} image={image}>
 
                 </Photo>

@@ -48,7 +48,7 @@ const redColors = [
 ]
 
 const spotlightStyle = css({
-    height: 500,
+    height: 768,
     width: '100%',
     background: 'orange'
 })
@@ -56,8 +56,20 @@ const spotlightStyle = css({
 const portfolioStyle = css({
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fill, 25%)',
-    gridAutoRows: 'minmax(400px, auto)'
+    gridAutoRows: 'minmax(500px, auto)'
 })
+
+const PortfolioText = glamorous.div(
+    {
+        gridRowEnd: 'span 1',
+        gridColumnEnd: 'span 2',
+        width: '100%',
+        height: '100%'
+    },
+    (props) => ({
+        background: props.background
+    })
+)
 
 const SocialDiv = glamorous.div(
     {
@@ -79,6 +91,72 @@ const InfoBreak = glamorous.div(
     })
 )
 
+const configStyles = [
+    {
+        rowSpan: 2, 
+        image: cecchi,
+        title: 'CECCHI',
+        hashtag: '#corporate #website',
+        titleTop: 40,
+        hashtagTop: 55
+    },
+    {
+        rowSpan: 2,
+        image: muller,
+        title: 'MULLER',
+        hashtag: '#website',
+        titleTop: 40,
+        hashtagTop: 55
+    },
+    {
+        rowSpan: 2,
+        image: palzileri,
+        title: 'PAL ZILERI',
+        hashtag: '#fashion . #website',
+        titleBottom: 60,
+        hashtagBottom: 33
+    },
+    {
+        rowSpan: 1,
+        image: linealight,
+        title: 'LINEALIGHT',
+        hashtag: '#website',
+        titleTop: 40,
+        hashtagTop: 55
+    },
+    {
+        rowSpan: 1,
+        title: 'CLARALUNA',
+        hashtag: '#corporate #website',
+        titleTop: 40,
+        hashtagTop: 55
+    },
+    {
+        rowSpan: 2,
+        image: fornasetti,
+        title: 'FORNASETTI',
+        hashtag: '#storytelling . #website',
+        titleTop: 40,
+        hashtagTop: 55
+    },
+    {
+        rowSpan: 2,
+        image: ferrari,
+        title: 'FERRARI PER MUTADO',
+        hashtag: '#contest . #website',
+        titleTop: 40,
+        hashtagTop: 55
+    },
+    {
+        rowSpan: 1,
+        image: mediaset,
+        title: 'MEDIASET PREMIUM',
+        hashtag: '#app . #website',
+        titleTop: 40,
+        hashtagTop: 55
+    }
+]
+
 export default class HomePage extends Component {
 
     render() {
@@ -87,16 +165,21 @@ export default class HomePage extends Component {
                 <div className={`${spotlightStyle}`}>
                 </div>
                 <div className={`${portfolioStyle}`}>
-                    <ProjLink rowSpan={1} color={blueColors[0]}/>
-                    <ProjLink rowSpan={2} image={cecchi}/>
-                    <ProjLink rowSpan={2} image={muller}/>
-                    <ProjLink rowSpan={2} image={palzileri} />
-                    <ProjLink  rowSpan={1} image={linealight}/>
-                    <ProjLink  rowSpan={1} image={claraluna} />
-                    <ProjLink rowSpan={2} image={fornasetti} />
-                    <ProjLink rowSpan={2} image={ferrari} />
-                    <ProjLink rowSpan={1} image={mediaset} />
-                    <ProjLink rowSpan={1} color={greenColors[1]} />
+                    <PortfolioText background={blueColors[0]}/>
+                    {/* {
+                        configStyles.map((style, idx) => {
+                            return <ProjLink config={style} />
+                        })
+                    } */}
+                    <ProjLink rowSpan={2} image={cecchi} title='CECCHI' hashtag='#corporate #website' titleTop={40} hashtagTop={55}/>
+                    <ProjLink rowSpan={2} image={muller} title='MULLER' hashtag='#website' titleTop={40} hashtagTop={55}/>
+                    <ProjLink rowSpan={2} image={palzileri} title='PAL ZILERI' hashtag='#fashion . #website'titleBottom={60} hashtagBottom={33}/>
+                    <ProjLink  rowSpan={1} image={linealight} title='LINEALIGHT' hashtag='#website' titleTop={40} hashtagTop={55}/>
+                    <ProjLink  rowSpan={1} image={claraluna} title='CLARALUNA' hashtag='#corporate #website' titleTop={40} hashtagTop={55}/>
+                    <ProjLink rowSpan={2} image={fornasetti} title='FORNASETTI' hashtag='#storytelling . #website' titleTop={40} hashtagTop={55}/>
+                    <ProjLink rowSpan={2} image={ferrari} title='FERRARI PER MUTADO' hashtag='#contest . #website' titleTop={40} hashtagTop={55}/>
+                    <ProjLink rowSpan={1} image={mediaset} title='MEDIASET PREMIUM' hashtag='#app . #website' titleTop={40} hashtagTop={55}/>
+                    <PortfolioText background={blueColors[1]} />
                 </div>
                 <InfoBreak width='100%' color={purpleColors[0]} />
                 <div className={`${portfolioStyle}`}>
@@ -121,3 +204,9 @@ export default class HomePage extends Component {
         )
     }
 }
+
+//config objects
+
+
+
+

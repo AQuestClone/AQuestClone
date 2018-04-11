@@ -1,7 +1,6 @@
-import React, { Component, PureComponent } from 'react';
+import React, { PureComponent } from 'react';
 import { StaggeredMotion, spring } from 'react-motion';
 import glamorous from 'glamorous';
-import { css } from 'glamor';
 
 
 const Wrapper = glamorous.div(
@@ -49,12 +48,6 @@ export default class Hamburger extends PureComponent {
         }
     }
     render() {
-
-        const {
-            image
-        } = this.props;
-
-
         const endingStyles = (prevStyles) => {
             switch (this.state.hovered) {
                 case 1:
