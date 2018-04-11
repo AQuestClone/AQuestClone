@@ -6,13 +6,19 @@ let Photo = glamorous.div(
         ':hover': {
             transform: 'translate3d(0px,0,0)'
         },
+        ':hover:before': {
+            opacity: '1'
+        },
+        ':hover:after': {
+            opacity: '0'
+        },
 
         ':before': {
             position: 'absolute',
             zIndex: '1',
             background: 'linear-gradient(to bottom,rgba(51,51,51,0) 0,rgba(51,51,51,.5) 90%)',
-            opacity: '1',
-            transform: 'translate3d(0,50%,0)',
+            opacity: '0',
+            transform: 'translate3d(0, 0%,0)',
             transition: 'opacity .35s,transform .35s',
             left: '0',
             top: '0',
@@ -24,7 +30,7 @@ let Photo = glamorous.div(
             position: 'absolute',
             zIndex: '1',
             background: 'linear-gradient(to bottom,rgba(51,51,51,.5) 0,rgba(51,51,51,0) 100%)',
-            transition: 'opacity .35s,transform .35s',
+            transition: 'opacity .35s, transform .35s',
             left: '0',
             top: '0',
             width: '100%',
