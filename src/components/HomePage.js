@@ -2,6 +2,18 @@ import React, { Component } from 'react';
 import { css } from 'glamor'
 import glamorous from 'glamorous';
 import Hamburger from './Hamburger';
+import ProjLink from './ProjLink';
+
+//images
+import cecchi from './assets/cecchi.jpg';
+import muller from './assets/muller.jpg';
+import palzileri from './assets/palzileri.jpg';
+import linealight from './assets/linealight.jpg';
+import claraluna from './assets/claraluna.jpg';
+import fornasetti from './assets/fornasetti.jpg';
+import ferrari from './assets/ferrari.jpg';
+import mediaset from './assets/mediaset.jpg';
+
 
 const blueColors = [
     '#BBDEFB',
@@ -36,7 +48,7 @@ const redColors = [
 ]
 
 const spotlightStyle = css({
-    height: 768,
+    height: 500,
     width: '100%',
     background: 'orange'
 })
@@ -44,28 +56,8 @@ const spotlightStyle = css({
 const portfolioStyle = css({
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fill, 25%)',
-    gridAutoRows: 'minmax(500px, auto)'
+    gridAutoRows: 'minmax(400px, auto)'
 })
-
-const PortfolioSmall = glamorous.div(
-    {
-        gridColumnEnd: 'span 2',
-        gridRowEnd: 'span 1'
-    },
-    (props) => ({
-        background: props.color
-    })
-)
-
-const PortfolioBig = glamorous.div(
-    {
-        gridColumnEnd: 'span 2',
-        gridRowEnd: 'span 2'
-    },
-    (props) => ({
-        background: props.color
-    })
-)
 
 const SocialDiv = glamorous.div(
     {
@@ -95,16 +87,16 @@ export default class HomePage extends Component {
                 <div className={`${spotlightStyle}`}>
                 </div>
                 <div className={`${portfolioStyle}`}>
-                    <PortfolioSmall color={greenColors[0]} />
-                    <PortfolioBig color={blueColors[0]} />
-                    <PortfolioBig color={blueColors[1]} />
-                    <PortfolioBig color={blueColors[2]} />
-                    <PortfolioSmall color={greenColors[1]} />
-                    <PortfolioSmall color={greenColors[2]} />
-                    <PortfolioBig color={blueColors[3]} />
-                    <PortfolioBig color={blueColors[4]} />
-                    <PortfolioSmall color={greenColors[3]} />
-                    <PortfolioSmall color={greenColors[4]} />
+                    <ProjLink rowSpan={1} color={blueColors[0]}/>
+                    <ProjLink rowSpan={2} image={cecchi}/>
+                    <ProjLink rowSpan={2} image={muller}/>
+                    <ProjLink rowSpan={2} image={palzileri} />
+                    <ProjLink  rowSpan={1} image={linealight}/>
+                    <ProjLink  rowSpan={1} image={claraluna} />
+                    <ProjLink rowSpan={2} image={fornasetti} />
+                    <ProjLink rowSpan={2} image={ferrari} />
+                    <ProjLink rowSpan={1} image={mediaset} />
+                    <ProjLink rowSpan={1} color={greenColors[1]} />
                 </div>
                 <InfoBreak width='100%' color={purpleColors[0]} />
                 <div className={`${portfolioStyle}`}>
