@@ -191,15 +191,16 @@ export default class HomePage extends Component {
                     <SocialDiv color={redColors[2]} spanLength={1} />
                     <SocialDiv color={redColors[0]} spanLength={2} />
                 </div>
-                <InfoBreak width='100%' color={purpleColors[0]} />
-                <div className={`${portfolioStyle}`}>
+                <InfoBreak width='50%' color={purpleColors[0]} style={{float: 'left'}}/>
+                <InfoBreak width='50%' color={purpleColors[1]} style={{float: 'right'}}/>
+                <div className={`${portfolioStyle}`} style={{clear: 'both'}}>
                     <SocialDiv color={redColors[0]} spanLength={1} />
                     <SocialDiv color={redColors[1]} spanLength={1} />
                     <SocialDiv color={redColors[2]} spanLength={1} />
                     <SocialDiv color={redColors[3]} spanLength={1} />
                 </div>
                 <InfoBreak width='50%' color={purpleColors[1]} style={{float: 'left'}}/>
-                <InfoBreak width='50%' color={purpleColors[2]} style={{float: 'right'}}/>
+                <InfoBreak width='50%' color={purpleColors[2]} style={{float: 'left'}}/>
             </div>
         )
     }
