@@ -4,16 +4,6 @@ import glamorous from 'glamorous';
 let Photo = glamorous.div(
     'photo-div',
     {
-        // ':hover': {
-        //     transform: 'translate3d(0px,0,0)'
-        // },
-        // ':hover:before': {
-        //     opacity: '1'
-        // },
-        // ':hover:after': {
-        //     opacity: '0'
-        // },
-
         ':before': {
             position: 'absolute',
             zIndex: '1',
@@ -38,8 +28,6 @@ let Photo = glamorous.div(
             height: '100%',
             content: '""'
         },
-
-
     },
     {
         backgroundSize: 'cover',
@@ -81,6 +69,7 @@ let PhotoWrapper = glamorous.div(
 let PhotoTitle = glamorous.h1(
     {
         position: 'absolute',
+        top: 40,
         left: 50,
         zIndex: '5',
         fontFamily: "'Montserrat', 'sans-serif'",
@@ -90,7 +79,6 @@ let PhotoTitle = glamorous.h1(
         letterSpacing: '0.2em',
     },
     (props) => ({
-        top: props.top,
         bottom: props.bottom
     })
 )
@@ -98,6 +86,7 @@ let PhotoTitle = glamorous.h1(
 let HashTag = glamorous.h2(
     {
         position: 'absolute',
+        top: 55,
         left: 50,
         zIndex: '5',
         fontFamily: "'Libre Baskerville', 'serif'",
@@ -107,7 +96,6 @@ let HashTag = glamorous.h2(
         color: '#e6e6e6'
     },
     (props) => ({
-        top: props.top,
         bottom: props.bottom
     })
 )
@@ -157,16 +145,12 @@ export default class ProjLink extends Component {
             rowSpan,
             title,
             hashtag,
-            titleTop,
-            titleBottom,
-            hashtagTop,
-            hashtagBottom,
             awards
         } = this.props.config
         return (
             <PhotoWrapper style={{ gridRowEnd: `span ${rowSpan}` }}>
-                <PhotoTitle top={titleTop} bottom={titleBottom}>{title}</PhotoTitle>
-                <HashTag top={hashtagTop} bottom={hashtagBottom}>{hashtag}</HashTag>
+                <PhotoTitle>{title}</PhotoTitle>
+                <HashTag>{hashtag}</HashTag>
                 <Awards>
                     {
                         awards

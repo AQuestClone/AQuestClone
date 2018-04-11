@@ -5,8 +5,9 @@ import glamorous from 'glamorous';
 
 const Wrapper = glamorous.div(
     {
-        backgroundColor: 'steelblue',
-        position: 'relative'
+        backgroundColor: '#0083DD',
+        position: 'relative',
+        cursor: 'pointer'
     },
     (props) => ({
         width: props.width,
@@ -15,7 +16,7 @@ const Wrapper = glamorous.div(
 )
 
 const whiteBar = {
-    width: '32px',
+    width: '37px',
     height: '3px',
     background: 'white',
     left: '28px',

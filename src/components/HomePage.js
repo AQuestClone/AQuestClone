@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { css } from 'glamor'
 import glamorous from 'glamorous';
-import Hamburger from './Hamburger';
+import MenuBox from './MenuBox';
 import ProjLink from './ProjLink';
 
 //images
@@ -99,8 +99,6 @@ const configStyles = [
         image: cecchi,
         title: 'CECCHI',
         hashtag: '#corporate #website',
-        titleTop: 40,
-        hashtagTop: 55,
         awards: [
             'AWWWARDS SITE OF THE DAY',
             'CSS DESIGN AWARDS SITE OF THE DAY'
@@ -111,8 +109,6 @@ const configStyles = [
         image: muller,
         title: 'MULLER',
         hashtag: '#website',
-        titleTop: 40,
-        hashtagTop: 55,
         awards: [
             'AWWWARDS SITE OF THE DAY'
         ]
@@ -122,16 +118,16 @@ const configStyles = [
         image: palzileri,
         title: 'PAL ZILERI',
         hashtag: '#fashion . #website',
-        titleBottom: 60,
-        hashtagBottom: 33
+        awards: [
+            'AWWWARDS DEV SOTD',
+            'FWA SOTD & MOBILE OF THE DAY'
+        ]
     },
     {
         rowSpan: 1,
         image: linealight,
         title: 'LINEALIGHT',
         hashtag: '#website',
-        titleTop: 40,
-        hashtagTop: 55,
         awards: [
             'AWWWARDS SITE OF THE DAY'
         ]
@@ -141,8 +137,6 @@ const configStyles = [
         image: claraluna,
         title: 'CLARALUNA',
         hashtag: '#corporate #website',
-        titleTop: 40,
-        hashtagTop: 55,
         awards: [
             'AWWWARDS SITE OF THE DAY',
             'CSS DESIGN AWARDS SITE OF THE DAY'
@@ -153,8 +147,6 @@ const configStyles = [
         image: fornasetti,
         title: 'FORNASETTI',
         hashtag: '#storytelling . #website',
-        titleTop: 40,
-        hashtagTop: 55,
         awards: [
             'AWWWARDS SITE OF THE DAY'
         ]
@@ -163,17 +155,13 @@ const configStyles = [
         rowSpan: 2,
         image: ferrari,
         title: 'FERRARI PER MUTADO',
-        hashtag: '#contest . #website',
-        titleTop: 40,
-        hashtagTop: 55
+        hashtag: '#contest . #website'
     },
     {
         rowSpan: 1,
         image: mediaset,
         title: 'MEDIASET PREMIUM',
-        hashtag: '#app . #website',
-        titleTop: 40,
-        hashtagTop: 55
+        hashtag: '#app . #website'
     }
 ]
 
