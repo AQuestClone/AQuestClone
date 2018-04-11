@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
+import {css} from 'glamor';
+import 'glamor/reset';
 
 class App extends Component {
-  render() {
+  render(){
     return (
       <div>
-        
       </div>
-    );
+    )
   }
 }
-
 export default App;
 
 
