@@ -2,16 +2,17 @@ import React, { Component } from 'react';
 import glamorous from 'glamorous';
 
 let Photo = glamorous.div(
+    'photo-div',
     {
-        ':hover': {
-            transform: 'translate3d(0px,0,0)'
-        },
-        ':hover:before': {
-            opacity: '1'
-        },
-        ':hover:after': {
-            opacity: '0'
-        },
+        // ':hover': {
+        //     transform: 'translate3d(0px,0,0)'
+        // },
+        // ':hover:before': {
+        //     opacity: '1'
+        // },
+        // ':hover:after': {
+        //     opacity: '0'
+        // },
 
         ':before': {
             position: 'absolute',
@@ -56,13 +57,24 @@ let Photo = glamorous.div(
 let PhotoWrapper = glamorous.div(
     {
         ':hover .awards-text': {
+            opacity: '1',
+            left: 50
+        },
+        ':hover .photo-div': {
+            transform: 'translate3d(0px,0,0)',
+        },
+        ':hover .photo-div:before': {
             opacity: '1'
+        },
+        ':hover .photo-div:after': {
+            opacity: '0'
         }
     },
     {
         gridColumnEnd: 'span 2',
         overflow: 'hidden',
-        position: 'relative'
+        position: 'relative', 
+        zIndex: '6'
     }
 )
 
@@ -104,11 +116,11 @@ let Awards = glamorous.div(
     'awards-text',
     {
         position: 'absolute',
-        zIndex: '5',
+        zIndex: '3',
         bottom: 33,
-        left: 50,
+        left: -5,
         opacity: '0',
-        transition: 'opacity .5s'
+        transition: 'opacity .35s, left .35s'
     },
     {
         ' span': {
