@@ -173,7 +173,7 @@ export default class ProjLink extends Component {
                     }]}
                     styles={[{
                         key: title,
-                        style: { top: spring(0) }
+                        style: { top: spring(0, {stiffness: 250, damping: 30}) }
                     }]}>
                     {
                         styles => 
