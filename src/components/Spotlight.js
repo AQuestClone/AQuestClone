@@ -84,7 +84,6 @@ export default class Spotlight extends Component{
 
         let arr = this.state.active ? [{id: 0}] : []
         return (
-          <div>
             <TransitionMotion
         defaultStyles={arr.map(() => ({ key: 'one', style: {top: -this.props.height, opacity: 0}}))}
         styles={arr.map(() => ({ key: 'one', style: { top: spring(0), opacity: spring(1)}}))}
@@ -136,7 +135,6 @@ export default class Spotlight extends Component{
           </div>
         )}
       </TransitionMotion>
-          </div>
         );
       }
     

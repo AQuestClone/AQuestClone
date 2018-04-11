@@ -3,6 +3,7 @@ import { css } from 'glamor'
 import glamorous from 'glamorous';
 import MenuBox from './MenuBox';
 import ProjLink from './ProjLink';
+import Spotlight from './Spotlight';
 
 //images
 import cecchi from './assets/cecchi.jpg';
@@ -50,7 +51,6 @@ const redColors = [
 const spotlightStyle = css({
     height: 768,
     width: '100%',
-    background: 'orange'
 })
 
 const portfolioStyle = css({
@@ -171,6 +171,7 @@ export default class HomePage extends Component {
         return (
             <div>
                 <div className={`${spotlightStyle}`}>
+                <Spotlight active={true} height={768} />
                 </div>
                 <div className={`${portfolioStyle}`}>
                     <PortfolioText background={blueColors[0]}/>
