@@ -36,7 +36,8 @@ let Photo = glamorous.div(
             width: '100%',
             height: '100%',
             content: '""'
-        }
+        },
+
 
     },
     {
@@ -54,6 +55,11 @@ let Photo = glamorous.div(
 
 let PhotoWrapper = glamorous.div(
     {
+        ':hover .awards-text': {
+            opacity: '1'
+        }
+    },
+    {
         gridColumnEnd: 'span 2',
         overflow: 'hidden',
         position: 'relative'
@@ -69,7 +75,7 @@ let PhotoTitle = glamorous.h1(
         color: 'white',
         fontSize: '12px',
         fontWeight: '500',
-        letterSpacing: '0.25em',
+        letterSpacing: '0.2em',
     },
     (props) => ({
         top: props.top,
@@ -94,6 +100,41 @@ let HashTag = glamorous.h2(
     })
 )
 
+let Awards = glamorous.div(
+    'awards-text',
+    {
+        position: 'absolute',
+        zIndex: '5',
+        bottom: 33,
+        left: 50,
+        opacity: '0',
+        transition: 'opacity .5s'
+    },
+    {
+        ' span': {
+            color: 'white',
+            display: 'inline-block',
+            marginRight: 25,
+            fontFamily: "'Lato', 'sans-serif'",
+            fontSize: '6.5px',
+            letterSpacing: '.25em'
+
+        },
+        ' span > i, span > h1': {
+            display: 'inline-block',
+            fontWeight: '300'
+        },
+        ' span i': {
+            fontSize: '25px',
+            marginRight: 15
+        }
+    },
+    (props) => ({
+
+    })
+)
+
+
 
 
 export default class ProjLink extends Component {
@@ -107,12 +148,30 @@ export default class ProjLink extends Component {
             titleTop,
             titleBottom,
             hashtagTop,
-            hashtagBottom
-        } = this.props
+            hashtagBottom,
+            awards
+        } = this.props.config
         return (
             <PhotoWrapper style={{ gridRowEnd: `span ${rowSpan}` }}>
                 <PhotoTitle top={titleTop} bottom={titleBottom}>{title}</PhotoTitle>
                 <HashTag top={hashtagTop} bottom={hashtagBottom}>{hashtag}</HashTag>
+                <Awards>
+                    {
+                        awards
+                        ?
+                            awards.map((award, idx) => {
+                                return (
+                                  <span>
+                                      <i class="fa fa-trophy"></i> 
+                                      <h1>{award}</h1>
+                                  </span>
+                                )
+                                
+                            })
+                        :
+                        null
+                    }
+                </Awards>
                 <Photo rowSpan={rowSpan} color={color} image={image}>
 
                 </Photo>

@@ -91,6 +91,8 @@ const InfoBreak = glamorous.div(
     })
 )
 
+//config props
+
 const configStyles = [
     {
         rowSpan: 2, 
@@ -98,7 +100,11 @@ const configStyles = [
         title: 'CECCHI',
         hashtag: '#corporate #website',
         titleTop: 40,
-        hashtagTop: 55
+        hashtagTop: 55,
+        awards: [
+            'AWWWARDS SITE OF THE DAY',
+            'CSS DESIGN AWARDS SITE OF THE DAY'
+        ]
     },
     {
         rowSpan: 2,
@@ -106,7 +112,10 @@ const configStyles = [
         title: 'MULLER',
         hashtag: '#website',
         titleTop: 40,
-        hashtagTop: 55
+        hashtagTop: 55,
+        awards: [
+            'AWWWARDS SITE OF THE DAY'
+        ]
     },
     {
         rowSpan: 2,
@@ -122,14 +131,22 @@ const configStyles = [
         title: 'LINEALIGHT',
         hashtag: '#website',
         titleTop: 40,
-        hashtagTop: 55
+        hashtagTop: 55,
+        awards: [
+            'AWWWARDS SITE OF THE DAY'
+        ]
     },
     {
         rowSpan: 1,
+        image: claraluna,
         title: 'CLARALUNA',
         hashtag: '#corporate #website',
         titleTop: 40,
-        hashtagTop: 55
+        hashtagTop: 55,
+        awards: [
+            'AWWWARDS SITE OF THE DAY',
+            'CSS DESIGN AWARDS SITE OF THE DAY'
+        ]
     },
     {
         rowSpan: 2,
@@ -137,7 +154,10 @@ const configStyles = [
         title: 'FORNASETTI',
         hashtag: '#storytelling . #website',
         titleTop: 40,
-        hashtagTop: 55
+        hashtagTop: 55,
+        awards: [
+            'AWWWARDS SITE OF THE DAY'
+        ]
     },
     {
         rowSpan: 2,
@@ -166,19 +186,11 @@ export default class HomePage extends Component {
                 </div>
                 <div className={`${portfolioStyle}`}>
                     <PortfolioText background={blueColors[0]}/>
-                    {/* {
+                    {
                         configStyles.map((style, idx) => {
-                            return <ProjLink config={style} />
+                            return <ProjLink config={style} key={`project_${style.title}`} />
                         })
-                    } */}
-                    <ProjLink rowSpan={2} image={cecchi} title='CECCHI' hashtag='#corporate #website' titleTop={40} hashtagTop={55}/>
-                    <ProjLink rowSpan={2} image={muller} title='MULLER' hashtag='#website' titleTop={40} hashtagTop={55}/>
-                    <ProjLink rowSpan={2} image={palzileri} title='PAL ZILERI' hashtag='#fashion . #website'titleBottom={60} hashtagBottom={33}/>
-                    <ProjLink  rowSpan={1} image={linealight} title='LINEALIGHT' hashtag='#website' titleTop={40} hashtagTop={55}/>
-                    <ProjLink  rowSpan={1} image={claraluna} title='CLARALUNA' hashtag='#corporate #website' titleTop={40} hashtagTop={55}/>
-                    <ProjLink rowSpan={2} image={fornasetti} title='FORNASETTI' hashtag='#storytelling . #website' titleTop={40} hashtagTop={55}/>
-                    <ProjLink rowSpan={2} image={ferrari} title='FERRARI PER MUTADO' hashtag='#contest . #website' titleTop={40} hashtagTop={55}/>
-                    <ProjLink rowSpan={1} image={mediaset} title='MEDIASET PREMIUM' hashtag='#app . #website' titleTop={40} hashtagTop={55}/>
+                    }
                     <PortfolioText background={blueColors[1]} />
                 </div>
                 <InfoBreak width='100%' color={purpleColors[0]} />
@@ -205,7 +217,6 @@ export default class HomePage extends Component {
     }
 }
 
-//config objects
 
 
 
