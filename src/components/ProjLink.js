@@ -37,7 +37,6 @@ let Photo = glamorous.div(
         transition: 'transform .35s'
     },
     (props) => ({
-        background: props.color,
         backgroundImage: `url(${props.image})`,
     })
 )
@@ -140,7 +139,6 @@ let Awards = glamorous.div(
 export default class ProjLink extends Component {
     render() {
         let {
-            color,
             image,
             rowSpan,
             title,
@@ -168,7 +166,7 @@ export default class ProjLink extends Component {
                         null
                     }
                 </Awards>
-                <Photo rowSpan={rowSpan} color={color} image={image}>
+                <Photo rowSpan={rowSpan} image={image}>
 
                 </Photo>
             </PhotoWrapper>
