@@ -211,3 +211,4 @@ const configStyles = [
         title: 'MEDIASET PREMIUM',
         hashtag: '#app . #website'
     }
+]
