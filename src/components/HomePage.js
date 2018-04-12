@@ -169,6 +169,7 @@ const configStyles = [
     }
 ]
 
+
 export default class HomePage extends Component {
 
     render() {
@@ -206,6 +207,7 @@ export default class HomePage extends Component {
                 </div>
                 <InfoBreak width='50%' color={purpleColors[1]} style={{float: 'left'}}/>
                 <InfoBreak width='50%' color={purpleColors[2]} style={{float: 'left'}}/>
+
             </div>
         )
     }
