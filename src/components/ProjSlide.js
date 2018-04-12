@@ -11,6 +11,8 @@ import sixth from './assets/projslide/06.jpg';
 import seventh from './assets/projslide/07.jpg';
 import eighth from './assets/projslide/08.jpg';
 
+import arrow from './assets/arrow-next.png';
+
 
 let photos = [
     first,
@@ -26,7 +28,7 @@ let photos = [
 let Wrapper = glamorous.div(
     {
         ':hover .photo-div:before': {
-            background: 'rgba(0,127,227,.5)'
+            background: 'rgba(0,127,227,.4)'
         }
     },
     {
@@ -63,6 +65,41 @@ let Photo = glamorous.div(
         left: 0
     }
 )
+
+let LoadMore = glamorous.h1({
+    position: 'absolute',
+    top: '30%',
+    left: '50%',
+    transform: 'translate(-50%)',
+    zIndex: 10,
+    fontFamily: "'Montserrat', 'sans-serif'",
+    color: 'white',
+    fontSize: '12px',
+    fontWeight: '500',
+    letterSpacing: '0.2em',
+})
+
+let Text = glamorous.h2({
+    position: 'absolute',
+    top: '37%',
+    left: '50%',
+    transform: 'translate(-50%)',
+    zIndex: 10,
+    fontFamily: "'Libre Baskerville', 'serif'",
+    fontSize: '15px',
+    fontWeight: '400',
+    letterSpacing: '0.05em',
+    color: '#e6e6e6',
+    lineHeight: '1.5em'
+})
+
+let Arrow = glamorous.img({
+    zIndex: 10,
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%)'
+})
 
 let intervalVar;
 
@@ -108,15 +145,23 @@ export default class ProjSlide extends Component {
         }
 
         return (
-            <Wrapper>
+            <Wrapper onMouseEnter={this.onHoverEnter} onMouseLeave={this.onHoverLeave}>
+                <LoadMore>
+                    LOAD MORE
+                </LoadMore>
+                <Text>
+                    discover all our works
+                    <br />
+                    we love to show you
+                </Text>
+                <Arrow src={arrow} />
+
                 {
                     photos.map((photo, idx) => {
                         return <Photo style={{
                             backgroundImage: `url(${photo})`,
                             zIndex: this.state.index === idx ? '1' : '-1'
-                        }}
-                            onMouseEnter={this.onHoverEnter}
-                            onMouseLeave={this.onHoverLeave}>
+                        }}>
 
                         </Photo>
                     })
