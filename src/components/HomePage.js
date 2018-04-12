@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import { css } from 'glamor'
 import glamorous from 'glamorous';
+
+//components
 import MenuBox from './MenuBox';
-import ProjLink from './ProjLink';
 import Spotlight from './Spotlight';
+import ProjLink from './ProjLink';
+import ProjSlide from './ProjSlide';
+
 
 //images
 import cecchi from './assets/cecchi.jpg';
@@ -180,7 +184,7 @@ export default class HomePage extends Component {
                             return <ProjLink config={style} key={`project_${style.title}`} />
                         })
                     }
-                    <PortfolioText background={blueColors[1]} />
+                    <ProjSlide />
                 </div>
                 <InfoBreak width='100%' color={purpleColors[0]} />
                 <div className={`${portfolioStyle}`}>
