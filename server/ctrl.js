@@ -5,7 +5,14 @@ module.exports = {
 
         db.get_all_posts([])
         .then((posts)=>res.status(200).send(posts))
-        .then(()=>res.status(500).send())
+        .catch(()=>res.status(500).send())
+    },
+    getOnePost: (req,res)=>{
+        const db = req.app.get('db')
+
+        db.get_one([req.params.id])
+        .then((post)=>res.status(200).send(post))
+        .catch(()=>res.status(500).send())
     },
     addPost: (req,res)=>{
         const db = req.app.get('db')

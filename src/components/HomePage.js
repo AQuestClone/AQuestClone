@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import { css } from 'glamor'
 import glamorous from 'glamorous';
+
+//components
 import MenuBox from './MenuBox';
-import ProjLink from './ProjLink';
 import Spotlight from './Spotlight';
+import ProjLink from './ProjLink';
+import ProjSlide from './ProjSlide';
+
 
 //images
 import cecchi from './assets/cecchi.jpg';
@@ -48,6 +52,7 @@ const redColors = [
     '#B71C1C'
 ]
 
+
 export default class HomePage extends Component {
 
     render() {
@@ -63,7 +68,7 @@ export default class HomePage extends Component {
                             return <ProjLink config={style} key={`project_${style.title}`} />
                         })
                     }
-                    <PortfolioText background={blueColors[1]} />
+                    <ProjSlide />
                 </div>
                 <InfoBreak width='100%' color={purpleColors[0]} />
                 <div className={`${portfolioStyle}`}>
@@ -85,6 +90,7 @@ export default class HomePage extends Component {
                 </div>
                 <InfoBreak width='50%' color={purpleColors[1]} style={{float: 'left'}}/>
                 <InfoBreak width='50%' color={purpleColors[2]} style={{float: 'left'}}/>
+
             </div>
         )
     }
@@ -205,4 +211,3 @@ const configStyles = [
         title: 'MEDIASET PREMIUM',
         hashtag: '#app . #website'
     }
-]
