@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import { css } from 'glamor'
 import glamorous from 'glamorous';
+
+//components
 import MenuBox from './MenuBox';
+import Spotlight from './Spotlight';
 import ProjLink from './ProjLink';
+import ProjSlide from './ProjSlide';
+
 
 //images
 import cecchi from './assets/cecchi.jpg';
@@ -50,7 +55,6 @@ const redColors = [
 const spotlightStyle = css({
     height: 768,
     width: '100%',
-    background: 'orange'
 })
 
 const portfolioStyle = css({
@@ -165,12 +169,14 @@ const configStyles = [
     }
 ]
 
+
 export default class HomePage extends Component {
 
     render() {
         return (
             <div>
                 <div className={`${spotlightStyle}`}>
+                <Spotlight active={true} height={768} />
                 </div>
                 <div className={`${portfolioStyle}`}>
                     <PortfolioText background={blueColors[0]}/>
@@ -179,7 +185,7 @@ export default class HomePage extends Component {
                             return <ProjLink config={style} key={`project_${style.title}`} />
                         })
                     }
-                    <PortfolioText background={blueColors[1]} />
+                    <ProjSlide />
                 </div>
                 <InfoBreak width='100%' color={purpleColors[0]} />
                 <div className={`${portfolioStyle}`}>
@@ -201,6 +207,7 @@ export default class HomePage extends Component {
                 </div>
                 <InfoBreak width='50%' color={purpleColors[1]} style={{float: 'left'}}/>
                 <InfoBreak width='50%' color={purpleColors[2]} style={{float: 'left'}}/>
+
             </div>
         )
     }
