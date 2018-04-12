@@ -16,7 +16,7 @@ class App extends Component {
   }
 
   componentDidMount(){
-    // setTimeout(this.switchGlobe, 5000)
+    setTimeout(this.switchGlobe, 7400)
   }
 
   switchGlobe = () => {
@@ -25,7 +25,6 @@ class App extends Component {
     })
   }
     render(){
-      // let globe = document.getElementById('globe');
     return (
       <div>
         {console.log(this.state.switch)}
