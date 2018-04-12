@@ -7,6 +7,7 @@ import MenuBox from './MenuBox';
 import Spotlight from './Spotlight';
 import ProjLink from './ProjLink';
 import ProjSlide from './ProjSlide';
+import InfoBox from './InfoBox';
 
 
 //images
@@ -75,6 +76,7 @@ const PortfolioText = glamorous.div(
     })
 )
 
+
 const SocialDiv = glamorous.div(
     {
         gridRowEnd: 'span 1'
@@ -94,6 +96,20 @@ const InfoBreak = glamorous.div(
         width: props.width
     })
 )
+
+const infoBoxConfig = [
+    {
+        background: 'white',
+        width: '100%',
+        height: '100%',
+        title: 'DIGITAL DREAMS BY AQUEST',
+        text: "It’s not true that the best dreams happen when you are awake, they happen when you are online! Don’t you believe? Check our works. We signed a pact with the world leaders in the science of dreams - Sandman, Sleeping Beauty and Sleepy the dwarf in order to provide you with the highest quality magical experience. Having researched the famous Ole Lukoje’s process of sprinkling tiny amount of fine dust onto the eyes of dreamers, and combining it with the catalyst of Rufus the Noops' vivid daydreams we came with an absolutely innovative solution. We call it DDC - Digital Dreams Catharsis. For more information about DDC, please give us a shout.",
+        config: {
+            gridRowEnd: 'span 1',
+            gridColumnEnd: 'span 2',
+        }
+    }
+]
 
 //config props
 
@@ -179,7 +195,7 @@ export default class HomePage extends Component {
                 <Spotlight active={true} height={768} />
                 </div>
                 <div className={`${portfolioStyle}`}>
-                    <PortfolioText background={blueColors[0]}/>
+                    <InfoBox config={infoBoxConfig[0]} />
                     {
                         configStyles.map((style, idx) => {
                             return <ProjLink config={style} key={`project_${style.title}`} />
