@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import glamorous from 'glamorous';
 import {css} from 'glamor';
 import logo from './assets/logo-bianco.png';
+import Particles from 'react-particles-js';
+import config from './assets/particlesjs-config.json';
 
 
 export default function Globe(props){
@@ -53,6 +55,11 @@ export default function Globe(props){
         '90%': {opacity: 1},
         '100%': {opacity: 0}
     })
+    const starFade = css.keyframes({
+        '0%': {opacity: 0, width: 150 },
+        '50%': {opacity: 1, width: 400},
+        '70%': {opacity: 0, width: 150},
+    })
 
     const Logo = glamorous.div({
         width: 50,
@@ -73,6 +80,20 @@ export default function Globe(props){
     return (
         <div style={{...style, ...props.style}}>
             <Globe><Logo/></Globe>
+            <Particles
+                params={config}
+                width={450}
+                height={300}
+                style={{
+                    position: 'absolute',
+                    transform: 'translate(-50%, -50%)',
+                    left: '50%',
+                    top: '50%',
+                    opacity: 0,
+                    animation: `${starFade} 1.7s, ${starFade} 1.7s`,
+                    animationDelay: '3s, 4.7s',
+                }}
+                 />
         </div>
     )
 }
