@@ -114,8 +114,6 @@ export default class ProjSlide extends Component {
 
     }
 
-
-
     onHoverEnter = () => {
         intervalVar = setInterval(() => {
             let indexCopy = this.state.index;
@@ -137,7 +135,6 @@ export default class ProjSlide extends Component {
         clearInterval(intervalVar)
     }
 
-
     render() {
 
         let wrapperStyle = {
@@ -155,15 +152,12 @@ export default class ProjSlide extends Component {
                     we love to show you
                 </Text>
                 <Arrow src={arrow} />
-
                 {
                     photos.map((photo, idx) => {
                         return <Photo style={{
                             backgroundImage: `url(${photo})`,
-                            zIndex: this.state.index === idx ? '1' : '-1'
-                        }}>
-
-                        </Photo>
+                            zIndex: this.state.index === idx ? '1' : '-1'}}>
+                                </Photo>
                     })
                 }
             </Wrapper>
