@@ -92,7 +92,6 @@ export default class Spotlight extends Component{
       >
         {(styles) => (
           <div
-          onClick={() => this.setState({active: !this.state.active})}
           style={{
             height: this.props.height,
             width: '100%', 

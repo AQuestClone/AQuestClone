@@ -94,7 +94,7 @@ export default class Hamburger extends PureComponent {
                             }}>
                                 {
                                     styles.map((style, i) => (
-                                        <div style={{
+                                        <div key={i} style={{
                                             ...whiteBar,
                                             top: style.top,
                                             opacity: i === 1 || i === 2 ? 1 : style.opacity
