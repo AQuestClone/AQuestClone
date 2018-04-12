@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import glamorous from 'glamorous';
 
+import logo from './assets/logo-grigio-scuro.png';
+
 const Wrapper = glamorous.div(
     {
-        ':hover': {
-            color: 'black'
+        ' .logo-image:hover': {
+            opacity: '1'
         }
     },
     {
@@ -15,18 +17,34 @@ const Wrapper = glamorous.div(
         justifyContent: 'center',
         alignItems: 'center',
         fontSize: '25px',
-        color: 'gray',
         transition: 'color .5s ease',
         cursor: 'pointer'
 
     }
 )
 
+const LogoWrapper = glamorous.div(
+    'logo-image',
+    {
+        opacity: '.5',
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        transition: 'opacity .35s'
+    }
+
+)
+
+
 export default class HomeButton extends Component {
     render() {
         return (
             <Wrapper>
-                AQ
+                <LogoWrapper>
+                    <img src={logo} alt='homelogo' />
+                </LogoWrapper>
             </Wrapper>
         )
     }

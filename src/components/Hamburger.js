@@ -98,7 +98,7 @@ export default class Hamburger extends PureComponent {
                                             ...whiteBar,
                                             top: style.top,
                                             opacity: i === 1 || i === 2 ? 1 : style.opacity
-                                        }}>
+                                        }} key={`white_bar_${i}`}>
 
                                         </div>
                                     ))

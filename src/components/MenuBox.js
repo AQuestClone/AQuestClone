@@ -12,7 +12,8 @@ let Wrapper = glamorous.div(
         position: 'fixed',
         zIndex: '10',
         top: 50,
-        left: 0
+        left: 0,
+        backfaceVisibility: 'hidden'
     }
 )
 

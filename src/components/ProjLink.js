@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { TransitionMotion, spring } from 'react-motion';
 import glamorous from 'glamorous';
 
 let Photo = glamorous.div(
@@ -34,11 +35,10 @@ let Photo = glamorous.div(
         width: 'calc(100% + 50px)',
         height: '100%',
         transform: 'translate3d(-50px,0,0)',
-        transition: 'transform .35s'
+        transition: 'transform .35s',
+        position: 'relative',
     },
-    (props) => ({
-        backgroundImage: `url(${props.image})`,
-    })
+
 )
 
 let PhotoWrapper = glamorous.div(
@@ -60,7 +60,7 @@ let PhotoWrapper = glamorous.div(
     {
         gridColumnEnd: 'span 2',
         overflow: 'hidden',
-        position: 'relative', 
+        position: 'relative',
         zIndex: '6'
     }
 )
@@ -152,23 +152,42 @@ export default class ProjLink extends Component {
                 <Awards>
                     {
                         awards
-                        ?
+                            ?
                             awards.map((award, idx) => {
                                 return (
-                                  <span>
-                                      <i class="fa fa-trophy"></i> 
-                                      <h1>{award}</h1>
-                                  </span>
+                                    <span className={`award_${idx}`}>
+                                        <i className="fa fa-trophy"></i>
+                                        <h1>{award}</h1>
+                                    </span>
                                 )
-                                
+
                             })
-                        :
-                        null
+                            :
+                            null
                     }
                 </Awards>
-                <Photo rowSpan={rowSpan} image={image}>
+                <TransitionMotion
+                    defaultStyles={[{
+                        key: title,
+                        style: { top: 100 }
+                    }]}
+                    styles={[{
+                        key: title,
+                        style: { top: spring(0, {stiffness: 250, damping: 30}) }
+                    }]}>
+                    {
+                        styles => 
+                            <Photo 
+                                rowSpan={rowSpan} 
+                                key={styles[0].key} 
+                                style={{ 
+                                    top: `${styles[0].style.top}%` ,
+                                    backgroundImage: `url(${image})`
+                                }}>
 
-                </Photo>
+                            </Photo>
+                    }
+                </TransitionMotion>
             </PhotoWrapper>
         )
     }
