@@ -13,7 +13,8 @@ const Wrapper = glamorous.div(
             width: '35px'
         },
         '::-webkit-scrollbar-thumb' : {
-            background: 'orange'
+            background: 'orange',
+            width: '35px'
         }
     }
 )
