@@ -3,11 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-<<<<<<< HEAD
     "axios": "^0.18.0",
-=======
-
->>>>>>> master
     "body-parser": "^1.18.2",
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
@@ -31,15 +27,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-<<<<<<< HEAD
   },
   "main": "./server/index.js",
   "proxy": "http://localhost:3030"
-=======
-
-
-  },
-  "main": "./server/index.js",
-  "proxy": "http://localhost:3021"
->>>>>>> master
 }
