@@ -25,11 +25,6 @@ class App extends Component {
     })
   }
     render(){
-      let fadeout = css.keyframes({
-      '0%': {opacity: 1},
-      '50%': {opacity: 1},
-      '100%': {opacity: 0}
-      })
       // let globe = document.getElementById('globe');
     return (
       <div>
@@ -37,7 +32,7 @@ class App extends Component {
         {
           this.state.switch ? 
           <MainWrapper/>    :          
-         <Globe style={{animation: `${fadeout} 5s`}} />
+         <Globe />
         }
       </div>
     )
