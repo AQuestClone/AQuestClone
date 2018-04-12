@@ -1,3 +1,4 @@
+
 require('dotenv').config()
 const express = require('express')
     , session = require('express-session')
@@ -65,30 +66,31 @@ passport.deserializeUser((id, done) => {
     })
 })
 
-app.get('/auth/me', (req, res) => {
-    if (req.user) {
-        res.status(200).send(req.user);
-    } else {
-        res.status(401).send('NNNNNOPE!')
-    }
-})
-
-app.get('/auth/logout', (req, res) => {
-    req.logOut();
-    res.redirect(FAILUREREDIRECT)
-})
-
 // auth0 endpoints
 app.get('/auth', passport.authenticate('auth0'))
 app.get('/auth/callback', passport.authenticate('auth0', {
     successRedirect: SUCCESSREDIRECT,
     failureRedirect: FAILUREREDIRECT
 }))
+app.get('/auth/me', (req, res) => {
+    console.log('apoy');
+    
+    if (req.user) {
+        res.status(200).send(req.user);
+    } else {
+        res.status(401).send('NNNNNOPE!')
+    }
+})
+app.get('/auth/logout', (req, res) => {
+    req.logOut();
+    res.redirect(FAILUREREDIRECT)
+})
 
 
 
 //api endpoints for blog
 app.get('/api/blogpost', ctrl.getAllPosts)
+app.get('/api/blogpost/:id', ctrl.getOnePost)
 app.post('/api/blogpost/:id', ctrl.addPost)
 app.put('/api/blogpost/:id', ctrl.editPost)
 app.delete('/api/blogpost/:id', ctrl.deletePost)
