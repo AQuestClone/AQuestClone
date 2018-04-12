@@ -103,10 +103,27 @@ const infoBoxConfig = [
         width: '100%',
         height: '100%',
         title: 'DIGITAL DREAMS BY AQUEST',
-        text: "It’s not true that the best dreams happen when you are awake, they happen when you are online! Don’t you believe? Check our works. We signed a pact with the world leaders in the science of dreams - Sandman, Sleeping Beauty and Sleepy the dwarf in order to provide you with the highest quality magical experience. Having researched the famous Ole Lukoje’s process of sprinkling tiny amount of fine dust onto the eyes of dreamers, and combining it with the catalyst of Rufus the Noops' vivid daydreams we came with an absolutely innovative solution. We call it DDC - Digital Dreams Catharsis. For more information about DDC, please give us a shout.",
+        text: [
+            "It’s not true that the best dreams happen when you are awake, they happen when you are online! Don’t you believe? Check our works.",
+            "We signed a pact with the world leaders in the science of dreams - Sandman, Sleeping Beauty and Sleepy the dwarf in order to provide you with the highest quality magical experience. Having researched the famous Ole Lukoje’s process of sprinkling tiny amount of fine dust onto the eyes of dreamers, and combining it with the catalyst of Rufus the Noops' vivid daydreams we came with an absolutely innovative solution. We call it DDC - Digital Dreams Catharsis. For more information about DDC, please give us a shout."
+        ], 
         config: {
             gridRowEnd: 'span 1',
             gridColumnEnd: 'span 2',
+        }
+    },
+    {
+        background: 'white',
+        width: '100%',
+        height: 275,
+        color: 'black',
+        textAlign: 'center',
+        title: 'STAY WITH US: ENJOY WITH US.',
+        text: [
+            "Keep calm and dream on. Follow us on social networks! A shared joy is a double joy. Stay with us to discover the most interesting projects, trends & news from the world of digital dreams."
+        ],
+        config: {
+
         }
     }
 ]
@@ -203,7 +220,7 @@ export default class HomePage extends Component {
                     }
                     <ProjSlide />
                 </div>
-                <InfoBreak width='100%' color={purpleColors[0]} />
+                <InfoBox config={infoBoxConfig[1]} />
                 <div className={`${portfolioStyle}`}>
                     <SocialDiv color={redColors[2]} spanLength={1} />
                     <SocialDiv color={redColors[1]} spanLength={1} />
