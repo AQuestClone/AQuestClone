@@ -81,7 +81,7 @@ export default class HomePage extends Component {
                     <SocialDiv color={redColors[2]} spanLength={1} />
                     <SocialDiv color={redColors[0]} spanLength={2} />
                 </div>
-                <Div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '350px'}} >
+                <Div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '350px' }} >
                     <FiftyAnim />
                     <InfoBox config={infoBoxConfig[2]} />
                 </Div>
@@ -91,8 +91,10 @@ export default class HomePage extends Component {
                     <SocialDiv color={redColors[2]} spanLength={1} />
                     <SocialDiv color={redColors[3]} spanLength={1} />
                 </div>
-                <InfoBreak width='50%' color={purpleColors[1]} style={{ float: 'left' }} />
-                <InfoBreak width='50%' color={purpleColors[2]} style={{ float: 'left' }} />
+                <Div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '350px' }} >
+                    <InfoBox config={infoBoxConfig[3]} />
+                    <InfoBox config={infoBoxConfig[4]} />
+                </Div>
 
             </div>
         )
@@ -146,10 +148,11 @@ const InfoBreak = glamorous.div(
 const infoBoxConfig = [
     {
         background: 'white',
+        width: '100%',
         height: '100%',
         padding: 50,
         textAlign: 'left',
-        pWidth: '100%',
+        pWidth: '95%',
         title: 'DIGITAL DREAMS BY AQUEST',
         text: [
             "It’s not true that the best dreams happen when you are awake, they happen when you are online! Don’t you believe? Check our works.",
@@ -163,7 +166,7 @@ const infoBoxConfig = [
     {
         background: 'white',
         width: '100vh',
-        height: 275,
+        height: 350,
         padding: 50,
         textAlign: 'center',
         pWidth: '100%',
@@ -178,8 +181,8 @@ const infoBoxConfig = [
     {
         background: 'white',
         width: '50%',
-        height: '100%',
-        padding: 0,
+        height: '350px',
+        padding: '20px 50px',
         textAlign: 'left',
         pWidth: '40%',
         title: 'GOOD REASONS TO WORK WITH US',
@@ -191,6 +194,38 @@ const infoBoxConfig = [
             gridColumnEnd: 'span 2',
         }
     },
+    {
+        background: '#eee',
+        width: '50%',
+        height: '100%',
+        padding: '10px 50px',
+        textAlign: 'left',
+        pWidth: '70%',
+        title: 'DIGITAL DREAMERS WANTED. \nCAREERS',
+        text: [
+            `"You may say I’m a dreamer, but I'm not the only one." We always look for passionate and dedicated creative geeks. Send us your profile, your working preferences and the reason why you want to join our crew.`
+        ],
+        config: {
+            gridRowEnd: 'span 1',
+            gridColumnEnd: 'span 2',
+        }
+    },
+    {
+        background: 'white',
+        width: '50%',
+        height: '100%',
+        padding: '10px 50px',
+        textAlign: 'left',
+        pWidth: '70%',
+        title: 'HAVE YOUR DREAM AND SHARE IT WITH US. CONTACTS',
+        text: [
+            `"You may say I’m a dreamer, but I'm not the only one." We always look for passionate and dedicated creative geeks. Send us your profile, your working preferences and the reason why you want to join our crew.`
+        ],
+        config: {
+            gridRowEnd: 'span 1',
+            gridColumnEnd: 'span 2',
+        }
+    }
 ]
 
 //config props
