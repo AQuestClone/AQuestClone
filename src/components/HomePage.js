@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { css } from 'glamor'
-import glamorous from 'glamorous';
+import glamorous, { Div } from 'glamorous';
 
 //components
 import MenuBox from './MenuBox';
@@ -100,13 +100,15 @@ const InfoBreak = glamorous.div(
 const infoBoxConfig = [
     {
         background: 'white',
-        width: '100%',
         height: '100%',
+        padding: 50,
+        textAlign: 'left',
+        pWidth: '100%',
         title: 'DIGITAL DREAMS BY AQUEST',
         text: [
             "It’s not true that the best dreams happen when you are awake, they happen when you are online! Don’t you believe? Check our works.",
             "We signed a pact with the world leaders in the science of dreams - Sandman, Sleeping Beauty and Sleepy the dwarf in order to provide you with the highest quality magical experience. Having researched the famous Ole Lukoje’s process of sprinkling tiny amount of fine dust onto the eyes of dreamers, and combining it with the catalyst of Rufus the Noops' vivid daydreams we came with an absolutely innovative solution. We call it DDC - Digital Dreams Catharsis. For more information about DDC, please give us a shout."
-        ], 
+        ],
         config: {
             gridRowEnd: 'span 1',
             gridColumnEnd: 'span 2',
@@ -114,10 +116,11 @@ const infoBoxConfig = [
     },
     {
         background: 'white',
-        width: '100%',
+        width: '100vh',
         height: 275,
-        color: 'black',
+        padding: 50,
         textAlign: 'center',
+        pWidth: '100%',
         title: 'STAY WITH US: ENJOY WITH US.',
         text: [
             "Keep calm and dream on. Follow us on social networks! A shared joy is a double joy. Stay with us to discover the most interesting projects, trends & news from the world of digital dreams."
@@ -125,14 +128,30 @@ const infoBoxConfig = [
         config: {
 
         }
-    }
+    },
+    {
+        background: 'white',
+        width: '50%',
+        height: '100%',
+        padding: 0,
+        textAlign: 'left',
+        pWidth: '40%',
+        title: 'GOOD REASONS TO WORK WITH US',
+        text: [
+            "We have been generating creative digital dreams for over 20 years and have collected more than 50 international awards in an assortment of categories voted by professional independent juries."
+        ],
+        config: {
+            gridRowEnd: 'span 1',
+            gridColumnEnd: 'span 2',
+        }
+    },
 ]
 
 //config props
 
 const configStyles = [
     {
-        rowSpan: 2, 
+        rowSpan: 2,
         image: cecchi,
         title: 'CECCHI',
         hashtag: '#corporate #website',
@@ -209,7 +228,7 @@ export default class HomePage extends Component {
         return (
             <div>
                 <div className={`${spotlightStyle}`}>
-                <Spotlight active={true} height={768} />
+                    <Spotlight active={true} height={768} />
                 </div>
                 <div className={`${portfolioStyle}`}>
                     <InfoBox config={infoBoxConfig[0]} />
@@ -230,16 +249,18 @@ export default class HomePage extends Component {
                     <SocialDiv color={redColors[2]} spanLength={1} />
                     <SocialDiv color={redColors[0]} spanLength={2} />
                 </div>
-                <InfoBreak width='50%' color={purpleColors[0]} style={{float: 'left'}}/>
-                <InfoBreak width='50%' color={purpleColors[1]} style={{float: 'right'}}/>
-                <div className={`${portfolioStyle}`} style={{clear: 'both'}}>
+                <Div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '350px'}} >
+                    <InfoBreak width='50%' color={purpleColors[0]} />
+                    <InfoBox config={infoBoxConfig[2]} />
+                </Div>
+                <div className={`${portfolioStyle}`} style={{ clear: 'both' }}>
                     <SocialDiv color={redColors[0]} spanLength={1} />
                     <SocialDiv color={redColors[1]} spanLength={1} />
                     <SocialDiv color={redColors[2]} spanLength={1} />
                     <SocialDiv color={redColors[3]} spanLength={1} />
                 </div>
-                <InfoBreak width='50%' color={purpleColors[1]} style={{float: 'left'}}/>
-                <InfoBreak width='50%' color={purpleColors[2]} style={{float: 'left'}}/>
+                <InfoBreak width='50%' color={purpleColors[1]} style={{ float: 'left' }} />
+                <InfoBreak width='50%' color={purpleColors[2]} style={{ float: 'left' }} />
 
             </div>
         )
