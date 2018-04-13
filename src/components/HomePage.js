@@ -54,6 +54,51 @@ const redColors = [
     '#B71C1C'
 ]
 
+export default class HomePage extends Component {
+
+    render() {
+        return (
+            <div>
+                <div className={`${spotlightStyle}`}>
+                    <Spotlight active={true} height={768} />
+                </div>
+                <div className={`${portfolioStyle}`}>
+                    <InfoBox config={infoBoxConfig[0]} />
+                    {
+                        configStyles.map((style, idx) => {
+                            return <ProjLink config={style} key={`project_${style.title}`} />
+                        })
+                    }
+                    <ProjSlide />
+                </div>
+                <InfoBox config={infoBoxConfig[1]} />
+                <div className={`${portfolioStyle}`}>
+                    <SocialDiv color={redColors[2]} spanLength={1} />
+                    <SocialDiv color={redColors[1]} spanLength={1} />
+                    <SocialDiv color={redColors[2]} spanLength={1} />
+                    <SocialDiv color={redColors[3]} spanLength={1} />
+                    <SocialDiv color={redColors[4]} spanLength={1} />
+                    <SocialDiv color={redColors[2]} spanLength={1} />
+                    <SocialDiv color={redColors[0]} spanLength={2} />
+                </div>
+                <Div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '350px'}} >
+                    <FiftyAnim />
+                    <InfoBox config={infoBoxConfig[2]} />
+                </Div>
+                <div className={`${portfolioStyle}`} style={{ clear: 'both' }}>
+                    <SocialDiv color={redColors[0]} spanLength={1} />
+                    <SocialDiv color={redColors[1]} spanLength={1} />
+                    <SocialDiv color={redColors[2]} spanLength={1} />
+                    <SocialDiv color={redColors[3]} spanLength={1} />
+                </div>
+                <InfoBreak width='50%' color={purpleColors[1]} style={{ float: 'left' }} />
+                <InfoBreak width='50%' color={purpleColors[2]} style={{ float: 'left' }} />
+
+            </div>
+        )
+    }
+}
+
 const spotlightStyle = css({
     height: 768,
     width: '100%',
@@ -220,54 +265,8 @@ const configStyles = [
         title: 'MEDIASET PREMIUM',
         hashtag: '#app . #website'
     }
+
 ]
-
-
-export default class HomePage extends Component {
-
-    render() {
-        return (
-            <div>
-                <div className={`${spotlightStyle}`}>
-                    <Spotlight active={true} height={768} />
-                </div>
-                <div className={`${portfolioStyle}`}>
-                    <InfoBox config={infoBoxConfig[0]} />
-                    {
-                        configStyles.map((style, idx) => {
-                            return <ProjLink config={style} key={`project_${style.title}`} />
-                        })
-                    }
-                    <ProjSlide />
-                </div>
-                <InfoBox config={infoBoxConfig[1]} />
-                <div className={`${portfolioStyle}`}>
-                    <SocialDiv color={redColors[2]} spanLength={1} />
-                    <SocialDiv color={redColors[1]} spanLength={1} />
-                    <SocialDiv color={redColors[2]} spanLength={1} />
-                    <SocialDiv color={redColors[3]} spanLength={1} />
-                    <SocialDiv color={redColors[4]} spanLength={1} />
-                    <SocialDiv color={redColors[2]} spanLength={1} />
-                    <SocialDiv color={redColors[0]} spanLength={2} />
-                </div>
-                <Div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '350px'}} >
-                    <FiftyAnim />
-                    <InfoBox config={infoBoxConfig[2]} />
-                </Div>
-                <div className={`${portfolioStyle}`} style={{ clear: 'both' }}>
-                    <SocialDiv color={redColors[0]} spanLength={1} />
-                    <SocialDiv color={redColors[1]} spanLength={1} />
-                    <SocialDiv color={redColors[2]} spanLength={1} />
-                    <SocialDiv color={redColors[3]} spanLength={1} />
-                </div>
-                <InfoBreak width='50%' color={purpleColors[1]} style={{ float: 'left' }} />
-                <InfoBreak width='50%' color={purpleColors[2]} style={{ float: 'left' }} />
-
-            </div>
-        )
-    }
-}
-
 
 
 
