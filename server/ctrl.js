@@ -34,6 +34,8 @@ module.exports = {
     deletePost : (req,res)=>{
         const db = req.app.get('db')
         const {id} = req.params
+        console.log(id);
+        
         
         db.delete_post([id])
         .then((post)=>res.status(200).send(post))
@@ -43,7 +45,7 @@ module.exports = {
     getResponses: (req,res)=>{
         const db = req.app.get('db')
 
-        db.get_responses([])
+        db.get_responses([req.params.id])
         .then((comment)=>res.status(200).send(comment))
         .then(()=>res.status(500).send())
     },
