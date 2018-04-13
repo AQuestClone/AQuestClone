@@ -13,7 +13,7 @@ let Wrapper = glamorous.div(
             fontWeight: '500',
             letterSpacing: '0.2em',
             margin: '25px',
-            marginTop: 50
+            marginTop: 25
         },
         ' p': {
             width: '95%',
@@ -28,13 +28,26 @@ let Wrapper = glamorous.div(
     },
     (props) => (
         {
-        height: props.height,
-        width: props.width,
-        background: props.background,
-        textAlign: props.textAlign,
-        padding: props.padding
+            position: 'relative',
+            height: props.height,
+            width: props.width,
+            background: props.background,
+            textAlign: props.textAlign,
         }
     )
+)
+
+let Content = glamorous.div(
+    {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%'
+    },
+    (props) => ({
+        padding: props.padding
+    })
 )
 
 export default class InfoBox extends Component {
@@ -57,25 +70,25 @@ export default class InfoBox extends Component {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-
         }
         return (
             <Wrapper width={width}
                 height={height}
-                padding={padding}
                 background={background}
                 textAlign={textAlign}
                 style={config}>
-                <h1>{title}</h1>
-                {
-                    text.map((el, idx) => {
-                        return (
-                            <div style={pWrapper}>
-                                <p style={{textAlign: 'left', padding: '0px'}}>{el}</p>   
-                            </div>
-                        )
-                    })
-                }
+                <Content >
+                    <h1>{title}</h1>
+                    {
+                        text.map((el, idx) => {
+                            return (
+                                <div style={pWrapper}>
+                                    <p style={{ textAlign: 'left', padding: '0px' }}>{el}</p>
+                                </div>
+                            )
+                        })
+                    }
+                </Content>
             </Wrapper>
         )
     }
