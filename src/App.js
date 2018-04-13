@@ -27,7 +27,6 @@ class App extends Component {
     render(){
     return (
       <div>
-        {console.log(this.state.switch)}
         {
           this.state.switch ? 
           <MainWrapper/>    :          
