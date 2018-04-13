@@ -93,9 +93,9 @@ app.get('/api/blogpost', ctrl.getAllPosts)
 app.get('/api/blogpost/:id', ctrl.getOnePost)
 app.post('/api/blogpost/:id', ctrl.addPost)
 app.put('/api/blogpost/:id', ctrl.editPost)
-app.delete('/api/blogpost/:id', ctrl.deletePost)
+app.delete('/api/blogpost/:id', ctrl.deletePost) // this deletes all responses attached to the post as well
 //api endpoints for responses
-app.get('/api/responses', ctrl.getResponses)
+app.get('/api/responses/:id', ctrl.getResponses)
 app.post('/api/responses/:id', ctrl.addResponse)
 app.put('/api/responses/:id', ctrl.editResponse)
 
