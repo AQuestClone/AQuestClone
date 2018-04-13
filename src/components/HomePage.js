@@ -8,6 +8,7 @@ import Spotlight from './Spotlight';
 import ProjLink from './ProjLink';
 import ProjSlide from './ProjSlide';
 import InfoBox from './InfoBox';
+import FiftyAnim from './FiftyAnim';
 
 
 //images
@@ -250,7 +251,7 @@ export default class HomePage extends Component {
                     <SocialDiv color={redColors[0]} spanLength={2} />
                 </div>
                 <Div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '350px'}} >
-                    <InfoBreak width='50%' color={purpleColors[0]} />
+                    <FiftyAnim />
                     <InfoBox config={infoBoxConfig[2]} />
                 </Div>
                 <div className={`${portfolioStyle}`} style={{ clear: 'both' }}>
