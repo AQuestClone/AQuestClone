@@ -93,7 +93,7 @@ export default class Spotlight extends Component{
         {(styles) => (
           <div
           style={{
-            height: this.props.height,
+            height: '100%',
             width: '100%', 
             position: 'relative',
             overflow: 'hidden'

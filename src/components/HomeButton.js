@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import glamorous from 'glamorous';
+import {withRouter} from 'react-router-dom';
 
 import logo from './assets/logo-grigio-scuro.png';
 
@@ -38,14 +39,16 @@ const LogoWrapper = glamorous.div(
 )
 
 
-export default class HomeButton extends Component {
+class HomeButton extends Component {
     render() {
         return (
             <Wrapper>
-                <LogoWrapper>
+                <LogoWrapper onClick={() => this.props.history.push('/')}>
                     <img src={logo} alt='homelogo' />
                 </LogoWrapper>
             </Wrapper>
         )
     }
 }
+
+export default withRouter(HomeButton);
