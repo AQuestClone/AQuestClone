@@ -63,7 +63,6 @@ export default class HomePage extends Component {
                 <div className={`${portfolioStyle}`}>
                     <PortfolioText background={blueColors[0]}/>
                         {projLinks}
-                        {console.log(projLinks[0])}
                     <ProjSlide />
                 </div>
                 <InfoBreak width='100%' color={purpleColors[0]} />
