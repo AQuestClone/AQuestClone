@@ -154,7 +154,7 @@ export default class ProjSlide extends Component {
                 <Arrow src={arrow} />
                 {
                     photos.map((photo, idx) => {
-                        return <Photo style={{
+                        return <Photo key={idx} style={{
                             backgroundImage: `url(${photo})`,
                             zIndex: this.state.index === idx ? '1' : '-1'}}>
                                 </Photo>

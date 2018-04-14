@@ -19,7 +19,6 @@ import fornasetti from './assets/fornasetti.jpg';
 import ferrari from './assets/ferrari.jpg';
 import mediaset from './assets/mediaset.jpg';
 
-
 const blueColors = [
     '#BBDEFB',
     '#64B5F6',
@@ -52,10 +51,10 @@ const redColors = [
     '#B71C1C'
 ]
 
-
 export default class HomePage extends Component {
 
     render() {
+        let projLinks = configStyles.map((style, idx) => <ProjLink key={`project_${idx}`} config={style}></ProjLink>)
         return (
             <div>
                 <div className={`${spotlightStyle}`}>
@@ -63,11 +62,8 @@ export default class HomePage extends Component {
                 </div>
                 <div className={`${portfolioStyle}`}>
                     <PortfolioText background={blueColors[0]}/>
-                    {
-                        configStyles.map((style, idx) => {
-                            return <ProjLink config={style} key={`project_${style.title}`} />
-                        })
-                    }
+                        {projLinks}
+                        {console.log(projLinks[0])}
                     <ProjSlide />
                 </div>
                 <InfoBreak width='100%' color={purpleColors[0]} />
@@ -97,7 +93,7 @@ export default class HomePage extends Component {
 }
 
 const spotlightStyle = css({
-    height: 768,
+    height: '80vh',
     width: '100%',
 })
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { TransitionMotion, spring } from 'react-motion';
 import glamorous from 'glamorous';
+var ReactDOM = require('react-dom');
 
 let Photo = glamorous.div(
     'photo-div',
@@ -32,7 +33,7 @@ let Photo = glamorous.div(
     },
     {
         backgroundSize: 'cover',
-        width: 'calc(100% + 50px)',
+        width: 'calc(100% + 51px)',
         height: '100%',
         transform: 'translate3d(-50px,0,0)',
         transition: 'transform .35s',
@@ -61,7 +62,7 @@ let PhotoWrapper = glamorous.div(
         gridColumnEnd: 'span 2',
         overflow: 'hidden',
         position: 'relative',
-        zIndex: '6'
+        zIndex: '6', 
     }
 )
 
@@ -92,7 +93,7 @@ let HashTag = glamorous.h2(
         fontSize: '15px',
         fontWeight: '400',
         letterSpacing: '0.05em',
-        color: '#e6e6e6'
+        color: 'white'
     },
     (props) => ({
         bottom: props.bottom
@@ -137,16 +138,48 @@ let Awards = glamorous.div(
 
 
 export default class ProjLink extends Component {
+    constructor(){
+        super();
+
+        this.state = {
+            visible: 0
+        }
+
+    }
+    checkVisibility = () => {
+        let projLocation = ReactDOM.findDOMNode(this).getBoundingClientRect(); 
+        let viewPort = {
+        top: 0,
+        left: 0,
+        bottom: window.innerHeight || document.documentElement.clientHeight,
+        right: window.innerWidth || document.documentElement.clientWidth
+      } 
+       var isVisible = (
+        projLocation.top <= viewPort.bottom && projLocation.bottom >= viewPort.top &&
+        projLocation.left <= viewPort.right && projLocation.right >= viewPort.left
+      );
+
+        this.setState({
+            visible: isVisible && !this.state.visible ? this.state.visible + 1 : this.state.visible
+        })
+    }
+
+    componentDidMount(){
+
+        this.interval = setInterval(this.checkVisibility, (Math.random() * (500 - 100) + 100))
+    }
     render() {
         let {
             image,
             rowSpan,
             title,
             hashtag,
-            awards
+            awards,
         } = this.props.config
+
         return (
             <PhotoWrapper style={{ gridRowEnd: `span ${rowSpan}` }}>
+            {this.state.visible ? clearInterval(this.interval) : null}
                 <PhotoTitle>{title}</PhotoTitle>
                 <HashTag>{hashtag}</HashTag>
                 <Awards>
@@ -168,25 +201,29 @@ export default class ProjLink extends Component {
                     }
                 </Awards>
                 <TransitionMotion
-                    defaultStyles={[{
+                    defaultStyles={this.state.visible ? [{
                         key: title,
-                        style: { top: 100 }
-                    }]}
-                    styles={[{
+                        style: { top: rowSpan === 1 ? 500 : 1000 }
+                    }] : []}
+                    styles={this.state.visible ? [{
                         key: title,
                         style: { top: spring(0, {stiffness: 250, damping: 30}) }
-                    }]}>
+                    }] : []}
+                    willEnter={() => ({top: rowSpan === 1 ? 500 : 1000})}>
                     {
-                        styles => 
-                            <Photo 
-                                rowSpan={rowSpan} 
-                                key={styles[0].key} 
-                                style={{ 
-                                    top: `${styles[0].style.top}%` ,
-                                    backgroundImage: `url(${image})`
-                                }}>
-
-                            </Photo>
+                        styles =>
+                            <div style={{height: '100%', width: '100%'}}>                        
+                            {styles.map( ({key, style}) =>
+                                <Photo 
+                                    rowSpan={rowSpan} 
+                                    key={key} 
+                                    style={{ 
+                                        backgroundImage: `url(${image})`,
+                                        ...style
+                                    }}>
+                                </Photo>
+                            )}
+                            </div>
                     }
                 </TransitionMotion>
             </PhotoWrapper>
