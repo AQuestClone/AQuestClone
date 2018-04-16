@@ -26,7 +26,7 @@ export default class MainWrapper extends Component {
         super();
 
         this.state = {
-            menuActive: true
+            menuActive: false
         }
 
     }
@@ -41,7 +41,7 @@ export default class MainWrapper extends Component {
         console.log(this.state.menuActive);
         return (
             <Wrapper>
-                <MenuBox toggleMenu={this.toggleMenu}/>
+                <MenuBox toggleMenu={this.toggleMenu} menuActive={this.state.menuActive}/>
                 <MainMenu active={this.state.menuActive} />
                 <Switch>
                     <Route exact path = '/' component={HomePage} />
