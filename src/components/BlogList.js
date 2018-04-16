@@ -3,7 +3,10 @@ import glamorous from 'glamorous';
 import BlogCard from './BlogCard';
 
 const BlogCardWrapper = glamorous.div(
-    {
+    {   
+        position:'relative',
+        top:'65px',
+        zIndex:'1',
         display:'flex',
         flexDirection:'column',
         alignItems:'center',

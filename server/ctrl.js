@@ -62,7 +62,7 @@ module.exports = {
     editResponse: (req,res)=>{
         const db = req.app.get('db')
         const {id} = req.params
-        
+    
         db.responses.update({id:id},req.body)
         .then((post)=>res.status(200).send(post))
         .catch(()=>res.status(500).send())
