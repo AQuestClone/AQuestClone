@@ -55,7 +55,6 @@ const redColors = [
 ]
 
 export default class HomePage extends Component {
-
     render() {
         return (
             <div>
@@ -95,7 +94,6 @@ export default class HomePage extends Component {
                     <InfoBox config={infoBoxConfig[3]} />
                     <InfoBox config={infoBoxConfig[4]} />
                 </Div>
-
             </div>
         )
     }
@@ -204,11 +202,7 @@ const infoBoxConfig = [
         title: 'DIGITAL DREAMERS WANTED. \nCAREERS',
         text: [
             `"You may say I’m a dreamer, but I'm not the only one." We always look for passionate and dedicated creative geeks. Send us your profile, your working preferences and the reason why you want to join our crew.`
-        ],
-        config: {
-            gridRowEnd: 'span 1',
-            gridColumnEnd: 'span 2',
-        }
+        ]
     },
     {
         background: 'white',
@@ -220,11 +214,7 @@ const infoBoxConfig = [
         title: 'HAVE YOUR DREAM AND SHARE IT WITH US. CONTACTS',
         text: [
             `"You may say I’m a dreamer, but I'm not the only one." We always look for passionate and dedicated creative geeks. Send us your profile, your working preferences and the reason why you want to join our crew.`
-        ],
-        config: {
-            gridRowEnd: 'span 1',
-            gridColumnEnd: 'span 2',
-        }
+        ]
     }
 ]
 
