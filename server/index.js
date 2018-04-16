@@ -72,9 +72,7 @@ app.get('/auth/callback', passport.authenticate('auth0', {
     successRedirect: SUCCESSREDIRECT,
     failureRedirect: FAILUREREDIRECT
 }))
-app.get('/auth/me', (req, res) => {
-    console.log('apoy');
-    
+app.get('/auth/me', (req, res) => {    
     if (req.user) {
         res.status(200).send(req.user);
     } else {
