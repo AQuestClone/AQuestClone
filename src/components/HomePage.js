@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import { css } from 'glamor'
 import glamorous from 'glamorous';
+import {StaggeredMotion, spring} from 'react-motion';
 
 //components
 import MenuBox from './MenuBox';
 import Spotlight from './Spotlight';
 import ProjLink from './ProjLink';
 import ProjSlide from './ProjSlide';
+import AwardBox from './AwardBox';
+import CheckVisibility from './CheckVisibility';
 
 
 //images
@@ -77,12 +80,34 @@ export default class HomePage extends Component {
                 </div>
                 <InfoBreak width='50%' color={purpleColors[0]} style={{float: 'left'}}/>
                 <InfoBreak width='50%' color={purpleColors[1]} style={{float: 'right'}}/>
-                <div className={`${portfolioStyle}`} style={{clear: 'both'}}>
-                    <SocialDiv color={redColors[0]} spanLength={1} />
-                    <SocialDiv color={redColors[1]} spanLength={1} />
-                    <SocialDiv color={redColors[2]} spanLength={1} />
-                    <SocialDiv color={redColors[3]} spanLength={1} />
-                </div>
+                <CheckVisibility>
+                        {isVisible => 
+                    <StaggeredMotion
+                        defaultStyles={[
+                            {top: 500},
+                            {top: 500},
+                            {top: 500},
+                            {top: 500},  
+                        ]}
+                        styles={(prevStyles) => !isVisible ? [] : [
+                            {top: spring(0)},
+                            {top: spring(prevStyles[0].top)},
+                            {top: spring(prevStyles[1].top)},
+                            {top: spring(prevStyles[2].top)},
+                        ]}
+                    >
+                    {
+                        styles => 
+                            <div className={`${portfolioStyle}`} style={{overflow: 'hidden', clear: 'both'}}>                            
+                                {styles.map((style, i) => {
+                                    console.log(awardInfo[i])
+                                    return <div style={{position: 'relative', ...style}} ><AwardBox visible={isVisible} ind={i} {...awardInfo[i]} /></div>  
+                                    }
+                                )}
+                            </div>
+                    }
+                    </StaggeredMotion>}
+                </CheckVisibility>
                 <InfoBreak width='50%' color={purpleColors[1]} style={{float: 'left'}}/>
                 <InfoBreak width='50%' color={purpleColors[2]} style={{float: 'left'}}/>
 
@@ -123,6 +148,13 @@ const SocialDiv = glamorous.div(
         gridColumnEnd: `span ${props.spanLength}`,
     })
 )
+
+const awardInfo = [
+    {title: 'fwa', award: 'site of the day', num: 19},
+    {title: 'awwwards', award: 'site of the day', num: 27},
+    {title: 'css design', award: 'awards', num: 26},
+    {title: 'other', award: 'awards', num: 50},    
+]
 
 const InfoBreak = glamorous.div(
     {
