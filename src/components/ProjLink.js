@@ -170,7 +170,7 @@ export default class ProjLink extends Component {
                             null
                     }
                 </Awards>
-                <CheckVisibility>
+                <CheckVisibility interval={(Math.random() * (500 - 100) + 100)}>
                     {(isVisible) =>
                         <TransitionMotion
                             defaultStyles={isVisible ? [{
