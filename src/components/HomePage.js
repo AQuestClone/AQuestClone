@@ -52,6 +52,50 @@ const redColors = [
     '#B71C1C'
 ]
 
+
+export default class HomePage extends Component {
+
+    render() {
+        return (
+            <div>
+                <div className={`${spotlightStyle}`}>
+                <Spotlight active={true} height={768} />
+                </div>
+                <div className={`${portfolioStyle}`}>
+                    <PortfolioText background={blueColors[0]}/>
+                    {
+                        configStyles.map((style, idx) => {
+                            return <ProjLink config={style} key={`project_${style.title}`} />
+                        })
+                    }
+                    <ProjSlide />
+                </div>
+                <InfoBreak width='100%' color={purpleColors[0]} />
+                <div className={`${portfolioStyle}`}>
+                    <SocialDiv color={redColors[2]} spanLength={1} />
+                    <SocialDiv color={redColors[1]} spanLength={1} />
+                    <SocialDiv color={redColors[2]} spanLength={1} />
+                    <SocialDiv color={redColors[3]} spanLength={1} />
+                    <SocialDiv color={redColors[4]} spanLength={1} />
+                    <SocialDiv color={redColors[2]} spanLength={1} />
+                    <SocialDiv color={redColors[0]} spanLength={2} />
+                </div>
+                <InfoBreak width='50%' color={purpleColors[0]} style={{float: 'left'}}/>
+                <InfoBreak width='50%' color={purpleColors[1]} style={{float: 'right'}}/>
+                <div className={`${portfolioStyle}`} style={{clear: 'both'}}>
+                    <SocialDiv color={redColors[0]} spanLength={1} />
+                    <SocialDiv color={redColors[1]} spanLength={1} />
+                    <SocialDiv color={redColors[2]} spanLength={1} />
+                    <SocialDiv color={redColors[3]} spanLength={1} />
+                </div>
+                <InfoBreak width='50%' color={purpleColors[1]} style={{float: 'left'}}/>
+                <InfoBreak width='50%' color={purpleColors[2]} style={{float: 'left'}}/>
+
+            </div>
+        )
+    }
+}
+
 const spotlightStyle = css({
     height: 768,
     width: '100%',
@@ -168,52 +212,3 @@ const configStyles = [
         hashtag: '#app . #website'
     }
 ]
-
-
-export default class HomePage extends Component {
-
-    render() {
-        return (
-            <div>
-                <div className={`${spotlightStyle}`}>
-                <Spotlight active={true} height={768} />
-                </div>
-                <div className={`${portfolioStyle}`}>
-                    <PortfolioText background={blueColors[0]}/>
-                    {
-                        configStyles.map((style, idx) => {
-                            return <ProjLink config={style} key={`project_${style.title}`} />
-                        })
-                    }
-                    <ProjSlide />
-                </div>
-                <InfoBreak width='100%' color={purpleColors[0]} />
-                <div className={`${portfolioStyle}`}>
-                    <SocialDiv color={redColors[2]} spanLength={1} />
-                    <SocialDiv color={redColors[1]} spanLength={1} />
-                    <SocialDiv color={redColors[2]} spanLength={1} />
-                    <SocialDiv color={redColors[3]} spanLength={1} />
-                    <SocialDiv color={redColors[4]} spanLength={1} />
-                    <SocialDiv color={redColors[2]} spanLength={1} />
-                    <SocialDiv color={redColors[0]} spanLength={2} />
-                </div>
-                <InfoBreak width='50%' color={purpleColors[0]} style={{float: 'left'}}/>
-                <InfoBreak width='50%' color={purpleColors[1]} style={{float: 'right'}}/>
-                <div className={`${portfolioStyle}`} style={{clear: 'both'}}>
-                    <SocialDiv color={redColors[0]} spanLength={1} />
-                    <SocialDiv color={redColors[1]} spanLength={1} />
-                    <SocialDiv color={redColors[2]} spanLength={1} />
-                    <SocialDiv color={redColors[3]} spanLength={1} />
-                </div>
-                <InfoBreak width='50%' color={purpleColors[1]} style={{float: 'left'}}/>
-                <InfoBreak width='50%' color={purpleColors[2]} style={{float: 'left'}}/>
-
-            </div>
-        )
-    }
-}
-
-
-
-
-
