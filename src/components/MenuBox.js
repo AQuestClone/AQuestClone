@@ -21,7 +21,7 @@ export default class MenuBox extends Component {
     render() {
         return (
             <Wrapper>
-                <Hamburger toggleMenu={this.props.toggleMenu}/>
+                <Hamburger toggleMenu={this.props.toggleMenu} menuActive={this.props.menuActive}/>
                 <HomeButton />
             </Wrapper>
         )
