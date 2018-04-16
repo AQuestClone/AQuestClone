@@ -163,8 +163,41 @@ export default class Hamburger extends PureComponent {
             }
         ]
 
+        const xWillLeaveStyles = [
+            {
+                key: '1',
+                style: {
+                    top: spring(-7),
+                    opacity: spring(0),
+                    rotate: spring(0)
+                }
+            },
+            {
+                key: '2',
+                style: {
+                    top: spring(0),
+                    opacity: spring(1),
+                }
+            },
+            {
+                key: '3',
+                style: {
+                    top: spring(7),
+                    opacity: spring(1),
+                    rotate: spring(0)
+                }
+            },
+            {
+                key: '4',
+                style: {
+                    top: spring(14),
+                    opacity: spring(1)
+                }
+            }
+        ]
+
         return (
-            !menuActive ?
+            !this.props.menuActive ?
                 <StaggeredMotion defaultStyles={[
                     { opacity: 1, top: 0 },
                     { opacity: 1, top: 7 },
@@ -207,12 +240,15 @@ export default class Hamburger extends PureComponent {
                 </StaggeredMotion>
                 :
                 <TransitionMotion
-                    defaultStyles={menuActive ? 
-                        startingXStyles.map((style, i) => style )
+                    defaultStyles={this.props.menuActive ?
+                        startingXStyles.map((style, i) => style)
                         : []}
-                    styles={menuActive ? 
+                    styles={this.props.menuActive ?
                         endingXStyles.map((style, i) => style)
-                        : []}>
+                        : []}
+                    // willLeave={() => xWillLeaveStyles.map((style) => style)}
+                    //  willEnter={() => startingXStyles.map((style) => style)}
+                     >
 
                     {
                         styles =>
@@ -229,17 +265,22 @@ export default class Hamburger extends PureComponent {
                                     }}>
                                         {
                                             styles.map(config => {
-                                                return <div 
-                                                        key={config.key} 
-                                                        style={{...config.style, ...whiteBar, transform: `rotate(${config.style.rotate}deg)`}}></div>
+                                                return <div
+                                                    key={config.key}
+                                                    style={{ ...config.style, ...whiteBar, transform: `rotate(${config.style.rotate}deg)` }}>
+                                                        {config.style.rotate}
+                                                    </div>
                                             })
                                         }
+                                        
+                                    
                                     </div>
 
                                 </Wrapper>
                             </div>
                     }
                 </TransitionMotion>
+
         )
     }
 }

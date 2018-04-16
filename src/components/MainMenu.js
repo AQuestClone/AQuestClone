@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { TransitionMotion, spring } from 'react-motion';
 import glamorous from 'glamorous';
+import { Link } from 'react-router-dom';
 
 let Wrapper = glamorous.div(
     {
