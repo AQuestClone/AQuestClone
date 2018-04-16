@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import glamorous from 'glamorous';
 import axios from 'axios';
+import {css} from 'glamor';
 import { getUser, getPost } from '../ducks/reducer';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
 import { log } from 'util';
 
 const BlogPageWrapper = glamorous.div(
-    {   
+    {
         position: 'relative',
-        top:'40px',
-        zIndex:'1',
+        top: '40px',
+        zIndex: '1',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -19,10 +20,14 @@ const BlogPageWrapper = glamorous.div(
     },
 
 )
-const ResponseInput = glamorous.input(
+const ResponseInput = glamorous.textarea(
     {
-        width: '70%',
-        height: '20px'
+        width: '98%',
+        height: '4vw',
+        border: 'none',
+        // boxShadow: '0 1px 4px rgba(44, 44, 46, 0.32)',
+
+
     }
 )
 let HashTag = glamorous.h2(
@@ -43,12 +48,50 @@ const CardButton = glamorous.button(
 )
 const ResHeader = glamorous.div(
     {
-        width: '500px',
-        height: '345px',
+        width: '30vw',
+        // height: '345px',
         boxShadow: '0 1px 4px rgba(44, 44, 46, 0.32)',
+
 
     }
 
+)
+const clapFade = css.keyframes({
+    '0%': { boxShadow: '0px 0px 3px #1976D2'},
+    // '50%': { boxShadow: '0 0px 25px #1976D2' },
+    '100%':{boxShadow: '0 0px 40px #0083dd1f'}
+
+})
+const Svg = glamorous.svg(
+    'clappingSvg',
+    {
+        height: '35px',
+        width: '35px',
+        fill: '#1976D2',
+        border: '1px solid',
+        borderRadius: '50%',
+        borderColor: 'black',
+    },
+    {
+
+        ':hover': {
+            borderColor: '#1976D2',
+            stroke: '#fff',
+            animation: `${clapFade} 1s ease-in infinite`
+        }
+    }
+)
+
+const Button = glamorous.div(
+    {
+        width: '52px',
+        border: '1px solid',
+        borderRadius: '5px',
+        padding: '5px',
+        borderColor: '#0083DD',
+        color: '#0083DD'
+
+    }
 )
 
 
@@ -89,26 +132,29 @@ class BlogPage extends Component {
             content: this.state.response,
             claps: 0
         }
-        console.log(obj)
         axios.post(`/api/responses/${this.props.post.id}`, obj).then(res => console.log(res))
 
     }
-    handleToggle(){
+    handleToggle() {
         this.setState({
             handleToggle: !this.state.handleToggle
         })
     }
-    addClaps(x){
-     let ans = this.state.responses[x].claps++
-     this.setState({
-         e: ans
-     })
-     axios.put(`/api/responses/${this.state.responses[x].res_id}`, {claps:this.state.responses[x].claps})
+    addClaps(x) {
+        let ans = this.state.responses[x].claps++
+        this.setState({
+            e: ans
+        })
+        axios.put(`/api/responses/${this.state.responses[x].res_id}`, { claps: this.state.responses[x].claps })
     }
     render() {
         console.log('blog page', this.props)
         console.log('blog page state', this.state)
         const { title, image, content } = this.props.post
+        let clappingIcon = <Svg id="clap--icon" xmlns="http://www.w3.org/2000/svg" viewBox="-549 338 100.1 125">
+            <path d="M-471.2 366.8c1.2 1.1 1.9 2.6 2.3 4.1.4-.3.8-.5 1.2-.7 1-1.9.7-4.3-1-5.9-2-1.9-5.2-1.9-7.2.1l-.2.2c1.8.1 3.6.9 4.9 2.2zm-28.8 14c.4.9.7 1.9.8 3.1l16.5-16.9c.6-.6 1.4-1.1 2.1-1.5 1-1.9.7-4.4-.9-6-2-1.9-5.2-1.9-7.2.1l-15.5 15.9c2.3 2.2 3.1 3 4.2 5.3zm-38.9 39.7c-.1-8.9 3.2-17.2 9.4-23.6l18.6-19c.7-2 .5-4.1-.1-5.3-.8-1.8-1.3-2.3-3.6-4.5l-20.9 21.4c-10.6 10.8-11.2 27.6-2.3 39.3-.6-2.6-1-5.4-1.1-8.3z" />
+            <path d="M-527.2 399.1l20.9-21.4c2.2 2.2 2.7 2.6 3.5 4.5.8 1.8 1 5.4-1.6 8l-11.8 12.2c-.5.5-.4 1.2 0 1.7.5.5 1.2.5 1.7 0l34-35c1.9-2 5.2-2.1 7.2-.1 2 1.9 2 5.2.1 7.2l-24.7 25.3c-.5.5-.4 1.2 0 1.7.5.5 1.2.5 1.7 0l28.5-29.3c2-2 5.2-2 7.1-.1 2 1.9 2 5.1.1 7.1l-28.5 29.3c-.5.5-.4 1.2 0 1.7.5.5 1.2.4 1.7 0l24.7-25.3c1.9-2 5.1-2.1 7.1-.1 2 1.9 2 5.2.1 7.2l-24.7 25.3c-.5.5-.4 1.2 0 1.7.5.5 1.2.5 1.7 0l14.6-15c2-2 5.2-2 7.2-.1 2 2 2.1 5.2.1 7.2l-27.6 28.4c-11.6 11.9-30.6 12.2-42.5.6-12-11.7-12.2-30.8-.6-42.7m18.1-48.4l-.7 4.9-2.2-4.4m7.6.9l-3.7 3.4 1.2-4.8m5.5 4.7l-4.8 1.6 3.1-3.9" />
+        </Svg>
         let resCard = this.state.responses.map((e, k) => {
             return (
                 <ResHeader key={k}>
@@ -122,19 +168,19 @@ class BlogPage extends Component {
                     </div>
                     <div style={{ padding: '20px' }}>
                         {e.content}
-                        <div style={{ display: 'flex',justifyContent: 'space-between',padding:'20px'}}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', padding: '20px' }}>
                             <div>
-                                {e.claps} <span style={{cursor:'pointer'}} onClick={()=>this.addClaps(k)}>+</span>
+                                <span style={{ cursor: 'pointer' }} onClick={() => this.addClaps(k)}>{clappingIcon}</span> {e.claps}
                             </div>
                             <div>
                                 <span onClick={this.handleToggle}>menu</span>
-                                {this.state.menuToggle?
-                                <div>
-                                    <span>Edit</span>
-                                    <span>Delete</span>
-                                </div>
-                                :
-                                ''
+                                {this.state.menuToggle ?
+                                    <div>
+                                        <span>Edit</span>
+                                        <span>Delete</span>
+                                    </div>
+                                    :
+                                    ''
                                 }
                             </div>
                         </div>
@@ -144,26 +190,14 @@ class BlogPage extends Component {
 
 
         })
+
         return (
             <div style={{ display: 'flex', justifyContent: 'center' }}>
                 <BlogPageWrapper>
+
                     <HashTag>{title}</HashTag>
                     <img style={{ height: '50vh', backgroundPosition: 'center', backgroundSize: 'cover' }} src={`${image}`} />
                     <HashTag fontSize={'17px'}>{content}</HashTag>
-
-                    {
-                        this.props.user.id ?
-                            <div style={{ width: ' 40vw' }}>
-
-                                <ResponseInput name='response' onChange={this.handleChange} placeholder='Write a response' />
-                                <div>
-                                    responses
-                    </div>
-                                <button onClick={this.handleSubmit} >submit</button>
-                            </div>
-                            :
-                            <a href={process.env.REACT_APP_LOGIN}> <ResponseInput placeholder='Write a Response'/> </a>
-                    }
 
                     <div>
                         {
@@ -176,8 +210,22 @@ class BlogPage extends Component {
                                 : ''
                         }
                     </div>
+                    {
+                        this.props.user.id ?
+                            <div style={{ boxShadow: '0 1px 4px rgba(44, 44, 46, 0.32)', padding: '10px', width: '28.8vw' }}>
+
+                                <ResponseInput name='response' onChange={this.handleChange} placeholder='Write a response' />
+                                <div>
+
+                                </div>
+                                <Button onClick={this.handleSubmit} >Publish</Button>
+                            </div>
+                            :
+                            <a style={{ boxShadow: '0 1px 4px rgba(44, 44, 46, 0.32)', width: '30vw' }} href={process.env.REACT_APP_LOGIN}> <ResponseInput placeholder='Write a Response' /> </a>
+                    }
 
                     {resCard}
+
 
                 </BlogPageWrapper>
             </div>

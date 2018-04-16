@@ -31,6 +31,7 @@ const HeaderBar = glamorous.div(
 
 )
 const GetStarted = glamorous.div(
+    'getStarted',
     {
         border:'1px solid',
         borderRadius:'5px',
