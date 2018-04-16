@@ -42,12 +42,7 @@ export default class MainWrapper extends Component {
         return (
             <Wrapper>
                 <MenuBox toggleMenu={this.toggleMenu}/>
-                {
-                    this.state.menuActive ?
-                    <MainMenu />
-                    :
-                    ''
-                }
+                <MainMenu active={this.state.menuActive} />
                 <Switch>
                     <Route exact path = '/' component={HomePage} />
                     <Route path='/blog' component={BlogRouter} />

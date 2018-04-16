@@ -59,18 +59,18 @@ let MenuItem = glamorous.div(
             bottom: 0,
             left: '50%',
             width: '10%',
-            height: 1,
+            height: 2,
             background: 'white',
             content: '""',
-            zIndex: '26',
+            zIndex: '27',
             transform: 'translate(-50%, -50%)',
             opacity: '0',
 
         },
         ':hover:after': {
-            opacity: '1',
+            opacity: '.5',
             width: '100%',
-            transition: 'all .8s ease'
+            transition: 'all .8s ease',
         }
     },
     {
@@ -87,50 +87,64 @@ let MenuItem = glamorous.div(
 )
 
 export default class MainMenu extends Component {
+
     render() {
+        let {
+            active
+        } = this.props
+        console.log(active);
         return (
             <TransitionMotion
-                defaultStyles={[{
+                defaultStyles={ active ? [{
                     key: 'menu',
                     style: { opacity: 0 }
-                }]}
-                styles={[{
+                }] : []}
+                styles={ active ? [{
                     key: 'menu',
-                    style: { opacity: spring(1) }
-                }]}
-                willLeave={() => ({ opacity: spring(0) })}
-                willEnter={() => ({ opacity: 0})}>
+                    style: { opacity: spring(0.95) }
+                }] : []}
+                willLeave={() => ({ opacity: spring(0)})}
+                willEnter={() => ({ opacity: 0 })}>
                 {
-                    styles => (
-                        <Wrapper key={styles[0].key} style={styles[0].style}>
-                            <MenuDiv>
-                                <MenuItem>
-                                    <a>HOME</a>
-                                </MenuItem>
-                                <MenuItem>
-                                    <h1>ABOUT US</h1>
-                                </MenuItem>
-                                <MenuItem>
-                                    <h1>CLIENTS</h1>
-                                </MenuItem>
-                                <MenuItem>
-                                    <h1>SERVICES</h1>
-                                </MenuItem>
-                                <MenuItem>
-                                    <h1>SOCIAL</h1>
-                                </MenuItem>
-                                <MenuItem>
-                                    <h1>BLOG</h1>
-                                </MenuItem>
-                                <MenuItem>
-                                    <h1>CONTACTS</h1>
-                                </MenuItem>
-                                <MenuItem>
-                                    <h1>JOB</h1>
-                                </MenuItem>
-                            </MenuDiv>
-                        </Wrapper>
-                    )
+                    styles =>
+                        <div>
+                            {
+                        styles.map(config => {
+                            return (
+                                <Wrapper key={config.key} style={config.style}>
+                                    <MenuDiv>
+                                        <MenuItem>
+                                            <a>HOME</a>
+                                        </MenuItem>
+                                        <MenuItem>
+                                            <h1>ABOUT US</h1>
+                                        </MenuItem>
+                                        <MenuItem>
+                                            <h1>CLIENTS</h1>
+                                        </MenuItem>
+                                        <MenuItem>
+                                            <h1>SERVICES</h1>
+                                        </MenuItem>
+                                        <MenuItem>
+                                            <h1>SOCIAL</h1>
+                                        </MenuItem>
+                                        <MenuItem>
+                                            <h1>BLOG</h1>
+                                        </MenuItem>
+                                        <MenuItem>
+                                            <h1>CONTACTS</h1>
+                                        </MenuItem>
+                                        <MenuItem>
+                                            <h1>JOB</h1>
+                                        </MenuItem>
+                                    </MenuDiv>
+                                </Wrapper>
+                            )
+                        })
+                            }
+                        </div>
+
+
                 }
 
             </TransitionMotion>
