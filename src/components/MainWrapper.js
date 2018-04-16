@@ -5,6 +5,7 @@ import glamorous from 'glamorous';
 import HomePage from './HomePage';
 import BlogRouter from './BlogRouter';
 import MenuBox from './MenuBox'
+import MainMenu from './MainMenu';
 
 const Wrapper = glamorous.div(
     {
@@ -21,10 +22,32 @@ const Wrapper = glamorous.div(
 
 
 export default class MainWrapper extends Component {
+    constructor() {
+        super();
+
+        this.state = {
+            menuActive: true
+        }
+
+    }
+
+    toggleMenu = () => {
+        this.setState({
+            menuActive: !this.state.menuActive
+        })
+    }
+
     render() {
+        console.log(this.state.menuActive);
         return (
             <Wrapper>
-                <MenuBox />
+                <MenuBox toggleMenu={this.toggleMenu}/>
+                {
+                    this.state.menuActive ?
+                    <MainMenu />
+                    :
+                    ''
+                }
                 <Switch>
                     <Route exact path = '/' component={HomePage} />
                     <Route path='/blog' component={BlogRouter} />
