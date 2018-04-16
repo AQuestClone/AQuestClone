@@ -84,7 +84,8 @@ export default class Hamburger extends PureComponent {
                         <Wrapper width={93}
                             height={65}
                             onMouseEnter={this.toggleHover}
-                            onMouseLeave={this.toggleHover}>
+                            onMouseLeave={this.toggleHover}
+                            onClick={this.props.toggleMenu}>
                             <div style={{
                                 height: '18px',
                                 position: 'absolute',
