@@ -106,7 +106,6 @@ export default class HomePage extends Component {
                         styles => 
                             <div className={`${portfolioStyle}`} style={{overflow: 'hidden', clear: 'both'}}>                            
                                 {styles.map((style, i) => {
-                                    console.log(awardInfo[i])
                                     return <div style={{position: 'relative', ...style}} ><AwardBox visible={isVisible} ind={i} {...awardInfo[i]} /></div>  
                                     }
                                 )}

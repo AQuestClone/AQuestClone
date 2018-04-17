@@ -26,25 +26,32 @@ export default class MenuBox extends Component {
                 <TransitionMotion
                     defaultStyles={!this.props.menuActive ? [{
                         key: 'x-menu',
-                        style: { opacity: 0 }
+                        style: { opacity: 0, top: 30 }
                     }] : []}
                     styles={!this.props.menuActive ? [{
                         key: 'x-menu',
-                        style: { opacity: spring(1) }
+                        style: { opacity: spring(1), top: spring(24) }
                     }] : []}
-                    willLeave={() => ({ opacity: spring(0) })}
-                    willEnter={() => ({ opacity: 0 })}>
+                    willLeave={() => ({ opacity: spring(0), top: spring(30) })}
+                    willEnter={() => ({ opacity: 0, top: 30})}>
                     {
-                        styles => 
-                            <div style={{position: 'absolute', top: 0, left: 0}}>
+                        styles =>
+                            <div style={{ position: 'absolute', top: 0, left: 0 }}>
                                 {
                                     styles.map((config => {
-                                        return <Hamburger toggleMenu={this.props.toggleMenu} menuActive={this.props.menuActive} />
+                                        return <Hamburger
+                                                    top={config.style.top}
+                                                    toggleMenu={this.props.toggleMenu}
+                                                    menuActive={this.props.menuActive}
+                                                    toggleHover={this.props.toggleHover}
+                                                    hoverEnter={this.props.hoverEnter}
+                                                    hoverLeave={this.props.hoverLeave}
+                                                    hovered={this.props.hovered} />
                                     }))
                                 }
                             </div>
                     }
-                    
+
                 </TransitionMotion>
                 <TransitionMotion
                     defaultStyles={this.props.menuActive ? [{
