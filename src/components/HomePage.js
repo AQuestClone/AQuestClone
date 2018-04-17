@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
 import { css } from 'glamor'
-import glamorous from 'glamorous';
+import glamorous, { Div } from 'glamorous';
+import {StaggeredMotion, spring} from 'react-motion';
+
 
 //components
 import MenuBox from './MenuBox';
 import Spotlight from './Spotlight';
 import ProjLink from './ProjLink';
 import ProjSlide from './ProjSlide';
+import InfoBox from './InfoBox';
+import FiftyAnim from './FiftyAnim';
+import AwardBox from './AwardBox';
+import CheckVisibility from './CheckVisibility';
+
 
 
 //images
@@ -52,20 +59,21 @@ const redColors = [
 ]
 
 export default class HomePage extends Component {
-
     render() {
         let projLinks = configStyles.map((style, idx) => <ProjLink key={`project_${idx}`} config={style}></ProjLink>)
         return (
             <div>
                 <div className={`${spotlightStyle}`}>
-                <Spotlight active={true} height={768} />
+                    <Spotlight active={true} height={768} />
                 </div>
                 <div className={`${portfolioStyle}`}>
-                    <PortfolioText background={blueColors[0]}/>
+
+                    <InfoBox config={infoBoxConfig[0]} />
+
                         {projLinks}
                     <ProjSlide />
                 </div>
-                <InfoBreak width='100%' color={purpleColors[0]} />
+                <InfoBox config={infoBoxConfig[1]} />
                 <div className={`${portfolioStyle}`}>
                     <SocialDiv color={redColors[2]} spanLength={1} />
                     <SocialDiv color={redColors[1]} spanLength={1} />
@@ -75,16 +83,43 @@ export default class HomePage extends Component {
                     <SocialDiv color={redColors[2]} spanLength={1} />
                     <SocialDiv color={redColors[0]} spanLength={2} />
                 </div>
-                <InfoBreak width='50%' color={purpleColors[0]} style={{float: 'left'}}/>
-                <InfoBreak width='50%' color={purpleColors[1]} style={{float: 'right'}}/>
-                <div className={`${portfolioStyle}`} style={{clear: 'both'}}>
-                    <SocialDiv color={redColors[0]} spanLength={1} />
-                    <SocialDiv color={redColors[1]} spanLength={1} />
-                    <SocialDiv color={redColors[2]} spanLength={1} />
-                    <SocialDiv color={redColors[3]} spanLength={1} />
-                </div>
-                <InfoBreak width='50%' color={purpleColors[1]} style={{float: 'left'}}/>
-                <InfoBreak width='50%' color={purpleColors[2]} style={{float: 'left'}}/>
+
+                <Div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '350px' }} >
+                    <FiftyAnim />
+                    <InfoBox config={infoBoxConfig[2]} />
+                </Div>
+                <CheckVisibility>
+                        {isVisible => 
+                    <StaggeredMotion
+                        defaultStyles={[
+                            {top: 500},
+                            {top: 500},
+                            {top: 500},
+                            {top: 500},  
+                        ]}
+                        styles={(prevStyles) => !isVisible ? [] : [
+                            {top: spring(0)},
+                            {top: spring(prevStyles[0].top)},
+                            {top: spring(prevStyles[1].top)},
+                            {top: spring(prevStyles[2].top)},
+                        ]}
+                    >
+                    {
+                        styles => 
+                            <div className={`${portfolioStyle}`} style={{overflow: 'hidden', clear: 'both'}}>                            
+                                {styles.map((style, i) => {
+                                    console.log(awardInfo[i])
+                                    return <div style={{position: 'relative', ...style}} ><AwardBox visible={isVisible} ind={i} {...awardInfo[i]} /></div>  
+                                    }
+                                )}
+                            </div>
+                    }
+                    </StaggeredMotion>}
+                </CheckVisibility>
+                <Div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '350px' }} >
+                    <InfoBox config={infoBoxConfig[3]} />
+                    <InfoBox config={infoBoxConfig[4]} />
+                </Div>
 
             </div>
         )
@@ -114,6 +149,7 @@ const PortfolioText = glamorous.div(
     })
 )
 
+
 const SocialDiv = glamorous.div(
     {
         gridRowEnd: 'span 1'
@@ -123,6 +159,13 @@ const SocialDiv = glamorous.div(
         gridColumnEnd: `span ${props.spanLength}`,
     })
 )
+
+const awardInfo = [
+    {title: 'fwa', award: 'site of the day', num: 19},
+    {title: 'awwwards', award: 'site of the day', num: 27},
+    {title: 'css design', award: 'awards', num: 26},
+    {title: 'other', award: 'awards', num: 50},    
+]
 
 const InfoBreak = glamorous.div(
     {
@@ -134,11 +177,86 @@ const InfoBreak = glamorous.div(
     })
 )
 
+const infoBoxConfig = [
+    {
+        background: 'white',
+        width: '100%',
+        height: '100%',
+        padding: 50,
+        textAlign: 'left',
+        pWidth: '95%',
+        title: 'DIGITAL DREAMS BY AQUEST',
+        text: [
+            "It’s not true that the best dreams happen when you are awake, they happen when you are online! Don’t you believe? Check our works.",
+            "We signed a pact with the world leaders in the science of dreams - Sandman, Sleeping Beauty and Sleepy the dwarf in order to provide you with the highest quality magical experience. Having researched the famous Ole Lukoje’s process of sprinkling tiny amount of fine dust onto the eyes of dreamers, and combining it with the catalyst of Rufus the Noops' vivid daydreams we came with an absolutely innovative solution. We call it DDC - Digital Dreams Catharsis. For more information about DDC, please give us a shout."
+        ],
+        config: {
+            gridRowEnd: 'span 1',
+            gridColumnEnd: 'span 2',
+        }
+    },
+    {
+        background: 'white',
+        width: '100vh',
+        height: 350,
+        padding: 50,
+        textAlign: 'center',
+        pWidth: '100%',
+        title: 'STAY WITH US: ENJOY WITH US.',
+        text: [
+            "Keep calm and dream on. Follow us on social networks! A shared joy is a double joy. Stay with us to discover the most interesting projects, trends & news from the world of digital dreams."
+        ],
+        config: {
+
+        }
+    },
+    {
+        background: 'white',
+        width: '50%',
+        height: '350px',
+        padding: '20px 50px',
+        textAlign: 'left',
+        pWidth: '40%',
+        title: 'GOOD REASONS TO WORK WITH US',
+        text: [
+            "We have been generating creative digital dreams for over 20 years and have collected more than 50 international awards in an assortment of categories voted by professional independent juries."
+        ],
+        config: {
+            gridRowEnd: 'span 1',
+            gridColumnEnd: 'span 2',
+        }
+    },
+    {
+        background: '#eee',
+        width: '50%',
+        height: '100%',
+        padding: '10px 50px',
+        textAlign: 'left',
+        pWidth: '70%',
+        title: 'DIGITAL DREAMERS WANTED. \nCAREERS',
+        text: [
+            `"You may say I’m a dreamer, but I'm not the only one." We always look for passionate and dedicated creative geeks. Send us your profile, your working preferences and the reason why you want to join our crew.`
+        ]
+    },
+    {
+        background: 'white',
+        width: '50%',
+        height: '100%',
+        padding: '10px 50px',
+        textAlign: 'left',
+        pWidth: '70%',
+        title: 'HAVE YOUR DREAM AND SHARE IT WITH US. CONTACTS',
+        text: [
+            `"You may say I’m a dreamer, but I'm not the only one." We always look for passionate and dedicated creative geeks. Send us your profile, your working preferences and the reason why you want to join our crew.`
+        ]
+    }
+]
+
 //config props
 
 const configStyles = [
     {
-        rowSpan: 2, 
+        rowSpan: 2,
         image: cecchi,
         title: 'CECCHI',
         hashtag: '#corporate #website',
@@ -206,4 +324,9 @@ const configStyles = [
         title: 'MEDIASET PREMIUM',
         hashtag: '#app . #website'
     }
+
 ]
+
+
+
+
