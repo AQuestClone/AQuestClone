@@ -13,9 +13,6 @@ export default class BlogRouter extends Component {
         
     }
     
-
-    
-
     render() {
         return (
             <div>
