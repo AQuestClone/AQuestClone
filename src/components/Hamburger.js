@@ -268,7 +268,7 @@ export default class Hamburger extends PureComponent {
                                                 return <div
                                                     key={config.key}
                                                     style={{ ...config.style, ...whiteBar, transform: `rotate(${config.style.rotate}deg)` }}>
-                                                        {config.style.rotate}
+                                                        
                                                     </div>
                                             })
                                         }
