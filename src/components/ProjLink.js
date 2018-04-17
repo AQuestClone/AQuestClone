@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { TransitionMotion, spring } from 'react-motion';
 import glamorous from 'glamorous';
-var ReactDOM = require('react-dom');
+
+import CheckVisibility from './CheckVisibility';
+
 
 let Photo = glamorous.div(
     'photo-div',
@@ -146,23 +148,7 @@ export default class ProjLink extends Component {
         }
 
     }
-    checkVisibility = () => {
-        let projLocation = ReactDOM.findDOMNode(this).getBoundingClientRect(); 
-        let viewPort = {
-        top: 0,
-        left: 0,
-        bottom: window.innerHeight || document.documentElement.clientHeight,
-        right: window.innerWidth || document.documentElement.clientWidth
-      } 
-       var isVisible = (
-        projLocation.top <= viewPort.bottom && projLocation.bottom >= viewPort.top &&
-        projLocation.left <= viewPort.right && projLocation.right >= viewPort.left
-      );
-
-        this.setState({
-            visible: isVisible && !this.state.visible ? this.state.visible + 1 : this.state.visible
-        })
-    }
+    
 
     componentDidMount(){
 
@@ -179,7 +165,6 @@ export default class ProjLink extends Component {
 
         return (
             <PhotoWrapper style={{ gridRowEnd: `span ${rowSpan}` }}>
-            {this.state.visible ? clearInterval(this.interval) : null}
                 <PhotoTitle>{title}</PhotoTitle>
                 <HashTag>{hashtag}</HashTag>
                 <Awards>
@@ -200,32 +185,37 @@ export default class ProjLink extends Component {
                             null
                     }
                 </Awards>
-                <TransitionMotion
-                    defaultStyles={this.state.visible ? [{
-                        key: title,
-                        style: { top: rowSpan === 1 ? 500 : 1000 }
-                    }] : []}
-                    styles={this.state.visible ? [{
-                        key: title,
-                        style: { top: spring(0, {stiffness: 250, damping: 30}) }
-                    }] : []}
-                    willEnter={() => ({top: rowSpan === 1 ? 500 : 1000})}>
-                    {
-                        styles =>
-                            <div style={{height: '100%', width: '100%'}}>                        
-                            {styles.map( ({key, style}) =>
-                                <Photo 
-                                    rowSpan={rowSpan} 
-                                    key={key} 
-                                    style={{ 
-                                        backgroundImage: `url(${image})`,
-                                        ...style
-                                    }}>
-                                </Photo>
-                            )}
-                            </div>
+
+                <CheckVisibility interval={(Math.random() * (500 - 100) + 100)}>
+                    {(isVisible) =>
+                        <TransitionMotion
+                            defaultStyles={isVisible ? [{
+                                key: title,
+                                style: { top: rowSpan === 1 ? 500 : 1000 }
+                            }] : []}
+                            styles={isVisible ? [{
+                                key: title,
+                                style: { top: spring(0, {stiffness: 250, damping: 30}) }
+                            }] : []}
+                            willEnter={() => ({top: rowSpan === 1 ? 500 : 1000})}>
+                            {
+                                styles =>
+                                    <div style={{height: '100%', width: '100%'}}>                        
+                                    {styles.map( ({key, style}) =>
+                                        <Photo 
+                                            rowSpan={rowSpan} 
+                                            key={key} 
+                                            style={{ 
+                                                backgroundImage: `url(${image})`,
+                                                ...style
+                                            }}>
+                                        </Photo>
+                                    )}
+                                    </div>
+                            }
+                        </TransitionMotion>
                     }
-                </TransitionMotion>
+                </CheckVisibility>
             </PhotoWrapper>
         )
     }
