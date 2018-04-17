@@ -48,6 +48,7 @@ export default class Hamburger extends PureComponent {
             })
         }
     }
+
     render() {
         let {
             menuActive
@@ -70,7 +71,6 @@ export default class Hamburger extends PureComponent {
                     ]
                 default: return [];
             }
-
         }
 
         const transformStyles = (i) => {
@@ -129,6 +129,7 @@ export default class Hamburger extends PureComponent {
                 }
             }
         ]
+
 
         const endingXStyles = [
             {
@@ -283,4 +284,5 @@ export default class Hamburger extends PureComponent {
 
         )
     }
+
 }
