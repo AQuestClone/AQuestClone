@@ -67,7 +67,9 @@ export default class HomePage extends Component {
                     <Spotlight active={true} height={768} />
                 </div>
                 <div className={`${portfolioStyle}`}>
+
                     <InfoBox config={infoBoxConfig[0]} />
+
                         {projLinks}
                     <ProjSlide />
                 </div>
