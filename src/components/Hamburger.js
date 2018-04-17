@@ -48,27 +48,28 @@ export default class Hamburger extends PureComponent {
             })
         }
     }
-    render() {
-        const endingStyles = (prevStyles) => {
-            switch (this.state.hovered) {
-                case 1:
-                    return [
-                        { opacity: spring(0, {stiffness: 400, damping: 32}), top: spring(-7, { stiffness: 400, damping: 32 }) },
-                        { opacity: spring(prevStyles[0].opacity, {stiffness: 400, damping: 32}), top: spring(prevStyles[0].top + 7, { stiffness: 400, damping: 32 }) },
-                        { opacity: spring(prevStyles[1].opacity, {stiffness: 400, damping: 32}), top: spring(prevStyles[1].top + 7, { stiffness: 400, damping: 32 }) },
-                        { opacity: spring(1 - prevStyles[2].opacity, {stiffness: 400, damping: 32}), top: spring(prevStyles[2].top + 7, { stiffness: 400, damping: 32 }) }
-                    ]
-                case 2:
-                    return [
-                        { opacity: spring(1 - prevStyles[1].opacity, {stiffness: 400, damping: 32}), top: spring(prevStyles[1].top - 7, { stiffness: 400, damping: 32 }) },
-                        { opacity: spring(prevStyles[2].opacity, {stiffness: 400, damping: 32}), top: spring(prevStyles[2].top - 7, { stiffness: 400, damping: 32 }) },
-                        { opacity: spring(prevStyles[3].opacity, {stiffness: 400, damping: 32}), top: spring(prevStyles[3].top - 7, { stiffness: 400, damping: 32 }) },
-                        { opacity: spring(0, {stiffness: 400, damping: 32}), top: spring(21, { stiffness: 400, damping: 32 }) }
-                    ]
-                default: return [];
-            }
 
+    endingStyles = (prevStyles) => {
+        switch (this.state.hovered) {
+            case 1:
+                return [
+                    { opacity: spring(0, {stiffness: 400, damping: 32}), top: spring(-7, { stiffness: 400, damping: 32 }) },
+                    { opacity: spring(prevStyles[0].opacity, {stiffness: 400, damping: 32}), top: spring(prevStyles[0].top + 7, { stiffness: 400, damping: 32 }) },
+                    { opacity: spring(prevStyles[1].opacity, {stiffness: 400, damping: 32}), top: spring(prevStyles[1].top + 7, { stiffness: 400, damping: 32 }) },
+                    { opacity: spring(1 - prevStyles[2].opacity, {stiffness: 400, damping: 32}), top: spring(prevStyles[2].top + 7, { stiffness: 400, damping: 32 }) }
+                ]
+            case 2:
+                return [
+                    { opacity: spring(1 - prevStyles[1].opacity, {stiffness: 400, damping: 32}), top: spring(prevStyles[1].top - 7, { stiffness: 400, damping: 32 }) },
+                    { opacity: spring(prevStyles[2].opacity, {stiffness: 400, damping: 32}), top: spring(prevStyles[2].top - 7, { stiffness: 400, damping: 32 }) },
+                    { opacity: spring(prevStyles[3].opacity, {stiffness: 400, damping: 32}), top: spring(prevStyles[3].top - 7, { stiffness: 400, damping: 32 }) },
+                    { opacity: spring(0, {stiffness: 400, damping: 32}), top: spring(21, { stiffness: 400, damping: 32 }) }
+                ]
+            default: return [];
         }
+
+    }
+    render() {
 
 
         return (
@@ -78,7 +79,7 @@ export default class Hamburger extends PureComponent {
                 { opacity: 1, top: 14 },
                 { opacity: 0, top: 21 }
             ]}
-                styles={(prevStyles) => endingStyles(prevStyles)}>
+                styles={(prevStyles) => this.endingStyles(prevStyles)}>
                 {
                     (styles) => (
                         <Wrapper width={93}
