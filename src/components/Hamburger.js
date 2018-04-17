@@ -32,6 +32,7 @@ export default class Hamburger extends PureComponent {
 
     }
 
+    //need to fix hover
 
     toggleHover = () => {
         let hoveredCopy = this.state.hovered
