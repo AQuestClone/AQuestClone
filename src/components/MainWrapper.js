@@ -26,22 +26,32 @@ export default class MainWrapper extends Component {
         super();
 
         this.state = {
-            menuActive: false
+            menuActive: false,
+            clicked: 0
         }
 
     }
 
     toggleMenu = () => {
-        this.setState({
-            menuActive: !this.state.menuActive
-        })
+        let clickedCopy = this.state.clicked;
+        if (this.state.clicked === 2) {
+            this.setState({
+                menuActive: !this.state.menuActive,
+                clicked: --clickedCopy
+            })
+        } else {
+            this.setState({
+                menuActive: !this.state.menuActive,
+                clicked: ++clickedCopy
+            })
+        }
     }
 
     render() {
         console.log(this.state.menuActive);
         return (
             <Wrapper>
-                <MenuBox toggleMenu={this.toggleMenu} menuActive={this.state.menuActive}/>
+                <MenuBox toggleMenu={this.toggleMenu} menuActive={this.state.menuActive} clicked={this.state.clicked}/>
                 <MainMenu active={this.state.menuActive} />
                 <Switch>
                     <Route exact path = '/' component={HomePage} />

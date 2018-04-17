@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import { TransitionMotion, spring } from 'react-motion';
 import glamorous from 'glamorous';
 
 import Hamburger from './Hamburger';
 import HomeButton from './HomeButton';
+import MenuX from './MenuX';
 
 let Wrapper = glamorous.div(
     {
@@ -21,7 +23,54 @@ export default class MenuBox extends Component {
     render() {
         return (
             <Wrapper>
-                <Hamburger toggleMenu={this.props.toggleMenu} menuActive={this.props.menuActive}/>
+                <TransitionMotion
+                    defaultStyles={!this.props.menuActive ? [{
+                        key: 'x-menu',
+                        style: { opacity: 0 }
+                    }] : []}
+                    styles={!this.props.menuActive ? [{
+                        key: 'x-menu',
+                        style: { opacity: spring(1) }
+                    }] : []}
+                    willLeave={() => ({ opacity: spring(0) })}
+                    willEnter={() => ({ opacity: 0 })}>
+                    {
+                        styles => 
+                            <div style={{position: 'absolute', top: 0, left: 0}}>
+                                {
+                                    styles.map((config => {
+                                        return <Hamburger toggleMenu={this.props.toggleMenu} menuActive={this.props.menuActive} />
+                                    }))
+                                }
+                            </div>
+                    }
+                    
+                </TransitionMotion>
+                <TransitionMotion
+                    defaultStyles={this.props.menuActive ? [{
+                        key: 'x-menu',
+                        style: { opacity: 0 }
+                    }] : []}
+                    styles={this.props.menuActive ? [{
+                        key: 'x-menu',
+                        style: { opacity: spring(1) }
+                    }] : []}
+                    willLeave={() => ({ opacity: spring(0) })}
+                    willEnter={() => ({ opacity: 0 })}>
+                    {
+                        styles =>
+                            <div>
+                                {
+                                    styles.map((config) => {
+                                        return <MenuX toggleMenu={this.props.toggleMenu} clicked={this.props.clicked} menuActive={this.props.menuActive} />
+                                    })
+                                }
+                            </div>
+                    }
+
+                </TransitionMotion>
+
+
                 <HomeButton />
             </Wrapper>
         )
