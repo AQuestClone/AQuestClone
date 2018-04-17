@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { TransitionMotion, spring } from 'react-motion';
 import glamorous from 'glamorous';
+import CheckVisibility from './CheckVisibility';
 
 let Photo = glamorous.div(
     'photo-div',
@@ -32,7 +33,7 @@ let Photo = glamorous.div(
     },
     {
         backgroundSize: 'cover',
-        width: 'calc(100% + 50px)',
+        width: 'calc(100% + 51px)',
         height: '100%',
         transform: 'translate3d(-50px,0,0)',
         transition: 'transform .35s',
@@ -61,7 +62,7 @@ let PhotoWrapper = glamorous.div(
         gridColumnEnd: 'span 2',
         overflow: 'hidden',
         position: 'relative',
-        zIndex: '6'
+        zIndex: '6', 
     }
 )
 
@@ -92,7 +93,7 @@ let HashTag = glamorous.h2(
         fontSize: '15px',
         fontWeight: '400',
         letterSpacing: '0.05em',
-        color: '#e6e6e6'
+        color: 'white'
     },
     (props) => ({
         bottom: props.bottom
@@ -143,10 +144,12 @@ export default class ProjLink extends Component {
             rowSpan,
             title,
             hashtag,
-            awards
+            awards,
         } = this.props.config
+
         return (
             <PhotoWrapper style={{ gridRowEnd: `span ${rowSpan}` }}>
+            { this.state && this.state.visible ? clearInterval(this.interval) : null}
                 <PhotoTitle>{title}</PhotoTitle>
                 <HashTag>{hashtag}</HashTag>
                 <Awards>
@@ -167,28 +170,36 @@ export default class ProjLink extends Component {
                             null
                     }
                 </Awards>
-                <TransitionMotion
-                    defaultStyles={[{
-                        key: title,
-                        style: { top: 100 }
-                    }]}
-                    styles={[{
-                        key: title,
-                        style: { top: spring(0, {stiffness: 250, damping: 30}) }
-                    }]}>
-                    {
-                        styles => 
-                            <Photo 
-                                rowSpan={rowSpan} 
-                                key={styles[0].key} 
-                                style={{ 
-                                    top: `${styles[0].style.top}%` ,
-                                    backgroundImage: `url(${image})`
-                                }}>
-
-                            </Photo>
+                <CheckVisibility interval={(Math.random() * (500 - 100) + 100)}>
+                    {(isVisible) =>
+                        <TransitionMotion
+                            defaultStyles={isVisible ? [{
+                                key: title,
+                                style: { top: rowSpan === 1 ? 500 : 1000 }
+                            }] : []}
+                            styles={isVisible ? [{
+                                key: title,
+                                style: { top: spring(0, {stiffness: 250, damping: 30}) }
+                            }] : []}
+                            willEnter={() => ({top: rowSpan === 1 ? 500 : 1000})}>
+                            {
+                                styles =>
+                                    <div style={{height: '100%', width: '100%'}}>                        
+                                    {styles.map( ({key, style}) =>
+                                        <Photo 
+                                            rowSpan={rowSpan} 
+                                            key={key} 
+                                            style={{ 
+                                                backgroundImage: `url(${image})`,
+                                                ...style
+                                            }}>
+                                        </Photo>
+                                    )}
+                                    </div>
+                            }
+                        </TransitionMotion>
                     }
-                </TransitionMotion>
+                </CheckVisibility>
             </PhotoWrapper>
         )
     }
