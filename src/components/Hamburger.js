@@ -34,26 +34,14 @@ export default class Hamburger extends PureComponent {
 
     //need to fix hover
 
-    toggleHover = () => {
-        let hoveredCopy = this.state.hovered
-        if (this.state.hovered === 2) {
-            this.setState({
-                hovered: --hoveredCopy
-            })
-        }
-        else {
-            this.setState({
-                hovered: ++hoveredCopy
-            })
-        }
-    }
+
 
     render() {
         let {
             menuActive
         } = this.props
         const endingStyles = (prevStyles) => {
-            switch (this.state.hovered) {
+            switch (this.props.hovered) {
                 case 1:
                     return [
                         { opacity: spring(0, { stiffness: 400, damping: 32 }), top: spring(-7, { stiffness: 400, damping: 32 }) },
@@ -92,14 +80,15 @@ export default class Hamburger extends PureComponent {
                 {
                     (styles) => (
                         <Wrapper 
-                            onMouseEnter={this.toggleHover}
-                            onMouseLeave={this.toggleHover}
+                            onMouseEnter={this.props.hoverEnter}
+                            onMouseLeave={this.props.hoverLeave}
+                            // onMouseOver={this.props.toggleHover}
                             onClick={this.props.toggleMenu}>
                             <div style={{
                                 height: '18px',
                                 position: 'absolute',
                                 width: '100%',
-                                top: '24px',
+                                top: 24,
                                 left: '0',
                             }}>
                                 {

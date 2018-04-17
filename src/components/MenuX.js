@@ -128,7 +128,6 @@ export default class MenuX extends Component {
                                         styles.map(config => {
                                             return <div
                                                 style={{ ...config, ...whiteBar, transform: `rotate(${config.rotate}deg)` }}>
-                                                {console.log(config)}
                                             </div>
                                         })
                                     }

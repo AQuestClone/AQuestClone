@@ -15,7 +15,8 @@ let Wrapper = glamorous.div(
         zIndex: '15',
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        backfaceVisibility: 'hidden'
     }
 )
 
@@ -93,7 +94,7 @@ export default class MainMenu extends Component {
         let {
             active
         } = this.props
-        console.log(active);
+
         return (
             <TransitionMotion
                 defaultStyles={ active ? [{
