@@ -15,6 +15,12 @@ export default class Spotlight extends Component{
         }
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        if (nextProps === nextState) {
+            return false
+        }
+    }
+
     render(){
         const CoverImg = glamorous.div({
             background: `url(${cover})`,
