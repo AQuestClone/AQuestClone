@@ -11,12 +11,12 @@ class App extends Component {
     super();
 
     this.state = {
-      switch: false,
+      switch: true,
     }
   }
 
   componentDidMount(){
-    setTimeout(this.switchGlobe, 7400)
+    // setTimeout(this.switchGlobe, 7400)
   }
 
   switchGlobe = () => {
