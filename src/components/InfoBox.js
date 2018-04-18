@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import glamorous from 'glamorous';
+import { TransitionMotion, spring } from 'react-motion';
+
+import CheckVisibility from './CheckVisibility';
+
 
 let Wrapper = glamorous.div(
     {
@@ -32,6 +36,7 @@ let Wrapper = glamorous.div(
             width: props.width,
             background: props.background,
             textAlign: props.textAlign,
+            overflow: 'hidden'
         }
     )
 )
@@ -61,7 +66,7 @@ export default class InfoBox extends Component {
             pWidth,
             config,
             title,
-            text, 
+            text,
             pFontSize,
             headerMargin,
             paddingLeft
@@ -79,24 +84,50 @@ export default class InfoBox extends Component {
                 background={background}
                 textAlign={textAlign}
                 style={config}
-                >
-                <Content>
+            >
+                <CheckVisibility interval={(Math.random() * (500 - 100) + 100)}>
                     {
-                        title.map((el, idx) => {
-                            return <h1 style={{marginTop: idx === 0 ? headerMargin : 5, paddingLeft: paddingLeft}}>{el}</h1>
-                        })
+                        (isVisible) =>
+                            <TransitionMotion
+                                defaultStyles={isVisible ? [{
+                                    key: 'infobox',
+                                    style: { top: 500 }
+                                }] : []}
+                                styles={isVisible ? [{
+                                    key: 'infobox',
+                                    style: { top: spring(0, { stiffness: 250, damping: 30 }) }
+                                }] : []}
+                                willEnter={() => ({ top: 500 })}>
+                                {
+                                    styles =>
+                                        <div style={{ height: '100%', width: '100%' }}>
+                                            {
+                                                styles.map(({key, style}) => {
+                                                    return <Content style={{...style}} key={key}>
+                                                        {
+                                                            title.map((el, idx) => {
+                                                                return <h1 style={{ marginTop: idx === 0 ? headerMargin : 5, paddingLeft: paddingLeft }}>{el}</h1>
+                                                            })
+                                                        }
+                                                        {
+                                                            text.map((el, idx) => {
+                                                                return (
+                                                                    <div style={pWrapper}>
+                                                                        <p style={{ textAlign: 'left', padding: '0px', fontSize: pFontSize, paddingLeft: paddingLeft }}>{el}</p>
+                                                                    </div>
+                                                                )
+                                                            })
+                                                        }
+                                                    </Content>
+                                                })
+                                            }
+
+                                        </div>
+                                }
+
+                            </TransitionMotion>
                     }
-                    
-                    {
-                        text.map((el, idx) => {
-                            return (
-                                <div style={pWrapper}>
-                                    <p style={{ textAlign: 'left', padding: '0px', fontSize: pFontSize, paddingLeft: paddingLeft }}>{el}</p>
-                                </div>
-                            )
-                        })
-                    }
-                </Content>
+                </CheckVisibility>
             </Wrapper>
         )
     }

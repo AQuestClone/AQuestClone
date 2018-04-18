@@ -173,13 +173,11 @@ export default class ProjLink extends Component {
                             ?
                             awards.map((award, idx) => {
                                 return (
-
                                     <span key={idx} className={`award_${idx}`}>
                                         <i className="fa fa-trophy"></i>
                                         <h1>{award}</h1>
                                     </span>
                                 )
-
                             })
                             :
                             null
