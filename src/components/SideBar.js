@@ -17,7 +17,7 @@ let Wrapper = glamorous.div(
         width: 50,
         background:'black',
         position: 'sticky',
-        top: '200px',
+        top: '250px',
       
     }
 )
