@@ -38,11 +38,10 @@ export default class MainWrapper extends Component {
     }
 
     render() {
-        console.log(this.state.menuActive);
         return (
             <Wrapper>
                 <MenuBox toggleMenu={this.toggleMenu} menuActive={this.state.menuActive}/>
-                <MainMenu active={this.state.menuActive} />
+                <MainMenu toggle={this.toggleMenu} active={this.state.menuActive} />
                 <Switch>
                     <Route exact path = '/' component={HomePage} />
                     <Route path='/blog' component={BlogRouter} />
