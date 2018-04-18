@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import glamorous, { Div } from 'glamorous';
+import { TransitionMotion, spring } from 'react-motion';
+
+import CheckVisibility from './CheckVisibility';
 
 const Wrapper = glamorous.div(
     {
@@ -10,7 +13,10 @@ const Wrapper = glamorous.div(
         background: '#eee',
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        position: 'absolute',
+        top: 0,
+        left: 0
     }
 )
 
@@ -76,31 +82,59 @@ export default class TwitterSlide extends Component {
             text
         } = this.props.config
         return (
-            <Wrapper>
-                <Content>
-                    <div style={{
-                        height: 100,
-                        width: '100%',
-                        display: 'flex',
-                        justifyContent: 'flex-start',
-                        alignItems: 'center',
-                    }}>
-                        <TwitterButton>
-                            <i class="fa fa-twitter"></i>
-                        </TwitterButton>
-                        <TimeDiv>
-                            <h1>{time}</h1>
-                            <p>@aquest</p>
-                        </TimeDiv>
-                    </div>
-                    <Message>
-                        <p>
-                            {text}
-                        </p>
-                    </Message>
+            <div style={{ width: '100%', height: '100%', position: 'relative', overflow: 'hidden' }}>
+                <CheckVisibility interval={(Math.random() * (500 - 100) + 100)}>
+                    {
+                        (isVisible) =>
+                            <TransitionMotion
+                                defaultStyles={isVisible ? [{
+                                    key: 'twitterslide',
+                                    style: { top: 500 }
+                                }] : []}
+                                styles={isVisible ? [{
+                                    key: 'twitterslide',
+                                    style: { top: spring(0, { stiffness: 250, damping: 30 }) }
+                                }] : []}
+                                willEnter={() => ({ top: 500 })}>
+                                {
+                                    styles =>
+                                        <div style={{ width: '100%', height: '100%' }}>
+                                            {
+                                                styles.map(({ key, style }) => {
+                                                    return <Wrapper key={key} style={{ top: style.top }}>
+                                                                <Content>
+                                                                    <div style={{
+                                                                        height: 100,
+                                                                        width: '100%',
+                                                                        display: 'flex',
+                                                                        justifyContent: 'flex-start',
+                                                                        alignItems: 'center',
+                                                                    }}>
+                                                                        <TwitterButton>
+                                                                            <i class="fa fa-twitter"></i>
+                                                                        </TwitterButton>
+                                                                        <TimeDiv>
+                                                                            <h1>{time}</h1>
+                                                                            <p>@aquest</p>
+                                                                        </TimeDiv>
+                                                                    </div>
+                                                                    <Message>
+                                                                        <p>
+                                                                            {text}
+                                                                        </p>
+                                                                    </Message>
 
-                </Content>
-            </Wrapper>
+                                                                </Content>
+                                                    </Wrapper>
+                                                })
+                                            }
+                                        </div>
+                                }
+                            </TransitionMotion>
+                    }
+
+                </CheckVisibility>
+            </div>
         )
     }
 }

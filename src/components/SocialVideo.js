@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import glamorous, { Div } from 'glamorous';
 import ReactPlayer from 'react-player'
+import { TransitionMotion, spring } from 'react-motion';
+
+import CheckVisibility from './CheckVisibility';
 
 const Wrapper = glamorous.div(
     {
@@ -8,6 +11,7 @@ const Wrapper = glamorous.div(
         gridColumnEnd: 'span 2',
         width: '100%',
         height: '100%',
+        position: 'absolute'
     }
 )
 
@@ -15,9 +19,37 @@ export default class SocialVideo extends Component {
 
     render() {
         return (
-            <Wrapper>
-                <ReactPlayer url='https://www.youtube.com/watch?v=HqOjOzs4WRk' width='100%' height='100%'/>
-            </Wrapper>
+            <div style={{ width: '100%', height: '100%', position: 'relative', overflow: 'hidden', gridColumnEnd: 'span 2' }}>
+                <CheckVisibility interval={(Math.random() * (500 - 100) + 100)}>
+                    {
+                        (isVisible) =>
+                            <TransitionMotion
+                                defaultStyles={isVisible ? [{
+                                    key: 'videoslide',
+                                    style: { top: 500 }
+                                }] : []}
+                                styles={isVisible ? [{
+                                    key: 'videoslide',
+                                    style: { top: spring(0, { stiffness: 250, damping: 30 }) }
+                                }] : []}
+                                willEnter={() => ({ top: 500 })}>
+                                {
+                                    styles =>
+                                        <div style={{ width: '100%', height: '100%' }}>
+                                            {
+                                                styles.map(({ key, style }) => {
+                                                    return <Wrapper key={key} style={{top: style.top}}>
+                                                            <ReactPlayer url='https://www.youtube.com/watch?v=HqOjOzs4WRk' width='100%' height='100%' />
+                                                            </Wrapper>
+                                                })
+                                            }
+                                        </div>
+                                }
+                            </TransitionMotion>
+                    }
+
+                </CheckVisibility>
+            </div>
         )
     }
 }
