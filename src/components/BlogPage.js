@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 import glamorous from 'glamorous';
 import axios from 'axios';
-import {css} from 'glamor';
+import { css } from 'glamor';
 import { getUser, getPost } from '../ducks/reducer';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
 import { log } from 'util';
+import Sidebar from './SideBar'
 
 const BlogPageWrapper = glamorous.div(
     {
-        position: 'relative',
+        position: 'absolute',
         top: '40px',
         zIndex: '1',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        height: '800',
         width: '45vw',
     },
 
@@ -31,6 +31,7 @@ const ResponseInput = glamorous.textarea(
     }
 )
 let HashTag = glamorous.h2(
+    'HashTag',
     {
         fontFamily: "'Libre Baskerville', 'serif'",
         fontSize: '30px',
@@ -57,9 +58,9 @@ const ResHeader = glamorous.div(
 
 )
 const clapFade = css.keyframes({
-    '0%': { boxShadow: '0px 0px 3px #1976D2'},
+    '0%': { boxShadow: '0px 0px 3px #1976D2' },
     // '50%': { boxShadow: '0 0px 25px #1976D2' },
-    '100%':{boxShadow: '0 0px 40px #0083dd1f'}
+    '100%': { boxShadow: '0 0px 40px #0083dd1f' }
 
 })
 const Svg = glamorous.svg(
@@ -84,6 +85,7 @@ const Svg = glamorous.svg(
 
 const Button = glamorous.div(
     {
+        boxSizing: 'border-box',
         width: '52px',
         border: '1px solid',
         borderRadius: '5px',
@@ -91,6 +93,14 @@ const Button = glamorous.div(
         borderColor: '#0083DD',
         color: '#0083DD'
 
+    }
+)
+const Position = glamorous.div(
+    {
+        position: 'absolute',
+        left: -166,
+        height: '75%',
+      
     }
 )
 
@@ -117,6 +127,9 @@ class BlogPage extends Component {
         axios.get(`/api/responses/${this.props.match.params.id}`).then(res => {
             this.setState({ responses: res.data })
         })
+        let newDoc = document.getElementById('bodyText').offsetHeight
+        // let newDoc = document.querySelector('.bodyText');
+        console.log('getElem',newDoc);
     }
     deletePost() {
         alert('are you sure?')
@@ -168,7 +181,7 @@ class BlogPage extends Component {
                     </div>
                     <div style={{ padding: '20px' }}>
                         {e.content}
-                        <div style={{ display: 'flex', justifyContent: 'space-between', padding: '20px' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', padding: '20px' }}>
                             <div>
                                 <span style={{ cursor: 'pointer' }} onClick={() => this.addClaps(k)}>{clappingIcon}</span> {e.claps}
                             </div>
@@ -190,14 +203,20 @@ class BlogPage extends Component {
 
 
         })
-
+        
+        
         return (
             <div style={{ display: 'flex', justifyContent: 'center' }}>
+
+
                 <BlogPageWrapper>
+                    <Position>
+                    <Sidebar style={{ background: 'blue', position: 'sticky' }} />
+                    </Position>
 
                     <HashTag>{title}</HashTag>
                     <img style={{ height: '50vh', backgroundPosition: 'center', backgroundSize: 'cover' }} src={`${image}`} />
-                    <HashTag fontSize={'17px'}>{content}</HashTag>
+                    <HashTag id={'bodyText'} fontSize={'17px'}>{content}</HashTag>
 
                     <div>
                         {

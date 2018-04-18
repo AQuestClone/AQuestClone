@@ -37,7 +37,8 @@ const GetStarted = glamorous.div(
         borderRadius:'5px',
         padding:'5px',
         borderColor:'#0083DD',
-        color:'#0083DD'
+        color:'#0083DD',
+        width:100
        
     }
 )
