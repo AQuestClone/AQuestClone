@@ -184,7 +184,9 @@ const infoBoxConfig = [
         padding: 50,
         textAlign: 'left',
         pWidth: '95%',
-        title: 'DIGITAL DREAMS BY AQUEST',
+        pFontSize: 19,
+        headerMargin: 50,
+        title: ['DIGITAL DREAMS BY AQUEST'],
         text: [
             "It’s not true that the best dreams happen when you are awake, they happen when you are online! Don’t you believe? Check our works.",
             "We signed a pact with the world leaders in the science of dreams - Sandman, Sleeping Beauty and Sleepy the dwarf in order to provide you with the highest quality magical experience. Having researched the famous Ole Lukoje’s process of sprinkling tiny amount of fine dust onto the eyes of dreamers, and combining it with the catalyst of Rufus the Noops' vivid daydreams we came with an absolutely innovative solution. We call it DDC - Digital Dreams Catharsis. For more information about DDC, please give us a shout."
@@ -201,7 +203,9 @@ const infoBoxConfig = [
         padding: 50,
         textAlign: 'center',
         pWidth: '100%',
-        title: 'STAY WITH US: ENJOY WITH US.',
+        pFontSize: 16,
+        headerMargin: 100,
+        title: ['STAY WITH US: ENJOY WITH US.'],
         text: [
             "Keep calm and dream on. Follow us on social networks! A shared joy is a double joy. Stay with us to discover the most interesting projects, trends & news from the world of digital dreams."
         ],
@@ -216,7 +220,8 @@ const infoBoxConfig = [
         padding: '20px 50px',
         textAlign: 'left',
         pWidth: '40%',
-        title: 'GOOD REASONS TO WORK WITH US',
+        headerMargin: 100,
+        title: ['GOOD REASONS TO WORK WITH US'],
         text: [
             "We have been generating creative digital dreams for over 20 years and have collected more than 50 international awards in an assortment of categories voted by professional independent juries."
         ],
@@ -232,7 +237,8 @@ const infoBoxConfig = [
         padding: '10px 50px',
         textAlign: 'left',
         pWidth: '70%',
-        title: 'DIGITAL DREAMERS WANTED. \nCAREERS',
+        headerMargin: 50,
+        title: ['DIGITAL DREAMERS WANTED.', 'CAREERS'],
         text: [
             `"You may say I’m a dreamer, but I'm not the only one." We always look for passionate and dedicated creative geeks. Send us your profile, your working preferences and the reason why you want to join our crew.`
         ]
@@ -244,7 +250,8 @@ const infoBoxConfig = [
         padding: '10px 50px',
         textAlign: 'left',
         pWidth: '70%',
-        title: 'HAVE YOUR DREAM AND SHARE IT WITH US. CONTACTS',
+        headerMargin: 50,
+        title: ['HAVE YOUR DREAM AND SHARE IT WITH US.', 'CONTACTS'],
         text: [
             `"You may say I’m a dreamer, but I'm not the only one." We always look for passionate and dedicated creative geeks. Send us your profile, your working preferences and the reason why you want to join our crew.`
         ]

@@ -19,7 +19,6 @@ let Wrapper = glamorous.div(
             width: '95%',
             fontFamily: "'Roboto', sans-serif",
             color: 'rgb(170, 170, 170)',
-            fontSize: '19px',
             fontWeight: '300',
             margin: '25px',
             lineHeight: '1.5em',
@@ -62,7 +61,9 @@ export default class InfoBox extends Component {
             pWidth,
             config,
             title,
-            text
+            text, 
+            pFontSize,
+            headerMargin
         } = this.props.config
 
         let pWrapper = {
@@ -76,14 +77,20 @@ export default class InfoBox extends Component {
                 height={height}
                 background={background}
                 textAlign={textAlign}
-                style={config}>
-                <Content >
-                    <h1>{title}</h1>
+                style={config}
+                >
+                <Content>
+                    {
+                        title.map((el, idx) => {
+                            return <h1 style={{marginTop: idx === 0 ? headerMargin : 5}}>{el}</h1>
+                        })
+                    }
+                    
                     {
                         text.map((el, idx) => {
                             return (
                                 <div style={pWrapper}>
-                                    <p style={{ textAlign: 'left', padding: '0px' }}>{el}</p>
+                                    <p style={{ textAlign: 'left', padding: '0px', fontSize: pFontSize }}>{el}</p>
                                 </div>
                             )
                         })
