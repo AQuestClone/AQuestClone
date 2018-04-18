@@ -13,6 +13,9 @@ export default class CheckVisibility extends React.Component{
     componentDidMount(){
         this.interval = setInterval(this.visibility, (this.props.interval || 100));
     }
+    componentWillUnmount(){
+        clearInterval(this.interval);
+    }
     visibility = () => {
         let location = ReactDOM.findDOMNode(this).getBoundingClientRect(); 
         let viewPort = {
