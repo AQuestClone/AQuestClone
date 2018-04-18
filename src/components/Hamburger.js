@@ -32,11 +32,19 @@ export default class Hamburger extends PureComponent {
 
     }
 
+
+    componentDidMount() {
+        console.log(spring(-45))
+    }
+
     //need to fix hover
 
 
 
     render() {
+        console.log(this.props.hovered)
+        let springTiming = { stiffness: 400, damping: 32 }
+        
         let {
             menuActive
         } = this.props
@@ -44,17 +52,24 @@ export default class Hamburger extends PureComponent {
             switch (this.props.hovered) {
                 case 1:
                     return [
-                        { opacity: spring(0, { stiffness: 400, damping: 32 }), top: spring(-7, { stiffness: 400, damping: 32 }) },
-                        { opacity: spring(prevStyles[0].opacity, { stiffness: 400, damping: 32 }), top: spring(prevStyles[0].top + 7, { stiffness: 400, damping: 32 }) },
-                        { opacity: spring(prevStyles[1].opacity, { stiffness: 400, damping: 32 }), top: spring(prevStyles[1].top + 7, { stiffness: 400, damping: 32 }) },
-                        { opacity: spring(1 - prevStyles[2].opacity, { stiffness: 400, damping: 32 }), top: spring(prevStyles[2].top + 7, { stiffness: 400, damping: 32 }) }
+                        { opacity: spring(0, springTiming), top: spring(-7, springTiming), rotate: spring(0) },
+                        { opacity: spring(prevStyles[0].opacity, springTiming), top: spring(prevStyles[0].top + 7, springTiming), rotate: 0 },
+                        { opacity: spring(prevStyles[1].opacity, springTiming), top: spring(prevStyles[1].top + 7, springTiming), rotate: spring(-prevStyles[0].rotate) },
+                        { opacity: spring(1 - prevStyles[2].opacity, springTiming), top: spring(prevStyles[2].top + 7, springTiming), rotate: 0 }
                     ]
                 case 2:
                     return [
-                        { opacity: spring(1 - prevStyles[1].opacity, { stiffness: 400, damping: 32 }), top: spring(prevStyles[1].top - 7, { stiffness: 400, damping: 32 }) },
-                        { opacity: spring(prevStyles[2].opacity, { stiffness: 400, damping: 32 }), top: spring(prevStyles[2].top - 7, { stiffness: 400, damping: 32 }) },
-                        { opacity: spring(prevStyles[3].opacity, { stiffness: 400, damping: 32 }), top: spring(prevStyles[3].top - 7, { stiffness: 400, damping: 32 }) },
-                        { opacity: spring(0, { stiffness: 400, damping: 32 }), top: spring(21, { stiffness: 400, damping: 32 }) }
+                        { opacity: spring(1 - prevStyles[1].opacity, springTiming), top: spring(prevStyles[1].top - 7, springTiming), rotate: 0 },
+                        { opacity: spring(prevStyles[2].opacity, springTiming), top: spring(prevStyles[2].top - 7, springTiming), rotate: 0 },
+                        { opacity: spring(prevStyles[3].opacity, springTiming), top: spring(prevStyles[3].top - 7, springTiming), rotate: 0 },
+                        { opacity: spring(0, springTiming), top: spring(21, springTiming), rotate: 0 }
+                    ]
+                case 3:
+                    return [
+                        { opacity: spring(1, springTiming), top: spring(7, springTiming), rotate: spring(-45, springTiming) },
+                        { opacity: spring(0, springTiming), top: spring(14, springTiming), rotate: 0},
+                        { opacity: 1, top: spring(7, springTiming), rotate: spring(45, springTiming) },
+                        { opacity: spring(0, springTiming), top: spring(28, springTiming), rotate: 0},
                     ]
                 default: return [];
             }
@@ -62,27 +77,17 @@ export default class Hamburger extends PureComponent {
 
 
         return (
-            <StaggeredMotion defaultStyles={
-                !this.props.menuActive ?
-                    [
-                        { opacity: 1, top: 0 },
-                        { opacity: 1, top: 7 },
-                        { opacity: 1, top: 14 },
-                        { opacity: 0, top: 21 }
-                    ]
-                    :
-                    []}
-                styles={
-                    !this.props.menuActive ?
-                    (prevStyles) => endingStyles(prevStyles)
-                    :
-                    (prevStyles) => []}>
+            <StaggeredMotion defaultStyles={[
+                        { opacity: 1, top: 0, rotate: 0 },
+                        { opacity: 1, top: 7, rotate: 0 },
+                        { opacity: 1, top: 14, rotate: 0 },
+                        { opacity: 0, top: 21, rotate: 0 }]}
+                styles={(prevStyles) => endingStyles(prevStyles)}>
                 {
                     (styles) => (
                         <Wrapper 
-                            onMouseEnter={this.props.hoverEnter}
-                            onMouseLeave={this.props.hoverLeave}
-                            // onMouseOver={this.props.toggleHover}
+                            onMouseEnter={this.props.toggleHover}
+                            onMouseLeave={this.props.toggleHover}
                             onClick={this.props.toggleMenu}>
                             <div style={{
                                 height: '18px',
@@ -96,10 +101,14 @@ export default class Hamburger extends PureComponent {
                                         <div key={i} style={{
                                             ...whiteBar,
                                             top: style.top,
-                                            opacity: i === 1 || i === 2 ? 1 : style.opacity
+                                            transform: `rotate(${style.rotate}deg)`,
+                                            opacity: !menuActive ?
+                                                            i === 1 || i === 2 ? 1 : style.opacity
+                                                            :
+                                                                i === 1 ? 0 : style.opacity
                                         }}
                                             key={`white_bar_${i}`}>
-
+                                            { console.log(style.rotate) }
                                         </div>
                                     ))
                                 }

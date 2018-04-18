@@ -34,49 +34,39 @@ export default class MainWrapper extends Component {
     }
 
     toggleMenu = () => {
-        let clickedCopy = this.state.clicked;
-        if (this.state.clicked === 2) {
+        let hoveredCopy = this.state.hovered;
+        if (this.state.hovered === 3) {
             this.setState({
                 menuActive: !this.state.menuActive,
-                clicked: --clickedCopy
+                hovered: 1
             })
         } 
         else {
             this.setState({
                 menuActive: !this.state.menuActive,
-                clicked: ++clickedCopy,
+                hovered: 3,
             })
         }
     }
 
     toggleHover = () => {
         let hoveredCopy = this.state.hovered
-        if (this.state.hovered === 2) {
-            this.setState({
-                hovered: --hoveredCopy
-            })
+        if (this.state.hovered !== 3) {
+            if (this.state.hovered === 2) {
+                this.setState({
+                    hovered: --hoveredCopy
+                })
+            }
+            else {
+                this.setState({
+                    hovered: ++hoveredCopy
+                })
+            }
         }
-        else {
-            this.setState({
-                hovered: ++hoveredCopy
-            })
-        }
 
     }
 
-    hoverEnter = () => {
-        console.log('entered')
-        this.setState({
-            hovered: 1
-        })
-    }
 
-    hoverLeave = () => {
-        console.log('left')
-        this.setState({
-            hovered: 2
-        })
-    }
 
     render() {
         return (
