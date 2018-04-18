@@ -12,15 +12,15 @@ let Wrapper = glamorous.div(
             fontSize: '12px',
             fontWeight: '500',
             letterSpacing: '0.2em',
-            margin: '25px',
-            marginTop: 25
+            margin: 15,
+            marginTop: 25,
         },
         ' p': {
             width: '95%',
             fontFamily: "'Roboto', sans-serif",
             color: 'rgb(170, 170, 170)',
             fontWeight: '300',
-            margin: '25px',
+            margin: 12,
             lineHeight: '1.5em',
 
         }
@@ -42,7 +42,7 @@ let Content = glamorous.div(
         top: 0,
         left: 0,
         width: '100%',
-        height: '100%'
+        height: '100%',
     },
     (props) => ({
         padding: props.padding
@@ -63,7 +63,8 @@ export default class InfoBox extends Component {
             title,
             text, 
             pFontSize,
-            headerMargin
+            headerMargin,
+            paddingLeft
         } = this.props.config
 
         let pWrapper = {
@@ -82,7 +83,7 @@ export default class InfoBox extends Component {
                 <Content>
                     {
                         title.map((el, idx) => {
-                            return <h1 style={{marginTop: idx === 0 ? headerMargin : 5}}>{el}</h1>
+                            return <h1 style={{marginTop: idx === 0 ? headerMargin : 5, paddingLeft: paddingLeft}}>{el}</h1>
                         })
                     }
                     
@@ -90,7 +91,7 @@ export default class InfoBox extends Component {
                         text.map((el, idx) => {
                             return (
                                 <div style={pWrapper}>
-                                    <p style={{ textAlign: 'left', padding: '0px', fontSize: pFontSize }}>{el}</p>
+                                    <p style={{ textAlign: 'left', padding: '0px', fontSize: pFontSize, paddingLeft: paddingLeft }}>{el}</p>
                                 </div>
                             )
                         })
