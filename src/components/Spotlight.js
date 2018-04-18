@@ -7,21 +7,21 @@ import fwa from './assets/fwa.png';
 import cda from './assets/css-design-awards.png';
 import {connect} from 'react-redux';
 
+
 class Spotlight extends Component{
     render(){
-        let {render} = this.props;
-        let arr = render ? [{id: 0}] : []
-        let arr2 = render ? [{id: 1}] : []
+        let arr = this.props.render ? [{id: 0}] : []
+        let arr2 = this.props.render ? [{id: 1}] : []
         
         const coverTextAnim = {
-            opacity: render ? spring(1) : 1,
-            top: render ? spring(0) : 0
+            opacity: this.props.render ? spring(1, springOptions) : 1,
+            top: this.props.render ? spring(0, springOptions) : 0
         }
         return (
             <TransitionMotion
         defaultStyles={arr.map(() => ({ key: 'one', style: {top: -this.props.height, opacity: 0}}))}
-        styles={arr.map(() => ({ key: 'one', style: { top: spring(0), opacity: spring(1)}}))}
-        willLeave={() => ({top: spring(-this.props.height)})}
+        styles={arr.map(() => ({ key: 'one', style: { top: spring(0, springOptions), opacity: spring(1, springOptions)}}))}
+        willLeave={() => ({top: spring(-this.props.height, springOptions)})}
         willEnter={() => ({top: -this.props.height, opacity: 0})}
       >
         {(styles) => (
@@ -79,6 +79,8 @@ function mapStateToProps(state){
 }
 
 export default connect(mapStateToProps, {})(Spotlight)
+
+const springOptions = {stiffness: 250, damping: 30}
 
 const CoverImg = glamorous.div({
     background: `url(${cover})`,
