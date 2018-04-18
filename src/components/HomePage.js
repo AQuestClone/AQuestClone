@@ -3,7 +3,6 @@ import { css } from 'glamor'
 import glamorous, { Div } from 'glamorous';
 import {StaggeredMotion, spring} from 'react-motion';
 
-
 //components
 import MenuBox from './MenuBox';
 import Spotlight from './Spotlight';
@@ -14,6 +13,8 @@ import FiftyAnim from './FiftyAnim';
 import AwardBox from './AwardBox';
 import CheckVisibility from './CheckVisibility';
 import TwitterSlide from './TwitterSlide';
+import SocialPicture from './SocialPicture';
+import SocialVideo from './SocialVideo';
 
 
 
@@ -26,6 +27,10 @@ import claraluna from './assets/claraluna.jpg';
 import fornasetti from './assets/fornasetti.jpg';
 import ferrari from './assets/ferrari.jpg';
 import mediaset from './assets/mediaset.jpg';
+
+import socialFirst from './assets/social1.jpeg';
+import socialSecond from './assets/social2.jpeg';
+import socialThird from './assets/social3.jpeg';
 
 const blueColors = [
     '#BBDEFB',
@@ -77,12 +82,13 @@ export default class HomePage extends Component {
                 <InfoBox config={infoBoxConfig[1]} />
                 <div className={`${portfolioStyle}`}>
                     <TwitterSlide config={twitterConfig[0]}/>
-                    <SocialDiv color={redColors[1]} spanLength={1} />
+                    <SocialPicture photo={socialFirst} />
                     <TwitterSlide config={twitterConfig[1]}/>
-                    <SocialDiv color={redColors[3]} spanLength={1} />
-                    <SocialDiv color={redColors[4]} spanLength={1} />
+                    <SocialPicture photo={socialSecond}/>
+                    <SocialPicture photo={socialThird}/>
                     <TwitterSlide config={twitterConfig[2]}/>
-                    <SocialDiv color={redColors[0]} spanLength={2} />
+                    <SocialVideo />
+
                 </div>
 
                 <Div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '350px' }} >
@@ -149,17 +155,6 @@ const PortfolioText = glamorous.div(
     })
 )
 
-
-const SocialDiv = glamorous.div(
-    {
-        gridRowEnd: 'span 1'
-    },
-    (props) => ({
-        background: props.color,
-        gridColumnEnd: `span ${props.spanLength}`,
-    })
-)
-
 const awardInfo = [
     {title: 'fwa', award: 'site of the day', num: 19},
     {title: 'awwwards', award: 'site of the day', num: 27},
@@ -167,15 +162,6 @@ const awardInfo = [
     {title: 'other', award: 'awards', num: 50},    
 ]
 
-const InfoBreak = glamorous.div(
-    {
-        height: 350
-    },
-    (props) => ({
-        background: props.color,
-        width: props.width
-    })
-)
 
 const infoBoxConfig = [
     {
