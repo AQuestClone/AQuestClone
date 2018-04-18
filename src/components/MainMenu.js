@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { TransitionMotion, spring } from 'react-motion';
 import glamorous from 'glamorous';
 import { Link } from 'react-router-dom';
+import {css} from 'glamor';
 
 let Wrapper = glamorous.div(
     {
@@ -18,6 +19,11 @@ let Wrapper = glamorous.div(
         alignItems: 'center'
     }
 )
+
+let linkReset = css({
+    textDecoration: 'none',
+    color: 'white'
+})
 
 let MenuDiv = glamorous.div(
     {
@@ -130,7 +136,7 @@ export default class MainMenu extends Component {
                                             <h1>SOCIAL</h1>
                                         </MenuItem>
                                         <MenuItem>
-                                            <h1>BLOG</h1>
+                                            <Link className={`${linkReset}`} to='/blog'>BLOG</Link>
                                         </MenuItem>
                                         <MenuItem>
                                             <h1>CONTACTS</h1>
