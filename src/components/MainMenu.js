@@ -125,7 +125,8 @@ let Wrapper = glamorous.div(
         zIndex: '15',
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        backfaceVisibility: 'hidden'
     }
 )
 
@@ -198,5 +199,4 @@ let MenuItem = glamorous.div(
         ':hover':{
             cursor: 'pointer'
         }
-    }
-)
+    })

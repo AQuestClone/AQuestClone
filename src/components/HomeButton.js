@@ -19,7 +19,10 @@ const Wrapper = glamorous.div(
         alignItems: 'center',
         fontSize: '25px',
         transition: 'color .5s ease',
-        cursor: 'pointer'
+        cursor: 'pointer',
+        position: 'absolute',
+        top: 0,
+        left: 93
 
     }
 )
