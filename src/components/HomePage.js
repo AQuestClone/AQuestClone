@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { css } from 'glamor'
 import glamorous, { Div } from 'glamorous';
 import {StaggeredMotion, spring} from 'react-motion';
+import {connect} from 'react-redux';
+import {shouldRender} from '../ducks/reducer';
 
 //components
 import MenuBox from './MenuBox';
@@ -64,13 +66,18 @@ const redColors = [
     '#B71C1C'
 ]
 
-export default class HomePage extends Component {
+class HomePage extends Component {
+    componentDidMount(){
+        this.props.shouldRender(this.props.render)
+    }
+
     render() {
+        let {shouldRender} = this.props;
         let projLinks = configStyles.map((style, idx) => <ProjLink key={`project_${idx}`} config={style}></ProjLink>)
         return (
             <div>
                 <div className={`${spotlightStyle}`}>
-                    <Spotlight active={true} height={768} />
+                    <Spotlight height={768} />
                 </div>
                 <div className={`${portfolioStyle}`}>
 
@@ -131,6 +138,12 @@ export default class HomePage extends Component {
         )
     }
 }
+
+function mapStateToProps(state){
+    return {render: state.render}
+}
+
+export default connect(mapStateToProps, {shouldRender})(HomePage)
 
 const spotlightStyle = css({
     height: '80vh',

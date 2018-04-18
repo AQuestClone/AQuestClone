@@ -20,7 +20,6 @@ const Wrapper = glamorous.div(
     }
 )
 
-
 export default class MainWrapper extends Component {
     constructor() {
         super();
@@ -66,8 +65,6 @@ export default class MainWrapper extends Component {
 
     }
 
-
-
     render() {
         return (
             <Wrapper>
@@ -79,7 +76,7 @@ export default class MainWrapper extends Component {
                     menuActive={this.state.menuActive}
                     clicked={this.state.clicked} 
                     hovered={this.state.hovered}/>
-                <MainMenu active={this.state.menuActive} />
+                <MainMenu toggle={this.toggleMenu} active={this.state.menuActive} />                    
                 <Switch>
                     <Route exact path='/' component={HomePage} />
                     <Route path='/blog' component={BlogRouter} />

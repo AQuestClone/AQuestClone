@@ -1,8 +1,117 @@
 import React, { Component } from 'react';
 import { TransitionMotion, spring } from 'react-motion';
-import glamorous from 'glamorous';
+import glamorous, { Main } from 'glamorous';
 import { Link } from 'react-router-dom';
 import {css} from 'glamor';
+import {connect} from 'react-redux';
+import {shouldRender} from '../ducks/reducer';
+import {withRouter} from 'react-router-dom'
+
+class MainMenu extends Component {
+    constructor(){
+        super()
+
+        this.state = {
+            scrollStatus: '',
+            newPage: ''
+        };
+        this.scrollTimeout = null;
+        this.pageTimeout = null
+    }
+
+    changePage = (newPage) => {
+        this.props.toggle();
+            this.afterScoll();
+            document.addEventListener('scroll', this.afterScoll, false)
+        document.getElementById('root').scrollIntoView({block: "start", inline: "nearest", behavior: 'smooth'})
+        this.setState({newPage})
+    }
+
+    afterScoll = () => {
+        if(this.scrollTimeout) clearTimeout(this.scrollTimeout);
+        this.scrollTimeout = setTimeout(() => {
+            this.scrollTimeout = null;
+            this.props.shouldRender(this.props.render)
+            document.removeEventListener('scroll', this.afterScoll, false)
+            this.scrollStatus = 'stoped scrolling';
+            if(this.pageTimeout) clearTimeout(this.pageTimeout)
+            this.pageTimeout = setTimeout(() => this.props.history.push(this.state.newPage), 700)
+        }, 700)
+        if(this.state.scrollStatus !== 'scrolling'){
+            this.setState({scrollStatus: 'scrolling'})
+        }
+    }
+
+    render() {
+        let {
+            active
+        } = this.props
+        return (
+            <TransitionMotion
+                defaultStyles={ active ? [{
+                    key: 'menu',
+                    style: { opacity: 0 }
+                }] : []}
+                styles={ active ? [{
+                    key: 'menu',
+                    style: { opacity: spring(0.95) }
+                }] : []}
+                willLeave={() => ({ opacity: spring(0)})}
+                willEnter={() => ({ opacity: 0 })}>
+                {
+                    styles =>
+                        <div>
+                            {
+                        styles.map(config => {
+                            return (
+                                <Wrapper key={config.key} style={config.style}>
+                                    <MenuDiv>
+                                        <MenuItem>
+                                            <a>HOME</a>
+                                        </MenuItem>
+                                        <MenuItem>
+                                            <h1>ABOUT US</h1>
+                                        </MenuItem>
+                                        <MenuItem>
+                                            <h1>CLIENTS</h1>
+                                        </MenuItem>
+                                        <MenuItem>
+                                            <h1>SERVICES</h1>
+                                        </MenuItem>
+                                        <MenuItem>
+                                            <h1>SOCIAL</h1>
+                                        </MenuItem>
+                                        <MenuItem onClick={() => this.changePage('/blog')} >
+                                            <h1>BLOG</h1>
+                                        </MenuItem>
+                                        <MenuItem>
+                                            <h1>CONTACTS</h1>
+                                        </MenuItem>
+                                        <MenuItem>
+                                            <h1>JOB</h1>
+                                        </MenuItem>
+                                    </MenuDiv>
+                                </Wrapper>
+                            )
+                        })
+                            }
+                        </div>
+
+
+                }
+
+            </TransitionMotion>
+        )
+    }
+}
+
+function mapStateToProps(state){
+    return {
+        render: state.render
+    }
+}
+
+export default connect(mapStateToProps, {shouldRender})(withRouter(MainMenu))
 
 let Wrapper = glamorous.div(
     {
@@ -20,11 +129,6 @@ let Wrapper = glamorous.div(
         backfaceVisibility: 'hidden'
     }
 )
-
-let linkReset = css({
-    textDecoration: 'none',
-    color: 'white'
-})
 
 let MenuDiv = glamorous.div(
     {
@@ -48,7 +152,8 @@ let MenuItem = glamorous.div(
             display: 'block',
             textAlign: 'center',
             fontWeight: 'bold',
-            letterSpacing: '0.4em'
+            letterSpacing: '0.4em',
+
         },
         ':before': {
             position: 'absolute',
@@ -90,72 +195,8 @@ let MenuItem = glamorous.div(
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        color: 'white'
-    }
-)
-
-export default class MainMenu extends Component {
-
-    render() {
-        let {
-            active
-        } = this.props
-
-        return (
-            <TransitionMotion
-                defaultStyles={ active ? [{
-                    key: 'menu',
-                    style: { opacity: 0 }
-                }] : []}
-                styles={ active ? [{
-                    key: 'menu',
-                    style: { opacity: spring(0.95) }
-                }] : []}
-                willLeave={() => ({ opacity: spring(0)})}
-                willEnter={() => ({ opacity: 0 })}>
-                {
-                    styles =>
-                        <div>
-                            {
-                        styles.map(config => {
-                            return (
-                                <Wrapper key={config.key} style={config.style}>
-                                    <MenuDiv>
-                                        <MenuItem>
-                                            <a>HOME</a>
-                                        </MenuItem>
-                                        <MenuItem>
-                                            <h1>ABOUT US</h1>
-                                        </MenuItem>
-                                        <MenuItem>
-                                            <h1>CLIENTS</h1>
-                                        </MenuItem>
-                                        <MenuItem>
-                                            <h1>SERVICES</h1>
-                                        </MenuItem>
-                                        <MenuItem>
-                                            <h1>SOCIAL</h1>
-                                        </MenuItem>
-                                        <MenuItem>
-                                            <Link className={`${linkReset}`} to='/blog'>BLOG</Link>
-                                        </MenuItem>
-                                        <MenuItem>
-                                            <h1>CONTACTS</h1>
-                                        </MenuItem>
-                                        <MenuItem>
-                                            <h1>JOB</h1>
-                                        </MenuItem>
-                                    </MenuDiv>
-                                </Wrapper>
-                            )
-                        })
-                            }
-                        </div>
-
-
-                }
-
-            </TransitionMotion>
-        )
-    }
-}
+        color: 'white',
+        ':hover':{
+            cursor: 'pointer'
+        }
+    })
