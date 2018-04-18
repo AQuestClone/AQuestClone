@@ -13,6 +13,7 @@ import InfoBox from './InfoBox';
 import FiftyAnim from './FiftyAnim';
 import AwardBox from './AwardBox';
 import CheckVisibility from './CheckVisibility';
+import TwitterSlide from './TwitterSlide';
 
 
 
@@ -75,12 +76,12 @@ export default class HomePage extends Component {
                 </div>
                 <InfoBox config={infoBoxConfig[1]} />
                 <div className={`${portfolioStyle}`}>
-                    <SocialDiv color={redColors[2]} spanLength={1} />
+                    <TwitterSlide config={twitterConfig[0]}/>
                     <SocialDiv color={redColors[1]} spanLength={1} />
-                    <SocialDiv color={redColors[2]} spanLength={1} />
+                    <TwitterSlide config={twitterConfig[1]}/>
                     <SocialDiv color={redColors[3]} spanLength={1} />
                     <SocialDiv color={redColors[4]} spanLength={1} />
-                    <SocialDiv color={redColors[2]} spanLength={1} />
+                    <TwitterSlide config={twitterConfig[2]}/>
                     <SocialDiv color={redColors[0]} spanLength={2} />
                 </div>
 
@@ -257,6 +258,21 @@ const infoBoxConfig = [
         text: [
             `"You may say I’m a dreamer, but I'm not the only one." We always look for passionate and dedicated creative geeks. Send us your profile, your working preferences and the reason why you want to join our crew.`
         ]
+    }
+]
+
+const twitterConfig = [
+    {
+        time: '10 HOURS AGO',
+        text: "@Kikk_Festival We’ll be there! ???"
+    },
+    {
+        time: '1 DAY AGO',
+        text: "RT @fabiomerlin: .@aquest is ????! They're 4th place in the #Webby People’s Voice. Give ‘em some ?? + VOTE: https://t.co/RUJjzpVCo6"
+    },
+    {
+        time : '8 DAYS AGO',
+        text: "Collision test! 3-2-1... BANG! ?? #AQlab #gaming #threejs #webgl #physicsengine #3D https://t.co/WbA0Tozt1Z"
     }
 ]
 
