@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { TransitionMotion, spring } from 'react-motion';
 import glamorous from 'glamorous';
+
 import CheckVisibility from './CheckVisibility';
+
 
 let Photo = glamorous.div(
     'photo-div',
@@ -138,6 +140,20 @@ let Awards = glamorous.div(
 
 
 export default class ProjLink extends Component {
+    constructor(){
+        super();
+
+        this.state = {
+            visible: 0
+        }
+
+    }
+    
+
+    componentDidMount(){
+
+        this.interval = setInterval(this.checkVisibility, (Math.random() * (500 - 100) + 100))
+    }
     render() {
         let {
             image,
@@ -149,7 +165,6 @@ export default class ProjLink extends Component {
 
         return (
             <PhotoWrapper style={{ gridRowEnd: `span ${rowSpan}` }}>
-            { this.state && this.state.visible ? clearInterval(this.interval) : null}
                 <PhotoTitle>{title}</PhotoTitle>
                 <HashTag>{hashtag}</HashTag>
                 <Awards>
@@ -170,6 +185,7 @@ export default class ProjLink extends Component {
                             null
                     }
                 </Awards>
+
                 <CheckVisibility interval={(Math.random() * (500 - 100) + 100)}>
                     {(isVisible) =>
                         <TransitionMotion
