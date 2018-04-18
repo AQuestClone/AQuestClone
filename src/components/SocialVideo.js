@@ -11,9 +11,15 @@ const Wrapper = glamorous.div(
         gridColumnEnd: 'span 2',
         width: '100%',
         height: '100%',
-        position: 'absolute'
+        position: 'absolute',
+        background: 'red',
+        transition: 'top .5s'
     }
 )
+
+
+
+
 
 export default class SocialVideo extends Component {
 
@@ -23,29 +29,9 @@ export default class SocialVideo extends Component {
                 <CheckVisibility interval={(Math.random() * (500 - 100) + 100)}>
                     {
                         (isVisible) =>
-                            <TransitionMotion
-                                defaultStyles={isVisible ? [{
-                                    key: 'videoslide',
-                                    style: { top: 500 }
-                                }] : []}
-                                styles={isVisible ? [{
-                                    key: 'videoslide',
-                                    style: { top: spring(0, { stiffness: 250, damping: 30 }) }
-                                }] : []}
-                                willEnter={() => ({ top: 500 })}>
-                                {
-                                    styles =>
-                                        <div style={{ width: '100%', height: '100%' }}>
-                                            {
-                                                styles.map(({ key, style }) => {
-                                                    return <Wrapper key={key} style={{top: style.top}}>
-                                                            <ReactPlayer url='https://www.youtube.com/watch?v=HqOjOzs4WRk' width='100%' height='100%' />
-                                                            </Wrapper>
-                                                })
-                                            }
-                                        </div>
-                                }
-                            </TransitionMotion>
+                            <Wrapper style={{ top: !isVisible ? 500 : 0 }}>
+                                <ReactPlayer url='https://www.youtube.com/watch?v=HqOjOzs4WRk' width='100%' height='100%' />
+                            </Wrapper>
                     }
 
                 </CheckVisibility>
