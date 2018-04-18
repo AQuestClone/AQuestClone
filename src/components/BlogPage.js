@@ -99,7 +99,7 @@ const Position = glamorous.div(
     {
         position: 'absolute',
         left: -166,
-        height: '75%',
+        height: '60%',
       
     }
 )
