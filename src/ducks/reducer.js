@@ -3,10 +3,12 @@ import axios from 'axios'
 const initialState = {
     user: {},
     post: {},
+    render: false
 }
 
 const GET_USER = 'GET_USER'
 const GET_POST = 'GET_POST'
+const SHOULD_RENDER = 'SHOULD_RENDER'
 
 
 export function getUser() {
@@ -32,6 +34,14 @@ export function getPost(id){
 
 }
 
+export function shouldRender(render){
+    let curRender = render;
+    return {
+        type: SHOULD_RENDER,
+        payload: !curRender
+    }
+}
+
 export default function reducer(state = initialState, action) { 
     switch (action.type) {
         case GET_USER + '_FULFILLED':
@@ -39,6 +49,8 @@ export default function reducer(state = initialState, action) {
         case GET_POST + '_FULFILLED':
             console.log('action.payload', action.payload)
             return Object.assign({}, state, { post: action.payload[0]} )
+        case SHOULD_RENDER:
+            return Object.assign({}, state, {render: action.payload})
         default: return state;
     }
 }
