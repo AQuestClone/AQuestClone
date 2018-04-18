@@ -5,7 +5,6 @@ import {StaggeredMotion, spring} from 'react-motion';
 import {connect} from 'react-redux';
 import {shouldRender} from '../ducks/reducer';
 
-
 //components
 import MenuBox from './MenuBox';
 import Spotlight from './Spotlight';
@@ -15,6 +14,9 @@ import InfoBox from './InfoBox';
 import FiftyAnim from './FiftyAnim';
 import AwardBox from './AwardBox';
 import CheckVisibility from './CheckVisibility';
+import TwitterSlide from './TwitterSlide';
+import SocialPicture from './SocialPicture';
+import SocialVideo from './SocialVideo';
 
 
 
@@ -27,6 +29,10 @@ import claraluna from './assets/claraluna.jpg';
 import fornasetti from './assets/fornasetti.jpg';
 import ferrari from './assets/ferrari.jpg';
 import mediaset from './assets/mediaset.jpg';
+
+import socialFirst from './assets/social1.jpeg';
+import socialSecond from './assets/social2.jpeg';
+import socialThird from './assets/social3.jpeg';
 
 const blueColors = [
     '#BBDEFB',
@@ -82,13 +88,14 @@ class HomePage extends Component {
                 </div>
                 <InfoBox config={infoBoxConfig[1]} />
                 <div className={`${portfolioStyle}`}>
-                    <SocialDiv color={redColors[2]} spanLength={1} />
-                    <SocialDiv color={redColors[1]} spanLength={1} />
-                    <SocialDiv color={redColors[2]} spanLength={1} />
-                    <SocialDiv color={redColors[3]} spanLength={1} />
-                    <SocialDiv color={redColors[4]} spanLength={1} />
-                    <SocialDiv color={redColors[2]} spanLength={1} />
-                    <SocialDiv color={redColors[0]} spanLength={2} />
+                    <TwitterSlide config={twitterConfig[0]}/>
+                    <SocialPicture photo={socialFirst} />
+                    <TwitterSlide config={twitterConfig[1]}/>
+                    <SocialPicture photo={socialSecond}/>
+                    <SocialPicture photo={socialThird}/>
+                    <TwitterSlide config={twitterConfig[2]}/>
+                    <SocialVideo />
+
                 </div>
 
                 <Div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '350px' }} >
@@ -161,17 +168,6 @@ const PortfolioText = glamorous.div(
     })
 )
 
-
-const SocialDiv = glamorous.div(
-    {
-        gridRowEnd: 'span 1'
-    },
-    (props) => ({
-        background: props.color,
-        gridColumnEnd: `span ${props.spanLength}`,
-    })
-)
-
 const awardInfo = [
     {title: 'fwa', award: 'site of the day', num: 19},
     {title: 'awwwards', award: 'site of the day', num: 27},
@@ -179,25 +175,18 @@ const awardInfo = [
     {title: 'other', award: 'awards', num: 50},    
 ]
 
-const InfoBreak = glamorous.div(
-    {
-        height: 350
-    },
-    (props) => ({
-        background: props.color,
-        width: props.width
-    })
-)
 
 const infoBoxConfig = [
     {
         background: 'white',
         width: '100%',
         height: '100%',
-        padding: 50,
         textAlign: 'left',
         pWidth: '95%',
-        title: 'DIGITAL DREAMS BY AQUEST',
+        pFontSize: 19,
+        headerMargin: 95,
+        paddingLeft: 40,
+        title: ['DIGITAL DREAMS BY AQUEST'],
         text: [
             "It’s not true that the best dreams happen when you are awake, they happen when you are online! Don’t you believe? Check our works.",
             "We signed a pact with the world leaders in the science of dreams - Sandman, Sleeping Beauty and Sleepy the dwarf in order to provide you with the highest quality magical experience. Having researched the famous Ole Lukoje’s process of sprinkling tiny amount of fine dust onto the eyes of dreamers, and combining it with the catalyst of Rufus the Noops' vivid daydreams we came with an absolutely innovative solution. We call it DDC - Digital Dreams Catharsis. For more information about DDC, please give us a shout."
@@ -214,7 +203,9 @@ const infoBoxConfig = [
         padding: 50,
         textAlign: 'center',
         pWidth: '100%',
-        title: 'STAY WITH US: ENJOY WITH US.',
+        pFontSize: 16,
+        headerMargin: 100,
+        title: ['STAY WITH US: ENJOY WITH US.'],
         text: [
             "Keep calm and dream on. Follow us on social networks! A shared joy is a double joy. Stay with us to discover the most interesting projects, trends & news from the world of digital dreams."
         ],
@@ -229,7 +220,8 @@ const infoBoxConfig = [
         padding: '20px 50px',
         textAlign: 'left',
         pWidth: '40%',
-        title: 'GOOD REASONS TO WORK WITH US',
+        headerMargin: 100,
+        title: ['GOOD REASONS TO WORK WITH US'],
         text: [
             "We have been generating creative digital dreams for over 20 years and have collected more than 50 international awards in an assortment of categories voted by professional independent juries."
         ],
@@ -245,7 +237,9 @@ const infoBoxConfig = [
         padding: '10px 50px',
         textAlign: 'left',
         pWidth: '70%',
-        title: 'DIGITAL DREAMERS WANTED. \nCAREERS',
+        headerMargin: 100,
+        paddingLeft: 100,
+        title: ['DIGITAL DREAMERS WANTED.', 'CAREERS'],
         text: [
             `"You may say I’m a dreamer, but I'm not the only one." We always look for passionate and dedicated creative geeks. Send us your profile, your working preferences and the reason why you want to join our crew.`
         ]
@@ -257,10 +251,27 @@ const infoBoxConfig = [
         padding: '10px 50px',
         textAlign: 'left',
         pWidth: '70%',
-        title: 'HAVE YOUR DREAM AND SHARE IT WITH US. CONTACTS',
+        headerMargin: 100,
+        paddingLeft: 100,
+        title: ['HAVE YOUR DREAM AND SHARE IT WITH US.', 'CONTACTS'],
         text: [
             `"You may say I’m a dreamer, but I'm not the only one." We always look for passionate and dedicated creative geeks. Send us your profile, your working preferences and the reason why you want to join our crew.`
         ]
+    }
+]
+
+const twitterConfig = [
+    {
+        time: '10 HOURS AGO',
+        text: "@Kikk_Festival We’ll be there! ???"
+    },
+    {
+        time: '1 DAY AGO',
+        text: "RT @fabiomerlin: .@aquest is ????! They're 4th place in the #Webby People’s Voice. Give ‘em some ?? + VOTE: https://t.co/RUJjzpVCo6"
+    },
+    {
+        time : '8 DAYS AGO',
+        text: "Collision test! 3-2-1... BANG! ?? #AQlab #gaming #threejs #webgl #physicsengine #3D https://t.co/WbA0Tozt1Z"
     }
 ]
 
