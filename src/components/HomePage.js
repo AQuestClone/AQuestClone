@@ -181,11 +181,11 @@ const infoBoxConfig = [
         background: 'white',
         width: '100%',
         height: '100%',
-        padding: 50,
         textAlign: 'left',
         pWidth: '95%',
         pFontSize: 19,
-        headerMargin: 50,
+        headerMargin: 95,
+        paddingLeft: 40,
         title: ['DIGITAL DREAMS BY AQUEST'],
         text: [
             "It’s not true that the best dreams happen when you are awake, they happen when you are online! Don’t you believe? Check our works.",
@@ -237,7 +237,8 @@ const infoBoxConfig = [
         padding: '10px 50px',
         textAlign: 'left',
         pWidth: '70%',
-        headerMargin: 50,
+        headerMargin: 100,
+        paddingLeft: 100,
         title: ['DIGITAL DREAMERS WANTED.', 'CAREERS'],
         text: [
             `"You may say I’m a dreamer, but I'm not the only one." We always look for passionate and dedicated creative geeks. Send us your profile, your working preferences and the reason why you want to join our crew.`
@@ -250,7 +251,8 @@ const infoBoxConfig = [
         padding: '10px 50px',
         textAlign: 'left',
         pWidth: '70%',
-        headerMargin: 50,
+        headerMargin: 100,
+        paddingLeft: 100,
         title: ['HAVE YOUR DREAM AND SHARE IT WITH US.', 'CONTACTS'],
         text: [
             `"You may say I’m a dreamer, but I'm not the only one." We always look for passionate and dedicated creative geeks. Send us your profile, your working preferences and the reason why you want to join our crew.`
