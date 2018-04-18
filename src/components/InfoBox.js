@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import glamorous from 'glamorous';
+import { TransitionMotion, spring } from 'react-motion';
+
+import CheckVisibility from './CheckVisibility';
+
 
 let Wrapper = glamorous.div(
     {
@@ -12,16 +16,15 @@ let Wrapper = glamorous.div(
             fontSize: '12px',
             fontWeight: '500',
             letterSpacing: '0.2em',
-            margin: '25px',
-            marginTop: 25
+            margin: 15,
+            marginTop: 25,
         },
         ' p': {
             width: '95%',
             fontFamily: "'Roboto', sans-serif",
             color: 'rgb(170, 170, 170)',
-            fontSize: '19px',
             fontWeight: '300',
-            margin: '25px',
+            margin: 12,
             lineHeight: '1.5em',
 
         }
@@ -33,6 +36,7 @@ let Wrapper = glamorous.div(
             width: props.width,
             background: props.background,
             textAlign: props.textAlign,
+            overflow: 'hidden'
         }
     )
 )
@@ -43,7 +47,7 @@ let Content = glamorous.div(
         top: 0,
         left: 0,
         width: '100%',
-        height: '100%'
+        height: '100%',
     },
     (props) => ({
         padding: props.padding
@@ -62,7 +66,10 @@ export default class InfoBox extends Component {
             pWidth,
             config,
             title,
-            text
+            text,
+            pFontSize,
+            headerMargin,
+            paddingLeft
         } = this.props.config
 
         let pWrapper = {
@@ -76,19 +83,51 @@ export default class InfoBox extends Component {
                 height={height}
                 background={background}
                 textAlign={textAlign}
-                style={config}>
-                <Content >
-                    <h1>{title}</h1>
+                style={config}
+            >
+                <CheckVisibility interval={(Math.random() * (500 - 100) + 100)}>
                     {
-                        text.map((el, idx) => {
-                            return (
-                                <div style={pWrapper}>
-                                    <p style={{ textAlign: 'left', padding: '0px' }}>{el}</p>
-                                </div>
-                            )
-                        })
+                        (isVisible) =>
+                            <TransitionMotion
+                                defaultStyles={isVisible ? [{
+                                    key: 'infobox',
+                                    style: { top: 500 }
+                                }] : []}
+                                styles={isVisible ? [{
+                                    key: 'infobox',
+                                    style: { top: spring(0, { stiffness: 250, damping: 30 }) }
+                                }] : []}
+                                willEnter={() => ({ top: 500 })}>
+                                {
+                                    styles =>
+                                        <div style={{ height: '100%', width: '100%' }}>
+                                            {
+                                                styles.map(({key, style}) => {
+                                                    return <Content style={{...style}} key={key}>
+                                                        {
+                                                            title.map((el, idx) => {
+                                                                return <h1 style={{ marginTop: idx === 0 ? headerMargin : 5, paddingLeft: paddingLeft }}>{el}</h1>
+                                                            })
+                                                        }
+                                                        {
+                                                            text.map((el, idx) => {
+                                                                return (
+                                                                    <div style={pWrapper}>
+                                                                        <p style={{ textAlign: 'left', padding: '0px', fontSize: pFontSize, paddingLeft: paddingLeft }}>{el}</p>
+                                                                    </div>
+                                                                )
+                                                            })
+                                                        }
+                                                    </Content>
+                                                })
+                                            }
+
+                                        </div>
+                                }
+
+                            </TransitionMotion>
                     }
-                </Content>
+                </CheckVisibility>
             </Wrapper>
         )
     }
