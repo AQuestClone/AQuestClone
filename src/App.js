@@ -6,17 +6,19 @@ import 'glamor/reset';
 import Globe from './components/Globe';
 import {TransitionMotion, spring} from 'react-motion';
 
-class App extends Component {
+export default class App extends Component {
   constructor(){
     super();
 
     this.state = {
-      switch: false,
+      switch: true,
     }
   }
 
   componentDidMount(){
-    setTimeout(this.switchGlobe, 7400)
+    // setTimeout(this.switchGlobe, 7400)
+  
+
   }
 
   switchGlobe = () => {
@@ -36,4 +38,3 @@ class App extends Component {
     )
   }
 }
-export default App;
