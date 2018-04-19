@@ -25,10 +25,10 @@ class BlogCard extends Component {
                 })
             }, 380) : null,
             <Link to={`/blog/${blog_id}`}>
-                <PhotoWrapper style={{ boxShadow: this.state.boxShadowValues }}>
+                <PhotoWrapper style={this.props.shouldRender?{ boxShadow: this.state.boxShadowValues, transition: '.4s' }:{}}>
                     <TransitionMotion
                         defaultStyles={
-                            this.props.isVisible ?
+                            this.props.isVisible && this.props.shouldRender ?
                                 [{
                                     key: title,
                                     style: { top: 500 }
@@ -36,7 +36,7 @@ class BlogCard extends Component {
                                 : []
                         }
                         styles={
-                            this.props.isVisible ?
+                            this.props.isVisible && this.props.shouldRender ?
                                 [{
                                     key: title,
                                     style: { top: spring(0, { stiffness: 250, damping: 30 }) }
@@ -45,6 +45,9 @@ class BlogCard extends Component {
                         }
                         willEnter={() => ({
                             top: 500
+                        })}
+                        willLeave={()=>({
+                            top: spring(500)
                         })}
                     >
                         {
@@ -149,7 +152,7 @@ let PhotoWrapper = glamorous.div(
         position: 'relative',
         zIndex: '6',
         overflow: 'hidden',
-        transition: '.4s',
+        // transition: '.4s',
         width: '45vw',
         height: '30vw'
 
