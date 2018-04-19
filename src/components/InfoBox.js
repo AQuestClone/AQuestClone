@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import glamorous from 'glamorous';
 import { TransitionMotion, spring } from 'react-motion';
+import { connect } from 'react-redux';
 
 import CheckVisibility from './CheckVisibility';
 
@@ -54,7 +55,7 @@ let Content = glamorous.div(
     })
 )
 
-export default class InfoBox extends Component {
+class InfoBox extends Component {
     render() {
         let {
             width,
@@ -89,15 +90,16 @@ export default class InfoBox extends Component {
                     {
                         (isVisible) =>
                             <TransitionMotion
-                                defaultStyles={isVisible ? [{
+                                defaultStyles={isVisible && this.props.render ? [{
                                     key: 'infobox',
                                     style: { top: 500 }
                                 }] : []}
-                                styles={isVisible ? [{
+                                styles={isVisible && this.props.render ? [{
                                     key: 'infobox',
                                     style: { top: spring(0, { stiffness: 250, damping: 30 }) }
                                 }] : []}
-                                willEnter={() => ({ top: 500 })}>
+                                willEnter={() => ({ top: 500 })}
+                                willLeave={() => ({ top: spring(500)})}>
                                 {
                                     styles =>
                                         <div style={{ height: '100%', width: '100%' }}>
@@ -132,3 +134,11 @@ export default class InfoBox extends Component {
         )
     }
 }
+
+function  mapStateToProps(state) {
+    return {
+        render: state.render
+    }
+}
+
+export default connect(mapStateToProps, {})(InfoBox);
