@@ -31,7 +31,7 @@ class MainMenu extends Component {
         if(this.scrollTimeout) clearTimeout(this.scrollTimeout);
         this.scrollTimeout = setTimeout(() => {
             this.scrollTimeout = null;
-            this.props.shouldRender(this.props.render)
+            this.props.shouldRender(false)
             document.removeEventListener('scroll', this.afterScoll, false)
             this.scrollStatus = 'stoped scrolling';
             if(this.pageTimeout) clearTimeout(this.pageTimeout)

@@ -5,10 +5,8 @@ import {css} from 'glamor'
 import 'glamor/reset';
 import Globe from './components/Globe';
 import {TransitionMotion, spring} from 'react-motion';
-import {getBlogs} from './ducks/reducer';
-import {connect} from  'react-redux';
 
-class App extends Component {
+export default class App extends Component {
   constructor(){
     super();
 
@@ -19,7 +17,7 @@ class App extends Component {
 
   componentDidMount(){
     // setTimeout(this.switchGlobe, 7400)
-    this.props.getBlogs()
+  
 
   }
 
@@ -40,8 +38,3 @@ class App extends Component {
     )
   }
 }
-function mapStateToProps(state){
-  return {
-  }
-}
-export default connect(mapStateToProps, {getBlogs}) (App)
