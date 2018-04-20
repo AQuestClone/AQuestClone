@@ -3,6 +3,8 @@ import glamorous from 'glamorous';
 import { Link } from 'react-router-dom'
 import { TransitionMotion, spring } from 'react-motion';
 import CheckVisibility from './CheckVisibility'
+import {connect} from 'react-redux'
+
 
 class BlogCard extends Component {
     constructor(props) {
@@ -24,8 +26,8 @@ class BlogCard extends Component {
 
                 })
             }, 380) : null,
-            <Link to={`/blog/${blog_id}`}>
-                <PhotoWrapper style={this.props.shouldRender?{ boxShadow: this.state.boxShadowValues, transition: '.4s' }:{}}>
+            <Link to={`/blog/${blog_id}`} >
+                <PhotoWrapper  style={this.props.shouldRender?{ boxShadow: this.state.boxShadowValues, transition: '.4s' }:{}}>
                     <TransitionMotion
                         defaultStyles={
                             this.props.isVisible && this.props.shouldRender ?
@@ -75,6 +77,7 @@ class BlogCard extends Component {
         )
     }
 };
+
 export default BlogCard
 
 const Card = glamorous.div(
