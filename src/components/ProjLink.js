@@ -151,6 +151,11 @@ let PhotoWrapper = glamorous.div(
         overflow: 'hidden',
         position: 'relative',
         zIndex: '6', 
+        '@media(max-width: 480px)': {
+            ':hover .awards-text': {
+                left: 25
+            }
+        }
     }
 )
 
@@ -221,6 +226,14 @@ let Awards = glamorous.div(
         ' span i': {
             fontSize: '25px',
             marginRight: 15
+        },
+        '@media(max-width: 480px)': {
+            ' span i': {
+                fontSize: 15
+            },
+            ' span' : {
+                fontSize: 5
+            },
         }
     },
     (props) => ({

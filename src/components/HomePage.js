@@ -180,8 +180,8 @@ const socialStyle = css(
     },
     {
         '@media(max-width: 768px)': {
-            gridTemplateColumns: 'repeat(auto-fill, 25%)',
-            gridAutoRows: 'minmax(25vh, 25vh)'
+            gridTemplateColumns: 'repeat(auto-fill, 50%)',
+            gridAutoRows: 'minmax(25vh, 30vh)'
         },
         '@media(max-width: 480px)': {
             display: 'none'
@@ -220,6 +220,9 @@ const StayWithUsDiv = glamorous.div({
     height: 350,
     margin: 'auto',
     '@media(max-width: 768px)': {
+        height: 250
+    },
+    '@media(max-width: 480px)': {
         height: 150
     }
 })
