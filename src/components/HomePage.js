@@ -90,7 +90,7 @@ class HomePage extends Component {
                 <StayWithUsDiv>
                     <InfoBox config={infoBoxConfig[1]} />
                 </StayWithUsDiv>
-                <div className={`${portfolioStyle}`}>
+                <div className={`${socialStyle}`}>
                     <TwitterSlide config={twitterConfig[0]} />
                     <SocialPicture photo={socialFirst} />
                     <TwitterSlide config={twitterConfig[1]} />
@@ -123,7 +123,7 @@ class HomePage extends Component {
                         >
                             {
                                 styles =>
-                                    <div className={`${portfolioStyle}`} style={{ overflow: 'hidden', clear: 'both' }}>
+                                    <div className={`${awardStyle}`} style={{ overflow: 'hidden', clear: 'both' }}>
                                         {styles.map((style, i) => {
                                             return <div style={{ position: 'relative', ...style }} ><AwardBox visible={isVisible} ind={i} {...awardInfo[i]} /></div>
                                         }
@@ -172,6 +172,20 @@ const portfolioStyle = css(
     }
 )
 
+const socialStyle = css(
+    {
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fill, 25%)',
+        gridAutoRows: 'minmax(25vh, 50vh)'
+    },
+    {
+        '@media(max-width: 768px)': {
+            gridTemplateColumns: 'repeat(auto-fill, 25%)',
+            gridAutoRows: 'minmax(25vh, 25vh)'
+        }
+    },
+)
+
 const PortfolioText = glamorous.div(
     {
         gridRowEnd: 'span 1',
@@ -182,6 +196,20 @@ const PortfolioText = glamorous.div(
     (props) => ({
         background: props.background
     })
+)
+
+const awardStyle = css(
+    {
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fill, 25%)',
+        gridAutoRows: 'minmax(25vh, 50vh)'
+    },
+    {
+        '@media(max-width: 768px)': {
+            gridTemplateColumns: '50% 50%',
+            gridAutoRows: 'minmax(25vh, 25vh)'
+        }
+    }
 )
 
 const StayWithUsDiv = glamorous.div({

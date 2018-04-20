@@ -41,7 +41,7 @@ let Wrapper = glamorous.div(
     {
         '@media(max-width: 768px)': {
             width: '100%',
-            marginTop: 5,
+            marginTop: 0,
             ' h1': {
                 fontSize: 9
             }
