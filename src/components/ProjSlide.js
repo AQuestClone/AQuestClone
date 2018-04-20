@@ -74,9 +74,12 @@ let LoadMore = glamorous.h1({
     zIndex: 10,
     fontFamily: "'Montserrat', 'sans-serif'",
     color: 'white',
-    fontSize: '12px',
+    fontSize: 12,
     fontWeight: '500',
     letterSpacing: '0.2em',
+    '@media(max-width: 768px)': {
+        fontSize: 10
+    }
 })
 
 let Text = glamorous.h2({
@@ -86,11 +89,15 @@ let Text = glamorous.h2({
     transform: 'translate(-50%)',
     zIndex: 10,
     fontFamily: "'Libre Baskerville', 'serif'",
-    fontSize: '15px',
+    fontSize: 15,
     fontWeight: '400',
     letterSpacing: '0.05em',
     color: '#e6e6e6',
-    lineHeight: '1.5em'
+    lineHeight: '1.5em',
+    '@media(max-width: 768px)': {
+        fontSize: 12,
+        top: '40%'
+    }
 })
 
 let Arrow = glamorous.img({
@@ -98,7 +105,12 @@ let Arrow = glamorous.img({
     position: 'absolute',
     top: '50%',
     left: '50%',
-    transform: 'translate(-50%)'
+    marginTop: 15,
+    transform: 'translate(-50%)',
+    '@media(max-width: 768px)': {
+        top: '75%',
+        marginTop: 0
+    }
 })
 
 let intervalVar;

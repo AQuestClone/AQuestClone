@@ -63,7 +63,8 @@ const AwardImage = glamorous.span({
     display: 'block',
     boxSizing: 'border-box',
     '@media(max-width: 768px)': {
-        marginTop: 5
+        marginTop: 5,
+        display: 'none'
     }
 })
 
@@ -77,7 +78,8 @@ const Details = glamorous.h3({
     transition: '.5s',
     '@media(max-width: 768px)': {
         padding: '10px 0 0',
-        width: '80%'
+        width: '80%',
+        borderTop: 'none'
     }
 })
 
