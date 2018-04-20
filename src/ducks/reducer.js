@@ -34,11 +34,10 @@ export function getPost(id){
 
 }
 
-export function shouldRender(render){
-    let curRender = render;
+export function shouldRender(bool){
     return {
         type: SHOULD_RENDER,
-        payload: !curRender
+        payload: bool
     }
 }
 
