@@ -160,6 +160,12 @@ const spotlightStyle = css(
 
 const portfolioStyle = css(
     {
+        '@media(max-width: 1200px)': {
+            gridTemplateColumns: 'repeat(auto-fill, 25%)',
+            gridAutoRows: 'minmax(25vh, 25vh)'
+        }
+    },
+    {
         '@media(max-width: 768px)': {
             gridTemplateColumns: '100%',
             gridAutoRows: 'minmax(25vh, 25vh)'
@@ -271,7 +277,7 @@ const infoBoxConfig = [
         textAlign: 'left',
         pWidth: '95%',
         pFontSize: 19,
-        headerMargin: 95,
+        headerMargin: 40,
         paddingLeft: 40,
         title: ['DIGITAL DREAMS BY AQUEST'],
         text: [
@@ -306,7 +312,7 @@ const infoBoxConfig = [
         height: '350px',
         padding: '20px 50px',
         textAlign: 'left',
-        pWidth: '40%',
+        pWidth: '70%',
         headerMargin: 100,
         title: ['GOOD REASONS TO WORK WITH US'],
         text: [

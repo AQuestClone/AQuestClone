@@ -65,7 +65,16 @@ let PWrapper = glamorous.div(
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-
+        '@media(max-width: 1500px)': {
+            ' p': {
+                fontSize: 16
+            }
+        },
+        '@media(max-width: 1200px)': {
+            '.paragraph-wrapper:nth-of-type(2n)': {
+                display: 'none',
+            },
+        },
         '@media(max-width: 768px)': {
             '.paragraph-wrapper:nth-of-type(2n)': {
                 display: 'none',
