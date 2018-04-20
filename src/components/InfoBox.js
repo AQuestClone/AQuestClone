@@ -43,6 +43,11 @@ let Wrapper = glamorous.div(
             width: '100%',
             marginTop: 0,
             ' h1': {
+                fontSize: 12
+            },
+        },
+        '@media(max-width: 480px)': {
+            ' h1': {
                 fontSize: 9
             },
         }
@@ -60,6 +65,7 @@ let PWrapper = glamorous.div(
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+
         '@media(max-width: 768px)': {
             '.paragraph-wrapper:nth-of-type(2n)': {
                 display: 'none',
@@ -67,11 +73,16 @@ let PWrapper = glamorous.div(
             width: '90%',
             margin: '0px auto',
             ' p': {
-                fontSize: 12,
+                fontSize: 15,
                 textAlign: 'center',
 
             }
-        }
+        },
+        '@media(max-width: 480px)': {
+            ' p': {
+                fontSize: 12
+            }
+        },
     }
 )
 
