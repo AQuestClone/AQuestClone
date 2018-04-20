@@ -111,12 +111,17 @@ class HomePage extends Component {
                             {top: 500},
                             {top: 500},  
                         ]}
-                        styles={(prevStyles) => !isVisible ? [] : [
+                        styles={(prevStyles) => isVisible && this.props.render ? [
                             {top: spring(0)},
                             {top: spring(prevStyles[0].top)},
                             {top: spring(prevStyles[1].top)},
                             {top: spring(prevStyles[2].top)},
-                        ]}
+                        ] : [
+                            {top: spring(500)},
+                            {top: spring(prevStyles[0].top)},
+                            {top: spring(prevStyles[1].top)},
+                            {top: spring(prevStyles[2].top)},
+                        ] }
                     >
                     {
                         styles => 
