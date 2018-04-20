@@ -1,17 +1,89 @@
 import React, { Component } from 'react';
 import glamorous from 'glamorous';
-import axios from 'axios';
 import { Link } from 'react-router-dom'
 import { TransitionMotion, spring } from 'react-motion';
+import CheckVisibility from './CheckVisibility'
 
+class BlogCard extends Component {
+    constructor(props) {
+        super(props);
 
+        this.state = {
+            boxShadowValues: ''
+        }
+    }
 
+    render() {
+
+        let { title, blog_id, profile_image, username, image } = this.props.post
+        return (
+
+            !this.state.boxShadowValues && this.props.isVisible ? setTimeout(() => {
+                this.setState({
+                    boxShadowValues: 'rgba(44, 44, 46, .55) -3px 3px 15px'
+
+                })
+            }, 380) : null,
+            <Link to={`/blog/${blog_id}`}>
+                <PhotoWrapper style={this.props.shouldRender?{ boxShadow: this.state.boxShadowValues, transition: '.4s' }:{}}>
+                    <TransitionMotion
+                        defaultStyles={
+                            this.props.isVisible && this.props.shouldRender ?
+                                [{
+                                    key: title,
+                                    style: { top: 500 }
+                                }]
+                                : []
+                        }
+                        styles={
+                            this.props.isVisible && this.props.shouldRender ?
+                                [{
+                                    key: title,
+                                    style: { top: spring(0, { stiffness: 250, damping: 30 }) }
+                                }]
+                                : []
+                        }
+                        willEnter={() => ({
+                            top: 500
+                        })}
+                        willLeave={()=>({
+                            top: spring(500)
+                        })}
+                    >
+                        {
+                            styles =>
+                                <div>
+                                    {
+                                        styles.map(({ key, style }) =>
+                                            <Card style={{ ...style, position: 'relative' }} key={key}  >
+                                                <HashTag>{title}</HashTag>
+                                                <Awards id='awards'><img style={{ borderRadius: '50%', height: '7vh', padding: '5px' }} src={profile_image} />{username}</Awards>
+                                                <Photo
+                                                    style={{
+                                                        backgroundImage: `url(${image})`,
+                                                    }}>
+
+                                                </Photo>
+                                            </Card>
+                                        )
+                                    }
+                                </div>
+                        }
+                    </TransitionMotion>
+                </PhotoWrapper>
+            </Link>
+        )
+    }
+};
+export default BlogCard
 
 const Card = glamorous.div(
     {
         width: '45vw',
         height: '30vw',
         overflow: 'hidden',
+
+
     },
 
 )
@@ -48,10 +120,10 @@ let Photo = glamorous.div(
         backgroundPosition: 'center',
         width: 'calc(100% + 50px)',
         height: '100%',
-        top: '-18px',
         transform: 'translate3d(-50px,0,0)',
         transition: 'transform .35s',
         position: 'relative',
+        bottom: 0
     },
 
 )
@@ -77,9 +149,13 @@ let PhotoWrapper = glamorous.div(
         margin: '15',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        boxShadow: '0 1px 4px rgba(44, 44, 46, 0.32)',
         position: 'relative',
-        zIndex: '6'
+        zIndex: '6',
+        overflow: 'hidden',
+        // transition: '.4s',
+        width: '45vw',
+        height: '30vw'
+
     },
     (props) => ({
         backgroundImage: `url(${props.backgroundImage})`
@@ -158,70 +234,3 @@ let Awards = glamorous.div(
 
     })
 )
-
-class BlogCard extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            blogPosts: []
-        }
-    }
-    componentDidMount() {
-        axios.get('/api/blogpost').then((res) => {
-            this.setState({ blogPosts: res.data })
-        })
-    }
-
-    render() {
-        console.log('blog card state', this.state);
-        let mappedCards = this.state.blogPosts.map((e, k) => {
-
-
-            return (
-                <Link to={`/blog/${e.blog_id}`}>
-                    <PhotoWrapper key={k}>
-                        <Card >
-                            {/* <PhotoTitle><img style={{borderRadius:'50%', height:'7vh', padding:'5px'}} src={e.profile_image}/>{e.username}</PhotoTitle> */}
-                            <br />
-                            <HashTag>{e.title}</HashTag>
-                            <Awards><img style={{ borderRadius: '50%', height: '7vh', padding: '5px' }} src={e.profile_image} />{e.username}</Awards>
-                            <TransitionMotion
-                                defaultStyles={[{
-
-                                    style: { top: 100 }
-                                }]}
-                                styles={[{
-
-                                    style: { top: spring(0, { stiffness: 250, damping: 30 }) }
-                                }]}>
-                                {
-                                    styles =>
-                                        <Photo
-                                            style={{
-
-                                                backgroundImage: `url(${e.image})`
-                                            }}>
-
-                                        </Photo>
-                                }
-                            </TransitionMotion>
-                        </Card>
-                    </PhotoWrapper>
-                </Link>
-
-            )
-
-        })
-        return (
-
-            <div>
-
-                {mappedCards}
-            </div>
-        )
-    }
-};
-
-
-export default BlogCard
