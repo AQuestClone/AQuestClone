@@ -68,7 +68,7 @@ const redColors = [
 
 class HomePage extends Component {
     componentDidMount(){
-        this.props.shouldRender(this.props.render)
+        this.props.shouldRender(true)
     }
 
     render() {
