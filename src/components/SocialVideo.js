@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import glamorous, { Div } from 'glamorous';
 import ReactPlayer from 'react-player'
-import { TransitionMotion, spring } from 'react-motion';
+import {connect} from 'react-redux';
 
 import CheckVisibility from './CheckVisibility';
 
@@ -17,11 +17,7 @@ const Wrapper = glamorous.div(
     }
 )
 
-
-
-
-
-export default class SocialVideo extends Component {
+class SocialVideo extends Component {
 
     render() {
         return (
@@ -29,7 +25,7 @@ export default class SocialVideo extends Component {
                 <CheckVisibility interval={(Math.random() * (500 - 100) + 100)}>
                     {
                         (isVisible) =>
-                            <Wrapper style={{ top: !isVisible ? 500 : 0 }}>
+                            <Wrapper style={{ top: isVisible && this.props.render ? 0 : 500 }}>
                                 <ReactPlayer url='https://www.youtube.com/watch?v=HqOjOzs4WRk' width='100%' height='100%' />
                             </Wrapper>
                     }
@@ -39,3 +35,11 @@ export default class SocialVideo extends Component {
         )
     }
 }
+
+function mapStateToProps(state){
+    return {
+        render: state.render
+    }
+}
+
+export default connect(mapStateToProps, {})(SocialVideo)
