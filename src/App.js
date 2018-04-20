@@ -6,7 +6,7 @@ import 'glamor/reset';
 import Globe from './components/Globe';
 import {TransitionMotion, spring} from 'react-motion';
 
-class App extends Component {
+export default class App extends Component {
   constructor(){
     super();
 
@@ -36,4 +36,3 @@ class App extends Component {
     )
   }
 }
-export default App;
