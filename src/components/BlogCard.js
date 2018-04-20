@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import glamorous from 'glamorous';
 import { Link } from 'react-router-dom'
 import { TransitionMotion, spring } from 'react-motion';
-import CheckVisibility from './CheckVisibility'
+import CheckVisibility from './CheckVisibility';
+import PageChange from './PageChange';
 
 class BlogCard extends Component {
     constructor(props) {
@@ -24,7 +25,7 @@ class BlogCard extends Component {
 
                 })
             }, 380) : null,
-            <Link to={`/blog/${blog_id}`}>
+            <PageChange newPage={`/blog/${blog_id}`}>
                 <PhotoWrapper style={this.props.shouldRender?{ boxShadow: this.state.boxShadowValues, transition: '.4s' }:{}}>
                     <TransitionMotion
                         defaultStyles={
@@ -71,7 +72,7 @@ class BlogCard extends Component {
                         }
                     </TransitionMotion>
                 </PhotoWrapper>
-            </Link>
+            </PageChange>
         )
     }
 };
@@ -154,7 +155,7 @@ let PhotoWrapper = glamorous.div(
         overflow: 'hidden',
         // transition: '.4s',
         width: '45vw',
-        height: '30vw'
+        height: '30vw',
 
     },
     (props) => ({
