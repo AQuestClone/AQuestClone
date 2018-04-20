@@ -87,7 +87,9 @@ class HomePage extends Component {
                     {projLinks}
                     <ProjSlide />
                 </div>
-                <InfoBox config={infoBoxConfig[1]} />
+                <StayWithUsDiv>
+                    <InfoBox config={infoBoxConfig[1]} />
+                </StayWithUsDiv>
                 <div className={`${portfolioStyle}`}>
                     <TwitterSlide config={twitterConfig[0]} />
                     <SocialPicture photo={socialFirst} />
@@ -99,10 +101,10 @@ class HomePage extends Component {
 
                 </div>
 
-                <Div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '350px' }} >
+                <FiftyDiv style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '350px' }} >
                     <FiftyAnim />
                     <InfoBox config={infoBoxConfig[2]} />
-                </Div>
+                </FiftyDiv>
                 <CheckVisibility>
                     {isVisible =>
                         <StaggeredMotion
@@ -160,13 +162,13 @@ const portfolioStyle = css(
     {
         '@media(max-width: 768px)': {
             gridTemplateColumns: '100%',
-            gridAutoRows: 'minmax(25vh, 30vh)'
+            gridAutoRows: 'minmax(25vh, 25vh)'
         }
     },
     {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fill, 25%)',
-    gridAutoRows: 'minmax(25vh, 50vh)'
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fill, 25%)',
+        gridAutoRows: 'minmax(25vh, 50vh)'
     }
 )
 
@@ -180,6 +182,29 @@ const PortfolioText = glamorous.div(
     (props) => ({
         background: props.background
     })
+)
+
+const StayWithUsDiv = glamorous.div({
+    width: '100%',
+    height: 350,
+    margin: 'auto',
+    '@media(max-width: 768px)': {
+        height: 150
+    }
+})
+
+const FiftyDiv = glamorous.div(
+    {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',
+        height: '350px',
+        '@media(max-width: 768px)': {
+            flexDirection: 'column'
+        }
+
+    }
 )
 
 const awardInfo = [
@@ -212,8 +237,8 @@ const infoBoxConfig = [
     },
     {
         background: 'white',
-        width: '100vh',
-        height: 350,
+        width: '100%',
+        height: '100%',
         padding: 50,
         textAlign: 'center',
         pWidth: '100%',

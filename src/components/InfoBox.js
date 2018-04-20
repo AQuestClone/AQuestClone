@@ -18,14 +18,6 @@ let Wrapper = glamorous.div(
         }
     ),
     {
-        '@media(max-width: 768px)': {
-            width: '100%',
-            ' h1': {
-                fontSize: 9
-            }
-        }
-    },
-    {
         margin: '0px auto',
     },
     {
@@ -35,8 +27,7 @@ let Wrapper = glamorous.div(
             fontSize: 12,
             fontWeight: '500',
             letterSpacing: '0.2em',
-            margin: 15,
-            marginTop: 25,
+
         },
         ' p': {
             width: '95%',
@@ -45,6 +36,15 @@ let Wrapper = glamorous.div(
             fontWeight: '300',
             margin: 12,
             lineHeight: '1.5em',
+        },
+    },
+    {
+        '@media(max-width: 768px)': {
+            width: '100%',
+            marginTop: 5,
+            ' h1': {
+                fontSize: 9
+            }
         }
     },
 
@@ -64,14 +64,21 @@ let PWrapper = glamorous.div(
             '.paragraph-wrapper:nth-of-type(2n)': {
                 display: 'none',
             },
+            width: '90%',
+            margin: 'auto',
             ' p': {
-                fontSize: 12
+                fontSize: 12,
+                textAlign: 'center',
+
             }
         }
     }
 )
 
 let Content = glamorous.div(
+    (props) => ({
+        padding: props.padding
+    }),
     {
         position: 'absolute',
         top: 0,
@@ -79,9 +86,41 @@ let Content = glamorous.div(
         width: '100%',
         height: '100%',
     },
+)
+
+let Header = glamorous.h1(
+    {
+        margin: 15,
+    },
     (props) => ({
-        padding: props.padding
-    })
+        marginTop: props.idx === 0 ? props.headerMargin : 5,
+        paddingLeft: props.paddingLeft
+    }),
+    {
+        '@media(max-width: 768px)': {
+            marginTop: 20,
+            paddingLeft: 0,
+            textAlign: 'center'
+        }
+    }
+)
+
+let Paragraph = glamorous.p(
+    { 
+        textAlign: 'left', 
+        padding: '0px'
+    },
+    (props) => ({
+        paddingLeft: props.paddingLeft
+    }),
+    {
+        '@media(max-width: 768px)': {
+            textAlign: 'center',
+            margin: 'auto',
+            padding: 0
+        }
+    }
+
 )
 
 class InfoBox extends Component {
@@ -104,8 +143,9 @@ class InfoBox extends Component {
 
         let pWrapper = {
             width: pWidth,
-
         }
+
+        console.log(paddingLeft)
         return (
             <Wrapper width={width}
                 height={height}
@@ -135,14 +175,14 @@ class InfoBox extends Component {
                                                     return <Content style={{...style}} key={key}>
                                                         {
                                                             title.map((el, idx) => {
-                                                                return <h1 key={`twitter_title_${idx}`} style={{ marginTop: idx === 0 ? headerMargin : 5, paddingLeft: paddingLeft }}>{el}</h1>
+                                                                return <Header key={`twitter_title_${idx}`} headerMargin={headerMargin} idx={idx} paddingLeft={paddingLeft}>{el}</Header>
                                                             })
                                                         }
                                                         {
                                                             text.map((el, idx) => {
                                                                 return (
                                                                     <PWrapper width={pWidth} fontSize={pFontSize}>
-                                                                        <p style={{ textAlign: 'left', padding: '0px', paddingLeft: paddingLeft }}>{el}</p>
+                                                                        <Paragraph paddingLeft={paddingLeft}>{el}</Paragraph>
                                                                     </PWrapper>
                                                                 )
                                                             })
