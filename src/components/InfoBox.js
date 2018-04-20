@@ -7,6 +7,24 @@ import CheckVisibility from './CheckVisibility';
 
 
 let Wrapper = glamorous.div(
+    (props) => (
+        {
+            position: 'relative',
+            height: props.height,
+            width: props.width,
+            background: props.background,
+            textAlign: props.textAlign,
+            overflow: 'hidden'
+        }
+    ),
+    {
+        '@media(max-width: 768px)': {
+            width: '100%',
+            ' h1': {
+                fontSize: 9
+            }
+        }
+    },
     {
         margin: '0px auto',
     },
@@ -14,7 +32,7 @@ let Wrapper = glamorous.div(
         ' h1': {
             color: '#0083DD',
             fontFamily: "'Montserrat', 'sans-serif'",
-            fontSize: '12px',
+            fontSize: 12,
             fontWeight: '500',
             letterSpacing: '0.2em',
             margin: 15,
@@ -27,19 +45,30 @@ let Wrapper = glamorous.div(
             fontWeight: '300',
             margin: 12,
             lineHeight: '1.5em',
-
         }
     },
-    (props) => (
-        {
-            position: 'relative',
-            height: props.height,
-            width: props.width,
-            background: props.background,
-            textAlign: props.textAlign,
-            overflow: 'hidden'
+
+)
+
+let PWrapper = glamorous.div(
+    'paragraph-wrapper',
+    (props) => ({
+        width: props.width,
+        fontSize: props.fontSize
+    }),
+    {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        '@media(max-width: 768px)': {
+            '.paragraph-wrapper:nth-of-type(2n)': {
+                display: 'none',
+            },
+            ' p': {
+                fontSize: 12
+            }
         }
-    )
+    }
 )
 
 let Content = glamorous.div(
@@ -75,9 +104,7 @@ class InfoBox extends Component {
 
         let pWrapper = {
             width: pWidth,
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
+
         }
         return (
             <Wrapper width={width}
@@ -108,15 +135,15 @@ class InfoBox extends Component {
                                                     return <Content style={{...style}} key={key}>
                                                         {
                                                             title.map((el, idx) => {
-                                                                return <h1 style={{ marginTop: idx === 0 ? headerMargin : 5, paddingLeft: paddingLeft }}>{el}</h1>
+                                                                return <h1 key={`twitter_title_${idx}`} style={{ marginTop: idx === 0 ? headerMargin : 5, paddingLeft: paddingLeft }}>{el}</h1>
                                                             })
                                                         }
                                                         {
                                                             text.map((el, idx) => {
                                                                 return (
-                                                                    <div style={pWrapper}>
-                                                                        <p style={{ textAlign: 'left', padding: '0px', fontSize: pFontSize, paddingLeft: paddingLeft }}>{el}</p>
-                                                                    </div>
+                                                                    <PWrapper width={pWidth} fontSize={pFontSize}>
+                                                                        <p style={{ textAlign: 'left', padding: '0px', paddingLeft: paddingLeft }}>{el}</p>
+                                                                    </PWrapper>
                                                                 )
                                                             })
                                                         }

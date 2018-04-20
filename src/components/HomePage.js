@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { css } from 'glamor'
+import { css, media } from 'glamor'
 import glamorous, { Div } from 'glamorous';
-import {StaggeredMotion, spring} from 'react-motion';
-import {connect} from 'react-redux';
-import {shouldRender} from '../ducks/reducer';
+import { StaggeredMotion, spring } from 'react-motion';
+import { connect } from 'react-redux';
+import { shouldRender } from '../ducks/reducer';
 
 //components
 import MenuBox from './MenuBox';
@@ -67,12 +67,13 @@ const redColors = [
 ]
 
 class HomePage extends Component {
-    componentDidMount(){
+    componentDidMount() {
         this.props.shouldRender(this.props.render)
     }
 
     render() {
-        let {shouldRender} = this.props;
+        console.log(window.innerWidth);
+        let { shouldRender } = this.props;
         let projLinks = configStyles.map((style, idx) => <ProjLink key={`project_${idx}`} config={style}></ProjLink>)
         return (
             <div>
@@ -83,17 +84,17 @@ class HomePage extends Component {
 
                     <InfoBox config={infoBoxConfig[0]} />
 
-                        {projLinks}
+                    {projLinks}
                     <ProjSlide />
                 </div>
                 <InfoBox config={infoBoxConfig[1]} />
                 <div className={`${portfolioStyle}`}>
-                    <TwitterSlide config={twitterConfig[0]}/>
+                    <TwitterSlide config={twitterConfig[0]} />
                     <SocialPicture photo={socialFirst} />
-                    <TwitterSlide config={twitterConfig[1]}/>
-                    <SocialPicture photo={socialSecond}/>
-                    <SocialPicture photo={socialThird}/>
-                    <TwitterSlide config={twitterConfig[2]}/>
+                    <TwitterSlide config={twitterConfig[1]} />
+                    <SocialPicture photo={socialSecond} />
+                    <SocialPicture photo={socialThird} />
+                    <TwitterSlide config={twitterConfig[2]} />
                     <SocialVideo />
 
                 </div>
@@ -103,31 +104,31 @@ class HomePage extends Component {
                     <InfoBox config={infoBoxConfig[2]} />
                 </Div>
                 <CheckVisibility>
-                        {isVisible => 
-                    <StaggeredMotion
-                        defaultStyles={[
-                            {top: 500},
-                            {top: 500},
-                            {top: 500},
-                            {top: 500},  
-                        ]}
-                        styles={(prevStyles) => !isVisible ? [] : [
-                            {top: spring(0)},
-                            {top: spring(prevStyles[0].top)},
-                            {top: spring(prevStyles[1].top)},
-                            {top: spring(prevStyles[2].top)},
-                        ]}
-                    >
-                    {
-                        styles => 
-                            <div className={`${portfolioStyle}`} style={{overflow: 'hidden', clear: 'both'}}>                            
-                                {styles.map((style, i) => {
-                                    return <div style={{position: 'relative', ...style}} ><AwardBox visible={isVisible} ind={i} {...awardInfo[i]} /></div>  
-                                    }
-                                )}
-                            </div>
-                    }
-                    </StaggeredMotion>}
+                    {isVisible =>
+                        <StaggeredMotion
+                            defaultStyles={[
+                                { top: 500 },
+                                { top: 500 },
+                                { top: 500 },
+                                { top: 500 },
+                            ]}
+                            styles={(prevStyles) => !isVisible ? [] : [
+                                { top: spring(0) },
+                                { top: spring(prevStyles[0].top) },
+                                { top: spring(prevStyles[1].top) },
+                                { top: spring(prevStyles[2].top) },
+                            ]}
+                        >
+                            {
+                                styles =>
+                                    <div className={`${portfolioStyle}`} style={{ overflow: 'hidden', clear: 'both' }}>
+                                        {styles.map((style, i) => {
+                                            return <div style={{ position: 'relative', ...style }} ><AwardBox visible={isVisible} ind={i} {...awardInfo[i]} /></div>
+                                        }
+                                        )}
+                                    </div>
+                            }
+                        </StaggeredMotion>}
                 </CheckVisibility>
                 <Div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '350px' }} >
                     <InfoBox config={infoBoxConfig[3]} />
@@ -139,22 +140,35 @@ class HomePage extends Component {
     }
 }
 
-function mapStateToProps(state){
-    return {render: state.render}
+function mapStateToProps(state) {
+    return { render: state.render }
 }
 
-export default connect(mapStateToProps, {shouldRender})(HomePage)
+export default connect(mapStateToProps, { shouldRender })(HomePage)
 
-const spotlightStyle = css({
-    height: '80vh',
-    width: '100%',
-})
+const spotlightStyle = css(
+    {
+        height: '80vh',
+        width: '100%',
+        '@media(max-width: 768px)': {
+            height: '60vh'
+        }
+    }
+)
 
-const portfolioStyle = css({
+const portfolioStyle = css(
+    {
+        '@media(max-width: 768px)': {
+            gridTemplateColumns: '100%',
+            gridAutoRows: 'minmax(25vh, 30vh)'
+        }
+    },
+    {
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fill, 25%)',
-    gridAutoRows: 'minmax(500px, auto)'
-})
+    gridAutoRows: 'minmax(25vh, 50vh)'
+    }
+)
 
 const PortfolioText = glamorous.div(
     {
@@ -169,10 +183,10 @@ const PortfolioText = glamorous.div(
 )
 
 const awardInfo = [
-    {title: 'fwa', award: 'site of the day', num: 19},
-    {title: 'awwwards', award: 'site of the day', num: 27},
-    {title: 'css design', award: 'awards', num: 26},
-    {title: 'other', award: 'awards', num: 50},    
+    { title: 'fwa', award: 'site of the day', num: 19 },
+    { title: 'awwwards', award: 'site of the day', num: 27 },
+    { title: 'css design', award: 'awards', num: 26 },
+    { title: 'other', award: 'awards', num: 50 },
 ]
 
 
@@ -270,7 +284,7 @@ const twitterConfig = [
         text: "RT @fabiomerlin: .@aquest is ????! They're 4th place in the #Webby People’s Voice. Give ‘em some ?? + VOTE: https://t.co/RUJjzpVCo6"
     },
     {
-        time : '8 DAYS AGO',
+        time: '8 DAYS AGO',
         text: "Collision test! 3-2-1... BANG! ?? #AQlab #gaming #threejs #webgl #physicsengine #3D https://t.co/WbA0Tozt1Z"
     }
 ]

@@ -165,6 +165,9 @@ let PhotoTitle = glamorous.h1(
         fontSize: '12px',
         fontWeight: '500',
         letterSpacing: '0.2em',
+        '@media(max-width: 768px)': {
+            display: 'none'
+        }
     },
     (props) => ({
         bottom: props.bottom
@@ -181,7 +184,10 @@ let HashTag = glamorous.h2(
         fontSize: '15px',
         fontWeight: '400',
         letterSpacing: '0.05em',
-        color: 'white'
+        color: 'white',
+        '@media(max-width: 768px)': {
+            display: 'none'
+        }
     },
     (props) => ({
         bottom: props.bottom
