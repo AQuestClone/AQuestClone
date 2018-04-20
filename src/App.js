@@ -17,8 +17,6 @@ export default class App extends Component {
 
   componentDidMount(){
     // setTimeout(this.switchGlobe, 7400)
-  
-
   }
 
   switchGlobe = () => {
