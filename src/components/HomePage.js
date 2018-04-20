@@ -132,10 +132,10 @@ class HomePage extends Component {
                             }
                         </StaggeredMotion>}
                 </CheckVisibility>
-                <Div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '350px' }} >
+                <FinalDiv>
                     <InfoBox config={infoBoxConfig[3]} />
                     <InfoBox config={infoBoxConfig[4]} />
-                </Div>
+                </FinalDiv>
 
             </div>
         )
@@ -182,6 +182,9 @@ const socialStyle = css(
         '@media(max-width: 768px)': {
             gridTemplateColumns: 'repeat(auto-fill, 25%)',
             gridAutoRows: 'minmax(25vh, 25vh)'
+        },
+        '@media(max-width: 480px)': {
+            display: 'none'
         }
     },
 )
@@ -232,6 +235,20 @@ const FiftyDiv = glamorous.div(
             flexDirection: 'column'
         }
 
+    }
+)
+
+const FinalDiv = glamorous.div(
+    { 
+        display: 'flex', 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        width: '100%', 
+        height: '350px',
+        '@media(max-width: 768px)': {
+            flexDirection: 'column',
+            height: 600
+        } 
     }
 )
 

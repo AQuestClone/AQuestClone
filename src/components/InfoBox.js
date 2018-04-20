@@ -44,7 +44,7 @@ let Wrapper = glamorous.div(
             marginTop: 0,
             ' h1': {
                 fontSize: 9
-            }
+            },
         }
     },
 
@@ -65,7 +65,7 @@ let PWrapper = glamorous.div(
                 display: 'none',
             },
             width: '90%',
-            margin: 'auto',
+            margin: '0px auto',
             ' p': {
                 fontSize: 12,
                 textAlign: 'center',
@@ -85,7 +85,14 @@ let Content = glamorous.div(
         left: 0,
         width: '100%',
         height: '100%',
+        '@media(max-width: 768px)': {
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+        }
     },
+
 )
 
 let Header = glamorous.h1(
@@ -111,7 +118,8 @@ let Paragraph = glamorous.p(
         padding: '0px'
     },
     (props) => ({
-        paddingLeft: props.paddingLeft
+        paddingLeft: props.paddingLeft,
+        textAlign: props.textAlign
     }),
     {
         '@media(max-width: 768px)': {
@@ -182,7 +190,7 @@ class InfoBox extends Component {
                                                             text.map((el, idx) => {
                                                                 return (
                                                                     <PWrapper width={pWidth} fontSize={pFontSize}>
-                                                                        <Paragraph paddingLeft={paddingLeft}>{el}</Paragraph>
+                                                                        <Paragraph paddingLeft={paddingLeft} textAlign={textAlign}>{el}</Paragraph>
                                                                     </PWrapper>
                                                                 )
                                                             })
