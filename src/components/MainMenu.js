@@ -50,7 +50,7 @@ class MainMenu extends Component {
                                             <h1>SOCIAL</h1>
                                         </MenuItem>
 
-                                        <PageChange newPage='/blog'>
+                                        <PageChange style={{width: '100%', display: 'flex', justifyContent: 'center'}} newPage='/blog'>
                                             <MenuItem onClick={() => this.props.toggle()}>
                                                 <h1>BLOG</h1>
                                             </MenuItem>
