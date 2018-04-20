@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {shouldRender} from '../ducks/reducer';
+import glamorous from 'glamorous';
 
 class PageChange extends Component{
     constructor(){
@@ -18,7 +19,7 @@ class PageChange extends Component{
     changePage = (newPage) => {
         this.afterScroll();
 
-        document.addEventListener('scroll', this.afterScroll, false)
+        document.addEventListener('scroll', this.afterScroll)
 
         document.getElementById('root').scrollIntoView({block: "start", inline: "nearest", behavior: 'smooth'})
 
@@ -33,7 +34,7 @@ class PageChange extends Component{
 
             this.props.shouldRender(false)
 
-            document.removeEventListener('scroll', this.afterScoll, false)
+            document.removeEventListener('scroll', this.afterScroll)
 
             this.scrollStatus = 'stopped scrolling';
 
@@ -49,9 +50,9 @@ class PageChange extends Component{
 
     render(){
         return (
-            <div style={{width: '100%', display: 'flex', justifyContent: 'center'}} onClick={() => this.changePage(this.props.newPage)} >
+            <Wrapper style={this.props.style} onClick={() => this.changePage(this.props.newPage)} >
                 {this.props.children}
-            </div>
+            </Wrapper>
         )
     }
 }
@@ -63,3 +64,12 @@ function mapStateToProps(state){
 }
 
 export default connect(mapStateToProps, {shouldRender})(withRouter(PageChange));
+
+const Wrapper = glamorous.div(
+    'page-change-wrapper',
+        {
+            ':hover':{
+                cursor: 'pointer'
+            }
+        }
+    )
