@@ -16,7 +16,10 @@ const Wrapper = glamorous.div(
         alignItems: 'center',
         position: 'absolute',
         top: 0,
-        left: 0
+        left: 0,
+        '@media(max-width: 1200px)': {
+            display: 'block'
+        }
     }
 )
 
@@ -24,6 +27,12 @@ const Content = glamorous.div(
     {
         width: '80%',
         height: '50%',
+        '@media(max-width: 1500px)': {
+            marginTop: -50
+        },
+        '@media(max-width: 1200px)': {
+            marginTop: 0
+        },
     }
 )
 
@@ -66,7 +75,14 @@ const Message = glamorous.div(
     {
         color: 'gray',
         marginTop: 25,
-        lineHeight: '1.5em'
+        lineHeight: '1.5em',
+        '@media(max-width: 1200px)': {
+            marginLeft: 15
+        },
+        '@media(max-width: 768px)': {
+            fontSize: 10,
+            marginLeft: 15
+        }
     }
 )
 
@@ -102,29 +118,29 @@ export default class TwitterSlide extends Component {
                                             {
                                                 styles.map(({ key, style }) => {
                                                     return <Wrapper key={key} style={{ top: style.top }}>
-                                                                <Content>
-                                                                    <div style={{
-                                                                        height: 100,
-                                                                        width: '100%',
-                                                                        display: 'flex',
-                                                                        justifyContent: 'flex-start',
-                                                                        alignItems: 'center',
-                                                                    }}>
-                                                                        <TwitterButton>
-                                                                            <i className="fa fa-twitter"></i>
-                                                                        </TwitterButton>
-                                                                        <TimeDiv>
-                                                                            <h1>{time}</h1>
-                                                                            <p>@aquest</p>
-                                                                        </TimeDiv>
-                                                                    </div>
-                                                                    <Message>
-                                                                        <p>
-                                                                            {text}
-                                                                        </p>
-                                                                    </Message>
+                                                        <Content>
+                                                            <div style={{
+                                                                height: 100,
+                                                                width: '100%',
+                                                                display: 'flex',
+                                                                justifyContent: 'flex-start',
+                                                                alignItems: 'center',
+                                                            }}>
+                                                                <TwitterButton>
+                                                                    <i className="fa fa-twitter"></i>
+                                                                </TwitterButton>
+                                                                <TimeDiv>
+                                                                    <h1>{time}</h1>
+                                                                    <p>@aquest</p>
+                                                                </TimeDiv>
+                                                            </div>
+                                                            <Message>
+                                                                <p>
+                                                                    {text}
+                                                                </p>
+                                                            </Message>
 
-                                                                </Content>
+                                                        </Content>
                                                     </Wrapper>
                                                 })
                                             }

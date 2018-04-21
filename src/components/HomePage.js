@@ -329,9 +329,9 @@ const infoBoxConfig = [
         height: '100%',
         padding: '10px 50px',
         textAlign: 'left',
-        pWidth: '70%',
-        headerMargin: 100,
-        paddingLeft: 100,
+        pWidth: '80%',
+        headerMargin: 75,
+        paddingLeft: 75,
         title: ['DIGITAL DREAMERS WANTED.', 'CAREERS'],
         text: [
             `"You may say I’m a dreamer, but I'm not the only one." We always look for passionate and dedicated creative geeks. Send us your profile, your working preferences and the reason why you want to join our crew.`
@@ -343,9 +343,9 @@ const infoBoxConfig = [
         height: '100%',
         padding: '10px 50px',
         textAlign: 'left',
-        pWidth: '70%',
-        headerMargin: 100,
-        paddingLeft: 100,
+        pWidth: '80%',
+        headerMargin: 75,
+        paddingLeft: 75,
         title: ['HAVE YOUR DREAM AND SHARE IT WITH US.', 'CONTACTS'],
         text: [
             `"You may say I’m a dreamer, but I'm not the only one." We always look for passionate and dedicated creative geeks. Send us your profile, your working preferences and the reason why you want to join our crew.`
