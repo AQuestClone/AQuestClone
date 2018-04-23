@@ -75,7 +75,7 @@ export default connect(mapStateToProps, {})(Spotlight)
 
 const springOptions = {stiffness: 250, damping: 30}
 
-const Wrapper = glamorous.div({
+const Wrapper = glamorous.div('spotlight', {
     height: '100%',
     width: '100%', 
     position: 'relative',

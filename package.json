@@ -30,11 +30,13 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "jest",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "cypress:start": "cypress open"
   },
   "main": "./server/index.js",
   "proxy": "http://localhost:3030",
   "devDependencies": {
+    "cypress": "^2.1.0",
     "jest": "^22.4.3"
   }
 }

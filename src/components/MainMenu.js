@@ -52,7 +52,7 @@ class MainMenu extends Component {
 
                                         <PageChange style={{width: '100%', display: 'flex', justifyContent: 'center'}} newPage='/blog'>
                                             <MenuItem onClick={() => this.props.toggle()}>
-                                                <h1>BLOG</h1>
+                                                <h1 id='menuBlogLink'>BLOG</h1>
                                             </MenuItem>
                                         </PageChange>
 
@@ -86,6 +86,7 @@ function mapStateToProps(state){
 export default connect(mapStateToProps, {shouldRender})(withRouter(MainMenu))
 
 let Wrapper = glamorous.div(
+    'mainMenu',
     {
         height: '100vh',
         width: '100%',
