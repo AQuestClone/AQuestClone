@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { css } from 'glamor'
+import { css, media } from 'glamor'
 import glamorous, { Div } from 'glamorous';
-import {StaggeredMotion, spring} from 'react-motion';
-import {connect} from 'react-redux';
-import {shouldRender} from '../ducks/reducer';
+import { StaggeredMotion, spring } from 'react-motion';
+import { connect } from 'react-redux';
+import { shouldRender } from '../ducks/reducer';
 
 //components
 import MenuBox from './MenuBox';
@@ -67,12 +67,14 @@ const redColors = [
 ]
 
 class HomePage extends Component {
+
     componentDidMount(){
         this.props.shouldRender(true)
     }
 
     render() {
-        let {shouldRender} = this.props;
+        console.log(window.innerWidth);
+        let { shouldRender } = this.props;
         let projLinks = configStyles.map((style, idx) => <ProjLink key={`project_${idx}`} config={style}></ProjLink>)
         return (
             <div>
@@ -83,25 +85,27 @@ class HomePage extends Component {
 
                     <InfoBox config={infoBoxConfig[0]} />
 
-                        {projLinks}
+                    {projLinks}
                     <ProjSlide />
                 </div>
-                <InfoBox config={infoBoxConfig[1]} />
-                <div className={`${portfolioStyle}`}>
-                    <TwitterSlide config={twitterConfig[0]}/>
+                <StayWithUsDiv>
+                    <InfoBox config={infoBoxConfig[1]} />
+                </StayWithUsDiv>
+                <div className={`${socialStyle}`}>
+                    <TwitterSlide config={twitterConfig[0]} />
                     <SocialPicture photo={socialFirst} />
-                    <TwitterSlide config={twitterConfig[1]}/>
-                    <SocialPicture photo={socialSecond}/>
-                    <SocialPicture photo={socialThird}/>
-                    <TwitterSlide config={twitterConfig[2]}/>
+                    <TwitterSlide config={twitterConfig[1]} />
+                    <SocialPicture photo={socialSecond} />
+                    <SocialPicture photo={socialThird} />
+                    <TwitterSlide config={twitterConfig[2]} />
                     <SocialVideo />
 
                 </div>
 
-                <Div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '350px' }} >
+                <FiftyDiv style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '350px' }} >
                     <FiftyAnim />
                     <InfoBox config={infoBoxConfig[2]} />
-                </Div>
+                </FiftyDiv>
                 <CheckVisibility>
                         {isVisible => 
                     <StaggeredMotion
@@ -134,32 +138,68 @@ class HomePage extends Component {
                     }
                     </StaggeredMotion>}
                 </CheckVisibility>
-                <Div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '350px' }} >
+                <FinalDiv>
                     <InfoBox config={infoBoxConfig[3]} />
                     <InfoBox config={infoBoxConfig[4]} />
-                </Div>
+                </FinalDiv>
 
             </div>
         )
     }
 }
 
-function mapStateToProps(state){
-    return {render: state.render}
+function mapStateToProps(state) {
+    return { render: state.render }
 }
 
-export default connect(mapStateToProps, {shouldRender})(HomePage)
+export default connect(mapStateToProps, { shouldRender })(HomePage)
 
-const spotlightStyle = css({
-    height: '80vh',
-    width: '100%',
-})
+const spotlightStyle = css(
+    {
+        height: '80vh',
+        width: '100%',
+        '@media(max-width: 768px)': {
+            height: '60vh'
+        }
+    }
+)
 
-const portfolioStyle = css({
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fill, 25%)',
-    gridAutoRows: 'minmax(500px, auto)'
-})
+const portfolioStyle = css(
+    {
+        '@media(max-width: 1200px)': {
+            gridTemplateColumns: 'repeat(auto-fill, 25%)',
+            gridAutoRows: 'minmax(25vh, 25vh)'
+        }
+    },
+    {
+        '@media(max-width: 768px)': {
+            gridTemplateColumns: '100%',
+            gridAutoRows: 'minmax(25vh, 25vh)'
+        }
+    },
+    {
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fill, 25%)',
+        gridAutoRows: 'minmax(25vh, 50vh)'
+    }
+)
+
+const socialStyle = css(
+    {
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fill, 25%)',
+        gridAutoRows: 'minmax(25vh, 50vh)'
+    },
+    {
+        '@media(max-width: 768px)': {
+            gridTemplateColumns: 'repeat(auto-fill, 50%)',
+            gridAutoRows: 'minmax(25vh, 30vh)'
+        },
+        '@media(max-width: 480px)': {
+            display: 'none'
+        }
+    },
+)
 
 const PortfolioText = glamorous.div(
     {
@@ -173,11 +213,65 @@ const PortfolioText = glamorous.div(
     })
 )
 
+const awardStyle = css(
+    {
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fill, 25%)',
+        gridAutoRows: 'minmax(25vh, 50vh)'
+    },
+    {
+        '@media(max-width: 768px)': {
+            gridTemplateColumns: '50% 50%',
+            gridAutoRows: 'minmax(25vh, 25vh)'
+        }
+    }
+)
+
+const StayWithUsDiv = glamorous.div({
+    width: '100%',
+    height: 350,
+    margin: 'auto',
+    '@media(max-width: 768px)': {
+        height: 250
+    },
+    '@media(max-width: 480px)': {
+        height: 150
+    }
+})
+
+const FiftyDiv = glamorous.div(
+    {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',
+        height: '350px',
+        '@media(max-width: 768px)': {
+            flexDirection: 'column'
+        }
+
+    }
+)
+
+const FinalDiv = glamorous.div(
+    { 
+        display: 'flex', 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        width: '100%', 
+        height: '350px',
+        '@media(max-width: 768px)': {
+            flexDirection: 'column',
+            height: 600
+        } 
+    }
+)
+
 const awardInfo = [
-    {title: 'fwa', award: 'site of the day', num: 19},
-    {title: 'awwwards', award: 'site of the day', num: 27},
-    {title: 'css design', award: 'awards', num: 26},
-    {title: 'other', award: 'awards', num: 50},    
+    { title: 'fwa', award: 'site of the day', num: 19 },
+    { title: 'awwwards', award: 'site of the day', num: 27 },
+    { title: 'css design', award: 'awards', num: 26 },
+    { title: 'other', award: 'awards', num: 50 },
 ]
 
 
@@ -189,7 +283,7 @@ const infoBoxConfig = [
         textAlign: 'left',
         pWidth: '95%',
         pFontSize: 19,
-        headerMargin: 95,
+        headerMargin: 40,
         paddingLeft: 40,
         title: ['DIGITAL DREAMS BY AQUEST'],
         text: [
@@ -203,8 +297,8 @@ const infoBoxConfig = [
     },
     {
         background: 'white',
-        width: '100vh',
-        height: 350,
+        width: '100%',
+        height: '100%',
         padding: 50,
         textAlign: 'center',
         pWidth: '100%',
@@ -224,7 +318,7 @@ const infoBoxConfig = [
         height: '350px',
         padding: '20px 50px',
         textAlign: 'left',
-        pWidth: '40%',
+        pWidth: '70%',
         headerMargin: 100,
         title: ['GOOD REASONS TO WORK WITH US'],
         text: [
@@ -241,9 +335,9 @@ const infoBoxConfig = [
         height: '100%',
         padding: '10px 50px',
         textAlign: 'left',
-        pWidth: '70%',
-        headerMargin: 100,
-        paddingLeft: 100,
+        pWidth: '80%',
+        headerMargin: 75,
+        paddingLeft: 75,
         title: ['DIGITAL DREAMERS WANTED.', 'CAREERS'],
         text: [
             `"You may say I’m a dreamer, but I'm not the only one." We always look for passionate and dedicated creative geeks. Send us your profile, your working preferences and the reason why you want to join our crew.`
@@ -255,9 +349,9 @@ const infoBoxConfig = [
         height: '100%',
         padding: '10px 50px',
         textAlign: 'left',
-        pWidth: '70%',
-        headerMargin: 100,
-        paddingLeft: 100,
+        pWidth: '80%',
+        headerMargin: 75,
+        paddingLeft: 75,
         title: ['HAVE YOUR DREAM AND SHARE IT WITH US.', 'CONTACTS'],
         text: [
             `"You may say I’m a dreamer, but I'm not the only one." We always look for passionate and dedicated creative geeks. Send us your profile, your working preferences and the reason why you want to join our crew.`
@@ -275,7 +369,7 @@ const twitterConfig = [
         text: "RT @fabiomerlin: .@aquest is ????! They're 4th place in the #Webby People’s Voice. Give ‘em some ?? + VOTE: https://t.co/RUJjzpVCo6"
     },
     {
-        time : '8 DAYS AGO',
+        time: '8 DAYS AGO',
         text: "Collision test! 3-2-1... BANG! ?? #AQlab #gaming #threejs #webgl #physicsengine #3D https://t.co/WbA0Tozt1Z"
     }
 ]

@@ -13,7 +13,11 @@ let Wrapper = glamorous.div(
         color: '#0083DD',
         display: 'flex',
         justifyContent: 'flex-end',
-        alignItems: 'center'
+        alignItems: 'center',
+        '@media(max-width: 768px)': {
+            fontSize: 100,
+            justifyContent: 'center'
+        }
     }
 )
 

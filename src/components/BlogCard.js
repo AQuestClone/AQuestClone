@@ -13,11 +13,19 @@ class BlogCard extends Component {
         this.state = {
             boxShadowValues: ''
         }
+        this.estTimeToRead = this.estTimeToRead.bind(this)
+    }
+    estTimeToRead(bodyText){
+        //according to Medium the average reading speed for an adult is (about 275 wpm)
+        let wordLength = ( bodyText.split(' ').length)/(275)
+        return `${Math.ceil(wordLength)} MIN`
     }
 
     render() {
 
-        let { title, blog_id, profile_image, username, image } = this.props.post
+        let { title, blog_id, profile_image, username, image, claps, time_stamped, content } = this.props.post
+        let date = time_stamped.slice(5,10)
+        console.log('date', date)
         return (
 
             !this.state.boxShadowValues && this.props.isVisible ? setTimeout(() => {
@@ -28,7 +36,7 @@ class BlogCard extends Component {
             }, 380) : null,
 
             <PageChange newPage={`/blog/${blog_id}`}>
-                <PhotoWrapper style={this.props.shouldRender?{ boxShadow: this.state.boxShadowValues, transition: '.4s' }:{}}>
+                <PhotoWrapper style={this.props.shouldRender ? { boxShadow: this.state.boxShadowValues, transition: '.4s' } : {}}>
                     <TransitionMotion
                         defaultStyles={
                             this.props.isVisible && this.props.shouldRender ?
@@ -49,7 +57,7 @@ class BlogCard extends Component {
                         willEnter={() => ({
                             top: 500
                         })}
-                        willLeave={()=>({
+                        willLeave={() => ({
                             top: spring(500)
                         })}
                     >
@@ -60,7 +68,8 @@ class BlogCard extends Component {
                                         styles.map(({ key, style }) =>
                                             <Card style={{ ...style, position: 'relative' }} key={key}  >
                                                 <HashTag>{title}</HashTag>
-                                                <Awards id='awards'><img style={{ borderRadius: '50%', height: '7vh', padding: '5px' }} src={profile_image} />{username}</Awards>
+                                                <SubTitle>{`- ${date}, ${this.estTimeToRead(content)} -`}</SubTitle>
+                                                <Awards id='awards'><img style={{ borderRadius: '50%', height: '7vh', padding: '5px' }} src={profile_image} />{`${username} Claps ${claps}`}</Awards>
                                                 <Photo
                                                     style={{
                                                         backgroundImage: `url(${image})`,
@@ -201,6 +210,22 @@ let HashTag = glamorous.h2(
         bottom: props.bottom
     })
 )
+let SubTitle = glamorous.h2(
+    {
+        position: 'absolute',
+        top: 20,
+        left: 50,
+        zIndex: '5',
+        fontFamily: "'Libre Baskerville', 'serif'",
+        fontSize: '20px',
+        fontWeight: '400',
+        letterSpacing: '0.05em',
+        color: '#e6e6e6'
+    },
+    (props) => ({
+        bottom: props.bottom
+    })
+)
 
 let Awards = glamorous.div(
     'awards-text',
@@ -237,4 +262,6 @@ let Awards = glamorous.div(
     (props) => ({
 
     })
+
 )
+
