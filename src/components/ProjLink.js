@@ -61,7 +61,7 @@ class ProjLink extends Component {
                                 style: { top: spring(0, {stiffness: 250, damping: 30}) }
                             }] : []}
                             willEnter={() => ({top: rowSpan === 1 ? 500 : 1000})}
-                            willLeave={() => ({top: spring(500, {stiffness: 250, damping: 30})})}>
+                            willLeave={() => ({top: rowSpan === 1 ? spring(500, {stiffness: 250, damping: 30}) : spring(1000, {stiffness: 250, damping: 30})})}>
                             {
                                 styles =>
                                     <div style={{height: '100%', width: '100%'}}>                        
