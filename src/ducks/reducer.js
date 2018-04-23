@@ -1,10 +1,12 @@
 import axios from 'axios'
+import { type } from 'os';
+import { active } from 'glamor';
 
 const initialState = {
     blogs: [],
     user: {},
     post: {},
-    render: false
+    render: false,
 }
 
 const _FULFILLED ='_FULFILLED'
@@ -60,6 +62,7 @@ export default function reducer(state = initialState, action) {
             return Object.assign({}, state, { blogs: action.payload })
         case SHOULD_RENDER:
             return Object.assign({}, state, {render: action.payload})
+
         default: return state;
     }
 }
