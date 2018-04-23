@@ -52,7 +52,6 @@ let Wrapper = glamorous.div(
             },
         }
     },
-
 )
 
 let PWrapper = glamorous.div(
