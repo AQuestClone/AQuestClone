@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import glamorous from 'glamorous';
 import axios from 'axios';
 import { css } from 'glamor';
-import { getUser, getPost } from '../ducks/reducer';
+import { getUser, getPost, shouldRender } from '../ducks/reducer';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
 import { log } from 'util';
@@ -32,6 +32,7 @@ class BlogPage extends Component {
             this.setState({ responses: res.data })
         })
         this.resPosition = document.getElementById('resInput').offsetTop
+        this.props.shouldRender(true);
         
     }
     deletePost() {
@@ -164,10 +165,11 @@ class BlogPage extends Component {
 function mapStateToProps(state) {
     return {
         user: state.user,
-        post: state.post
+        post: state.post,
+        render: state.render
     }
 }
-export default connect(mapStateToProps, { getUser, getPost })(BlogPage)
+export default connect(mapStateToProps, { getUser, getPost, shouldRender })(BlogPage)
 
 const BlogPageWrapper = glamorous.div(
     {
