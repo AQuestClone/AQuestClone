@@ -36,6 +36,16 @@ class BlogList extends Component {
     this.props.getBlogs()
     this.props.shouldRender(true)
   }
+  shouldComponentUpdate(nextProps, nextState){
+    console.log(nextProps)
+    console.log(this.props);
+    
+    
+    if (JSON.stringify(nextProps) === JSON.stringify(this.props)){
+      return false;
+    }
+    return true
+  }
 
 
   render() {
