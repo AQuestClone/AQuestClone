@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { spring, TransitionMotion } from 'react-motion'
-import { margin } from 'polished';
 
 class BlogHeader extends Component {
     constructor(props) {
@@ -23,10 +22,10 @@ class BlogHeader extends Component {
 
         return (
             <TransitionMotion
-                defaultStyles={this.props.render && this.props.blogs.length > 0 ?
+                defaultStyles={this.props.render ?
                     [{ key: 'navbar', style: { top: -65 } }]
                     : []}
-                styles={this.props.render && this.props.blogs.length > 0 ?
+                styles={this.props.render ?
                     [{ key: 'navbar', style: { top: spring(0) } }]
                     : []}
                 willLeave={() => ({ top: spring(-65) })}
@@ -71,7 +70,8 @@ function mapStateToProps(state) {
     return {
         user: state.user,
         render: state.render,
-        blogs: state.blogs
+        blogs: state.blogs,
+        post: state.post
     }
 }
 export default connect(mapStateToProps, { getUser })(BlogHeader)
@@ -127,3 +127,12 @@ const GetStarted = glamorous.div(
         }
     }
 )
+
+export function isEmpty(obj){
+    for (var key in obj){
+        if(obj.hasOwnProperty(key)){
+            return false
+        }
+    }
+    return true;
+}
