@@ -6,41 +6,9 @@ import {css} from 'glamor';
 import {connect} from 'react-redux';
 import {shouldRender} from '../ducks/reducer';
 import {withRouter} from 'react-router-dom'
+import PageChange from './PageChange';
 
 class MainMenu extends Component {
-    constructor(){
-        super()
-
-        this.state = {
-            scrollStatus: '',
-            newPage: ''
-        };
-        this.scrollTimeout = null;
-        this.pageTimeout = null
-    }
-
-    changePage = (newPage) => {
-        this.props.toggle();
-            this.afterScoll();
-            document.addEventListener('scroll', this.afterScoll, false)
-        document.getElementById('root').scrollIntoView({block: "start", inline: "nearest", behavior: 'smooth'})
-        this.setState({newPage})
-    }
-
-    afterScoll = () => {
-        if(this.scrollTimeout) clearTimeout(this.scrollTimeout);
-        this.scrollTimeout = setTimeout(() => {
-            this.scrollTimeout = null;
-            this.props.shouldRender(this.props.render)
-            document.removeEventListener('scroll', this.afterScoll, false)
-            this.scrollStatus = 'stoped scrolling';
-            if(this.pageTimeout) clearTimeout(this.pageTimeout)
-            this.pageTimeout = setTimeout(() => this.props.history.push(this.state.newPage), 700)
-        }, 700)
-        if(this.state.scrollStatus !== 'scrolling'){
-            this.setState({scrollStatus: 'scrolling'})
-        }
-    }
 
     render() {
         let {
@@ -81,9 +49,13 @@ class MainMenu extends Component {
                                         <MenuItem>
                                             <h1>SOCIAL</h1>
                                         </MenuItem>
-                                        <MenuItem onClick={() => this.changePage('/blog')} >
-                                            <h1>BLOG</h1>
-                                        </MenuItem>
+
+                                        <PageChange style={{width: '100%', display: 'flex', justifyContent: 'center'}} newPage='/blog'>
+                                            <MenuItem onClick={() => this.props.toggle()}>
+                                                <h1>BLOG</h1>
+                                            </MenuItem>
+                                        </PageChange>
+
                                         <MenuItem>
                                             <h1>CONTACTS</h1>
                                         </MenuItem>

@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import CheckVisibility from './CheckVisibility';
 
 
+
 let Wrapper = glamorous.div(
     (props) => (
         {
@@ -194,6 +195,7 @@ class InfoBox extends Component {
                                 }] : []}
                                 willEnter={() => ({ top: 500 })}
                                 willLeave={() => ({ top: spring(500)})}>
+
                                 {
                                     styles =>
                                         <div style={{ height: '100%', width: '100%' }}>

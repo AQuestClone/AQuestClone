@@ -34,7 +34,6 @@ export default class Hamburger extends PureComponent {
 
 
     componentDidMount() {
-        console.log(spring(-45))
     }
 
     //need to fix hover
@@ -42,7 +41,6 @@ export default class Hamburger extends PureComponent {
 
 
     render() {
-        console.log(this.props.hovered)
         let springTiming = { stiffness: 400, damping: 32 }
         
         let {
@@ -108,7 +106,6 @@ export default class Hamburger extends PureComponent {
                                                                 i === 1 ? 0 : style.opacity
                                         }}
                                             key={`white_bar_${i}`}>
-                                            { console.log(style.rotate) }
                                         </div>
                                     ))
                                 }

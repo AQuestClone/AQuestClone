@@ -67,8 +67,9 @@ const redColors = [
 ]
 
 class HomePage extends Component {
-    componentDidMount() {
-        this.props.shouldRender(this.props.render)
+
+    componentDidMount(){
+        this.props.shouldRender(true)
     }
 
     render() {
@@ -106,31 +107,36 @@ class HomePage extends Component {
                     <InfoBox config={infoBoxConfig[2]} />
                 </FiftyDiv>
                 <CheckVisibility>
-                    {isVisible =>
-                        <StaggeredMotion
-                            defaultStyles={[
-                                { top: 500 },
-                                { top: 500 },
-                                { top: 500 },
-                                { top: 500 },
-                            ]}
-                            styles={(prevStyles) => !isVisible ? [] : [
-                                { top: spring(0) },
-                                { top: spring(prevStyles[0].top) },
-                                { top: spring(prevStyles[1].top) },
-                                { top: spring(prevStyles[2].top) },
-                            ]}
-                        >
-                            {
-                                styles =>
-                                    <div className={`${awardStyle}`} style={{ overflow: 'hidden', clear: 'both' }}>
-                                        {styles.map((style, i) => {
-                                            return <div style={{ position: 'relative', ...style }} ><AwardBox visible={isVisible} ind={i} {...awardInfo[i]} /></div>
-                                        }
-                                        )}
-                                    </div>
-                            }
-                        </StaggeredMotion>}
+                        {isVisible => 
+                    <StaggeredMotion
+                        defaultStyles={[
+                            {top: 500},
+                            {top: 500},
+                            {top: 500},
+                            {top: 500},  
+                        ]}
+                        styles={(prevStyles) => isVisible && this.props.render ? [
+                            {top: spring(0)},
+                            {top: spring(prevStyles[0].top)},
+                            {top: spring(prevStyles[1].top)},
+                            {top: spring(prevStyles[2].top)},
+                        ] : [
+                            {top: spring(500)},
+                            {top: spring(prevStyles[0].top)},
+                            {top: spring(prevStyles[1].top)},
+                            {top: spring(prevStyles[2].top)},
+                        ] }
+                    >
+                    {
+                        styles => 
+                            <div className={`${portfolioStyle}`} style={{overflow: 'hidden', clear: 'both'}}>                            
+                                {styles.map((style, i) => {
+                                    return <div style={{position: 'relative', ...style}} ><AwardBox visible={isVisible} ind={i} {...awardInfo[i]} /></div>  
+                                    }
+                                )}
+                            </div>
+                    }
+                    </StaggeredMotion>}
                 </CheckVisibility>
                 <FinalDiv>
                     <InfoBox config={infoBoxConfig[3]} />

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import glamorous from 'glamorous';
+import {TransitionMotion, spring} from 'react-motion';
+import {connect} from 'react-redux';
 
 //photos
 import first from './assets/projslide/01.jpg';
@@ -12,7 +14,102 @@ import seventh from './assets/projslide/07.jpg';
 import eighth from './assets/projslide/08.jpg';
 
 import arrow from './assets/arrow-next.png';
+import CheckVisibility from './CheckVisibility';
 
+class ProjSlide extends Component {
+    constructor() {
+        super();
+
+        this.state = {
+            index: 0
+        }
+
+    }
+
+    onHoverEnter = () => {
+        intervalVar = setInterval(() => {
+            let indexCopy = this.state.index;
+            if (indexCopy === 7) {
+                this.setState({
+                    index: 0
+                })
+            } else {
+                this.setState({
+                    index: ++indexCopy
+                })
+            }
+        }, 115)
+
+        intervalVar;
+    }
+
+    onHoverLeave = () => {
+        clearInterval(intervalVar)
+    }
+
+    render() {
+
+        let wrapperStyle = {
+            backgroundImage: `url(${photos[this.state.index]})`
+        }
+
+        return (
+            <CheckVisibility>
+                {
+                    isVisible => 
+                        <TransitionMotion 
+                        defaultStyles={isVisible && this.props.render ? [{
+                            key: 'infobox',
+                            style: { top: 500 }
+                        }] : []}
+                        styles={isVisible && this.props.render ? [{
+                            key: 'infobox',
+                            style: { top: spring(0, { stiffness: 250, damping: 30 }) }
+                        }] : []}
+                        willEnter={() => ({ top: 500 })}
+                        willLeave={() => ({top: spring(500)})}
+                        >{
+                            styles => 
+                                <div style={{overflow: 'hidden', gridColumnEnd: 'span 2', gridRowEnd: 'span 1', height: '100%', width: '100%' }} >
+                                    {
+                                        styles.map(({key, style}) => (
+                                            <Wrapper style={{...style}} onMouseEnter={this.onHoverEnter} onMouseLeave={this.onHoverLeave}>
+                                                <LoadMore>
+                                                    LOAD MORE
+                                                </LoadMore>
+                                                <Text>
+                                                    discover all our works
+                                                    <br />
+                                                    we love to show you
+                                                </Text>
+                                                <Arrow src={arrow} />
+                                                {
+                                                    photos.map((photo, idx) => {
+                                                        return <Photo key={idx} style={{
+                                                            backgroundImage: `url(${photo})`,
+                                                            zIndex: this.state.index === idx ? '1' : '-1'}}>
+                                                                </Photo>
+                                                    })
+                                                }
+                                            </Wrapper>
+                                        ))
+                                    }
+                                    
+                                </div>
+                        }
+                        </TransitionMotion>}
+            </CheckVisibility>
+        )
+    }
+}
+
+function mapStateToProps(state){
+    return {
+        render: state.render
+    }
+}
+
+export default connect(mapStateToProps, {})(ProjSlide)
 
 let photos = [
     first,
@@ -32,9 +129,9 @@ let Wrapper = glamorous.div(
         }
     },
     {
-        gridColumnEnd: 'span 2',
-        gridRowEnd: 'span 1',
-        position: 'relative'
+        position: 'relative',
+        width: '100%',
+        height: '100%'
 
     }
 
@@ -114,65 +211,3 @@ let Arrow = glamorous.img({
 })
 
 let intervalVar;
-
-
-export default class ProjSlide extends Component {
-    constructor() {
-        super();
-
-        this.state = {
-            index: 0
-        }
-
-    }
-
-    onHoverEnter = () => {
-        intervalVar = setInterval(() => {
-            let indexCopy = this.state.index;
-            if (indexCopy === 7) {
-                this.setState({
-                    index: 0
-                })
-            } else {
-                this.setState({
-                    index: ++indexCopy
-                })
-            }
-        }, 115)
-
-        intervalVar;
-    }
-
-    onHoverLeave = () => {
-        clearInterval(intervalVar)
-    }
-
-    render() {
-
-        let wrapperStyle = {
-            backgroundImage: `url(${photos[this.state.index]})`
-        }
-
-        return (
-            <Wrapper onMouseEnter={this.onHoverEnter} onMouseLeave={this.onHoverLeave}>
-                <LoadMore>
-                    LOAD MORE
-                </LoadMore>
-                <Text>
-                    discover all our works
-                    <br />
-                    we love to show you
-                </Text>
-                <Arrow src={arrow} />
-                {
-                    photos.map((photo, idx) => {
-                        return <Photo key={idx} style={{
-                            backgroundImage: `url(${photo})`,
-                            zIndex: this.state.index === idx ? '1' : '-1'}}>
-                                </Photo>
-                    })
-                }
-            </Wrapper>
-        )
-    }
-}

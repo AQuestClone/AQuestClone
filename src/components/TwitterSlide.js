@@ -1,8 +1,87 @@
 import React, { Component } from 'react';
 import glamorous, { Div } from 'glamorous';
 import { TransitionMotion, spring } from 'react-motion';
+import {connect} from 'react-redux';
 
 import CheckVisibility from './CheckVisibility';
+
+class TwitterSlide extends Component {
+    constructor() {
+        super();
+
+    }
+
+    render() {
+        let {
+            time,
+            text
+        } = this.props.config
+        return (
+            <div style={{ width: '100%', height: '100%', position: 'relative', overflow: 'hidden' }}>
+                <CheckVisibility interval={(Math.random() * (500 - 100) + 100)}>
+                    {
+                        (isVisible) =>
+                            <TransitionMotion
+                                defaultStyles={isVisible && this.props.render ? [{
+                                    key: 'twitterslide',
+                                    style: { top: 500 }
+                                }] : []}
+                                styles={isVisible && this.props.render ? [{
+                                    key: 'twitterslide',
+                                    style: { top: spring(0, { stiffness: 250, damping: 30 }) }
+                                }] : []}
+                                willEnter={() => ({ top: 500 })}
+                                willLeave={() => ({top: spring(500)})}>
+                                {
+                                    styles =>
+                                        <div style={{ width: '100%', height: '100%' }}>
+                                            {
+                                                styles.map(({ key, style }) => {
+                                                    return <Wrapper key={key} style={{ top: style.top }}>
+                                                                <Content>
+                                                                    <div style={{
+                                                                        height: 100,
+                                                                        width: '100%',
+                                                                        display: 'flex',
+                                                                        justifyContent: 'flex-start',
+                                                                        alignItems: 'center',
+                                                                    }}>
+                                                                        <TwitterButton>
+                                                                            <i class="fa fa-twitter"></i>
+                                                                        </TwitterButton>
+                                                                        <TimeDiv>
+                                                                            <h1>{time}</h1>
+                                                                            <p>@aquest</p>
+                                                                        </TimeDiv>
+                                                                    </div>
+                                                                    <Message>
+                                                                        <p>
+                                                                            {text}
+                                                                        </p>
+                                                                    </Message>
+
+                                                                </Content>
+                                                    </Wrapper>
+                                                })
+                                            }
+                                        </div>
+                                }
+                            </TransitionMotion>
+                    }
+
+                </CheckVisibility>
+            </div>
+        )
+    }
+}
+
+function mapStateToProps(state){
+    return {
+        render: state.render
+    }
+}
+
+export default connect(mapStateToProps, {})(TwitterSlide)
 
 const Wrapper = glamorous.div(
     {
@@ -85,72 +164,3 @@ const Message = glamorous.div(
         }
     }
 )
-
-export default class TwitterSlide extends Component {
-    constructor() {
-        super();
-
-    }
-
-    render() {
-        let {
-            time,
-            text
-        } = this.props.config
-        return (
-            <div style={{ width: '100%', height: '100%', position: 'relative', overflow: 'hidden' }}>
-                <CheckVisibility interval={(Math.random() * (500 - 100) + 100)}>
-                    {
-                        (isVisible) =>
-                            <TransitionMotion
-                                defaultStyles={isVisible ? [{
-                                    key: 'twitterslide',
-                                    style: { top: 500 }
-                                }] : []}
-                                styles={isVisible ? [{
-                                    key: 'twitterslide',
-                                    style: { top: spring(0, { stiffness: 250, damping: 30 }) }
-                                }] : []}
-                                willEnter={() => ({ top: 500 })}>
-                                {
-                                    styles =>
-                                        <div style={{ width: '100%', height: '100%' }}>
-                                            {
-                                                styles.map(({ key, style }) => {
-                                                    return <Wrapper key={key} style={{ top: style.top }}>
-                                                        <Content>
-                                                            <div style={{
-                                                                height: 100,
-                                                                width: '100%',
-                                                                display: 'flex',
-                                                                justifyContent: 'flex-start',
-                                                                alignItems: 'center',
-                                                            }}>
-                                                                <TwitterButton>
-                                                                    <i className="fa fa-twitter"></i>
-                                                                </TwitterButton>
-                                                                <TimeDiv>
-                                                                    <h1>{time}</h1>
-                                                                    <p>@aquest</p>
-                                                                </TimeDiv>
-                                                            </div>
-                                                            <Message>
-                                                                <p>
-                                                                    {text}
-                                                                </p>
-                                                            </Message>
-
-                                                        </Content>
-                                                    </Wrapper>
-                                                })
-                                            }
-                                        </div>
-                                }
-                            </TransitionMotion>
-                    }
-
-                </CheckVisibility>
-            </div>
-        )
-    }
-}

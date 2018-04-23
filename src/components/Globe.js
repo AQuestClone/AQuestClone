@@ -3,7 +3,7 @@ import glamorous from 'glamorous';
 import {css} from 'glamor';
 import logo from './assets/logo-bianco.png';
 import Particles from 'react-particles-js';
-import config from './assets/particlesjs-config.json';
+import config from './assets/globeParticles.json';
 import map from './assets/world-map.png';
 
 
