@@ -23,7 +23,6 @@ class ProjSlide extends Component {
         this.state = {
             index: 0
         }
-
     }
 
     onHoverEnter = () => {
