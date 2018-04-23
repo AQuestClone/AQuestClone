@@ -61,7 +61,13 @@ const AwardImage = glamorous.span({
     margin: '-5% auto 5%',
     position: 'relative',
     display: 'block',
-    boxSizing: 'border-box'
+    boxSizing: 'border-box',
+    '@media(max-width: 768px)': {
+        marginTop: 5,
+    },
+    '@media(max-width: 480px)': {
+        display: 'none'
+    }
 })
 
 const Details = glamorous.h3({
@@ -72,15 +78,31 @@ const Details = glamorous.h3({
     borderBottom: '2px solid #0071DA',
     padding: '15px 0 0',
     transition: '.5s',
+    '@media(max-width: 768px)': {
+        padding: '10px 0 0',
+        width: '80%',
+    },
+    '@media(max-width: 480px)': {
+        borderTop: 'none'
+    }
 })
 
 const Text = glamorous.span({
     letterSpacing: '3px',
     textTransform: 'uppercase',
     fontWeight: 400,
-    fontSize: '75%'
+    fontSize: '75%',
+    '@media(max-width: 768px)': {
+        fontSize: '40%',
+        letterSpacing: '2px',
+        textAlign: 'center'
+    }
 })
 
 const Number = glamorous.span({
     fontSize: '100px',
+    '@media(max-width: 768px)': {
+        fontSize: 35,
+        paddingTop: 5
+    }
 })

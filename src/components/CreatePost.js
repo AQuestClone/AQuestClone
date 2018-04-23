@@ -13,8 +13,10 @@ const CreateWrapper = glamorous.div(
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+        marginTop: 65,
         height: '800',
-        background: '#1976D2',
+        // background: '#1976D2',
+        border: '1px solid gray',
         width: '70vw',
     }
 )
@@ -38,6 +40,20 @@ const ContentInput = glamorous.textarea(
         background: 'white'
     }
 )
+
+
+//new design
+
+const PostContent = glamorous.div(
+    {
+        width: 600,
+        border: '1px solid gray',
+        
+    }
+)
+
+
+
 const CloudinaryURL = 'https://api.cloudinary.com/v1_1/dbuqor9no/image/upload'
 //aay8b9ww
 class CreatePost extends Component {

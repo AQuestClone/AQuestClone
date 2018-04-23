@@ -12,8 +12,8 @@ const Wrapper = glamorous.div(
         width: '100%',
         height: '100%',
         position: 'absolute',
-        background: 'red',
-        transition: 'top .5s'
+        transition: 'top .5s',
+        background: 'white'
     }
 )
 

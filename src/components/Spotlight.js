@@ -25,14 +25,7 @@ class Spotlight extends Component{
         willEnter={() => ({top: -this.props.height, opacity: 0})}
       >
         {(styles) => (
-          <div
-          style={{
-            height: '100%',
-            width: '100%', 
-            position: 'relative',
-            overflow: 'hidden'
-        }
-          } >
+          <Wrapper >
             {styles.map(({ key, style }) => (
               <CoverImg key={key} style={{...style}}>
                 <TransitionMotion
@@ -65,7 +58,7 @@ class Spotlight extends Component{
                 </TransitionMotion>
               </CoverImg>
             ))}
-          </div>
+          </Wrapper>
         )}
       </TransitionMotion>
         );
@@ -81,6 +74,16 @@ function mapStateToProps(state){
 export default connect(mapStateToProps, {})(Spotlight)
 
 const springOptions = {stiffness: 250, damping: 30}
+
+const Wrapper = glamorous.div({
+    height: '100%',
+    width: '100%', 
+    position: 'relative',
+    overflow: 'hidden',
+    '@media(max-width: 768px)': {
+        height: '100%'
+    }
+})
 
 const CoverImg = glamorous.div({
     background: `url(${cover})`,
@@ -99,12 +102,20 @@ const CoverText = glamorous.div({
     width: 500, 
     fontFamily: '"Oswald", sans-serif',
     color: 'white',
+    '@media(max-width: 768px)': {
+        right: '-200px'
+    }
 })
 const Title = glamorous.div({
     fontSize: '100px',
     marginBottom: '10px',
     lineHeight: '90px',
     position: 'relative',
+    '@media(max-width: 768px)': {
+        fontSize: 40,
+        width: '40%',
+        lineHeight: '40px'
+    }
 })
 
 const Sotd = glamorous.div({
