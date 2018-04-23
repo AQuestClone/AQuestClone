@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {shouldRender} from '../ducks/reducer';
+import {shouldRender, emptyPost} from '../ducks/reducer';
 import glamorous from 'glamorous';
 
 class PageChange extends Component{
@@ -63,7 +63,7 @@ function mapStateToProps(state){
     }
 }
 
-export default connect(mapStateToProps, {shouldRender})(withRouter(PageChange));
+export default connect(mapStateToProps, {shouldRender, emptyPost})(withRouter(PageChange));
 
 const Wrapper = glamorous.div(
     'page-change-wrapper',

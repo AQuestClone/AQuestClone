@@ -42,7 +42,7 @@ class BlogCard extends Component {
                             this.props.isVisible && this.props.shouldRender ?
                                 [{
                                     key: title,
-                                    style: { top: 500 }
+                                    style: { top: 500, opacity: 0 }
                                 }]
                                 : []
                         }
@@ -50,15 +50,15 @@ class BlogCard extends Component {
                             this.props.isVisible && this.props.shouldRender ?
                                 [{
                                     key: title,
-                                    style: { top: spring(0, { stiffness: 250, damping: 30 }) }
+                                    style: { top: spring(0, { stiffness: 250, damping: 30 }), opacity: spring(1) }
                                 }]
                                 : []
                         }
                         willEnter={() => ({
-                            top: 500
+                            top: 500, opacity: 0
                         })}
                         willLeave={() => ({
-                            top: spring(500)
+                            top: spring(500), opacity: spring(0)
                         })}
                     >
                         {
