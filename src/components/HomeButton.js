@@ -22,8 +22,10 @@ const Wrapper = glamorous.div(
         cursor: 'pointer',
         position: 'absolute',
         top: 0,
-        left: 93
-
+        left: 93,
+        '@media(max-width: 768px)': {
+            display: 'none'
+        }
     }
 )
 

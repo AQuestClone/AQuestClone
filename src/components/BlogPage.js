@@ -76,7 +76,7 @@ class BlogPage extends Component {
         axios.put(`/api/responses/${this.state.responses[x].res_id}`, { claps: this.state.responses[x].claps })
     }
     render() {
-
+        console.log('page props', this.props)
         const Position = glamorous.div(
             {
                 position: 'absolute',
