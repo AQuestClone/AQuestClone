@@ -34,7 +34,6 @@ export default class CheckVisibility extends React.Component{
     if(this.state.visible){
         clearInterval(this.interval);
     }
-    console.log(document.documentElement.clientHeight)
 }
 
     render(){
