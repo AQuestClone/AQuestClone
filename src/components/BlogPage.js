@@ -7,8 +7,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
 import { log } from 'util';
 import Sidebar from './SideBar'
-import ReactDOM from 'react-dom'
-
+import {TransitionMotion, spring} from 'react-motion';
+import {isEmpty} from './BlogHeader';
 
 class BlogPage extends Component {
     constructor(props) {
@@ -42,7 +42,7 @@ class BlogPage extends Component {
         axios.get(`/api/responses/${this.props.match.params.id}`).then(res => {
             this.setState({ responses: res.data })
         })
-        this.resPosition = document.getElementById('resInput').offsetTop
+        // setTimeout(() => this.resPosition = document.getElementById('resInput').offsetTop, 500)
 
         this.props.shouldRender(true)
 
@@ -76,7 +76,6 @@ class BlogPage extends Component {
         axios.put(`/api/responses/${this.state.responses[x].res_id}`, { claps: this.state.responses[x].claps })
     }
     render() {
-        console.log('page props', this.props)
         const Position = glamorous.div(
             {
                 position: 'absolute',
@@ -126,48 +125,56 @@ class BlogPage extends Component {
 
 
         return (
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
+
+            <TransitionMotion
+                defaultStyles={!isEmpty(this.props.render) && this.props.render ? [{key: 'blogPost', style: {top: 0, opacity: 0}}] : []}
+                styles={!isEmpty(this.props.post) && this.props.render ? [{key: 'blogPost', style: {top: spring(40), opacity: spring(1)}}] : []}
+                willEnter={() => ({top: 0, opacity: 0})}
+                willLeave={() => ({top: spring(70), opacity: spring(0)})}>
+            {   styles =>
+                <div style={{ display: 'flex', justifyContent: 'center'}}>
+
+                    {styles.map(({key, style}) => (
+                        <BlogPageWrapper key={key} style={{...style}} >
+                            <Position>
+                                <Sidebar blog_id={this.props.post.id} claps={this.props.post.claps} />
+                            </Position>
+
+                            <HashTag>{title}</HashTag>
+                            <img style={{ height: '50vh', backgroundPosition: 'center', backgroundSize: 'cover' }} src={`${image}`} />
+                            <HashTag id={'bodyText'} fontSize={'17px'}>{content}</HashTag>
+
+                            <div>
+                                {
+                                    this.props.user ?
+                                        this.props.user.admin ?
+                                            <div>
+                                                <Link to='/blog/create'><CardButton>edit</CardButton></Link>
+                                                <CardButton onClick={this.deletePost}>delete</CardButton>
+                                            </div> : ''
+                                        : ''
+                                }
+                            </div>
+                            <div id='resInput' style={{ boxShadow: '0 1px 4px rgba(44, 44, 46, 0.32)', padding: '10px', width: '28.8vw' }}>
+                                {
+                                    this.props.user.id ?
+                                        <div  >
+
+                                            <ResponseInput name='response' onChange={this.handleChange} placeholder='Write a response' />
+
+                                            <Button onClick={this.handleSubmit} >Publish</Button>
+                                        </div>
+                                        :
+                                        <a href={process.env.REACT_APP_LOGIN}> <ResponseInput placeholder='Write a Response' /> </a>
+                                }
+                            </div>
+
+                            {resCard}
 
 
-                <BlogPageWrapper>
-                    <Position>
-                        <Sidebar blog_id={this.props.post.id} claps={this.props.post.claps} />
-                    </Position>
-
-                    <HashTag>{title}</HashTag>
-                    <img style={{ height: '50vh', backgroundPosition: 'center', backgroundSize: 'cover' }} src={`${image}`} />
-                    <HashTag id={'bodyText'} fontSize={'17px'}>{content}</HashTag>
-
-                    <div>
-                        {
-                            this.props.user ?
-                                this.props.user.admin ?
-                                    <div>
-                                        <Link to='/blog/create'><CardButton>edit</CardButton></Link>
-                                        <CardButton onClick={this.deletePost}>delete</CardButton>
-                                    </div> : ''
-                                : ''
-                        }
-                    </div>
-                    <div id='resInput' style={{ boxShadow: '0 1px 4px rgba(44, 44, 46, 0.32)', padding: '10px', width: '28.8vw' }}>
-                        {
-                            this.props.user.id ?
-                                <div  >
-
-                                    <ResponseInput name='response' onChange={this.handleChange} placeholder='Write a response' />
-
-                                    <Button onClick={this.handleSubmit} >Publish</Button>
-                                </div>
-                                :
-                                <a href={process.env.REACT_APP_LOGIN}> <ResponseInput placeholder='Write a Response' /> </a>
-                        }
-                    </div>
-
-                    {resCard}
-
-
-                </BlogPageWrapper>
-            </div>
+                        </BlogPageWrapper>))}
+                </div>}
+            </TransitionMotion>
         )
     }
 };
