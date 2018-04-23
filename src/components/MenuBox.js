@@ -15,7 +15,10 @@ let Wrapper = glamorous.div(
         zIndex: '25',
         top: 50,
         left: 0,
-        backfaceVisibility: 'hidden'
+        backfaceVisibility: 'hidden',
+        '@media(max-width: 768px)': {
+            top: 0
+        }
     }
 )
 
