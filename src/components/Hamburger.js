@@ -4,6 +4,7 @@ import glamorous from 'glamorous';
 
 
 const Wrapper = glamorous.div(
+    'hamburger',
     {
         backgroundColor: '#0083DD',
         position: 'relative',

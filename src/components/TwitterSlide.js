@@ -47,7 +47,7 @@ class TwitterSlide extends Component {
                                                                         alignItems: 'center',
                                                                     }}>
                                                                         <TwitterButton>
-                                                                            <i class="fa fa-twitter"></i>
+                                                                            <i className="fa fa-twitter"></i>
                                                                         </TwitterButton>
                                                                         <TimeDiv>
                                                                             <h1>{time}</h1>
