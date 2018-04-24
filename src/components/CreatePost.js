@@ -16,11 +16,12 @@ const CreateWrapper = glamorous.div(
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        marginTop: 65,
+        marginTop: 75,
         height: '700',
         // background: '#1976D2',
         // border: '1px solid gray',
         width: '70vw',
+        overflow: 'auto'
     }
 )
 const AddPostInput = glamorous.input(
@@ -62,7 +63,7 @@ const SubmitButton = glamorous.button(
 const ContentInput = glamorous.textarea(
     {
         width: '95%',
-        height: '400',
+        height: '350',
         background: 'white',
         fontSize: 18,
         fontFamily: "'Tinos', serif",
