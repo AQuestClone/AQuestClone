@@ -2,10 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import glamorous from 'glamorous';
+import { css } from 'glamor'
 import axios from 'axios';
 import { getPost } from '../ducks/reducer';
 import { placeholder } from 'glamor';
-import Dropzone from 'react-dropzone'
+import Dropzone from 'react-dropzone';
+
+import BlogHeader from './BlogHeader'
 
 
 const CreateWrapper = glamorous.div(
@@ -14,30 +17,84 @@ const CreateWrapper = glamorous.div(
         flexDirection: 'column',
         alignItems: 'center',
         marginTop: 65,
-        height: '800',
+        height: '700',
         // background: '#1976D2',
-        border: '1px solid gray',
+        // border: '1px solid gray',
         width: '70vw',
     }
 )
 const AddPostInput = glamorous.input(
     {
-        width: '300'
+        width: '300',
+        height: 50,
+        fontSize: '2.3em',
+        fontFamily: "'Martel Sans', sans-serif",
+        border: 'none',
+        ':focus': {
+            outline: 'none'
+        },
+        '::placeholder': {
+            color: '#b3b3b3'
+        }
     }
 )
 const SubmitButton = glamorous.button(
     {
-        width: '70',
-        height: '20',
-        background: 'white'
+        width: '85',
+        height: '30',
+        background: 'white',
+        border: '2px solid #b3b3b3',
+        color: '#b3b3b3',
+        borderRadius: 3,
+        display: 'block',
+        margin: 'auto',
+        fontFamily: "'Tinos', serif",
+        letterSpacing: 1,
+        transition: 'all .2s',
+        ':hover': {
+            background: '#b3b3b3',
+            color: 'white',
+            cursor: 'pointer'
+        }
     }
 
 )
 const ContentInput = glamorous.textarea(
     {
-        width: '300',
-        height: '60',
-        background: 'white'
+        width: '95%',
+        height: '400',
+        background: 'white',
+        fontSize: 18,
+        fontFamily: "'Tinos', serif",
+        letterSpacing: 1,
+        border: 'none',
+        borderBottom: '1px solid #e3e3e3',
+        marginBottom: 25,
+        ':focus': {
+            outline: 'none'
+        },
+        '::placeholder': {
+            color: '#b3b3b3'
+        }
+        
+    }
+)
+
+const ImageDiv = glamorous.div(
+    {
+        width: 300,
+        height: 100,
+        display: 'flex',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        color: '#b3b3b3',
+        marginBottom: 10,
+        ' h1': {
+            fontWeight: 'normal',
+            fontSize: '2em',
+            fontFamily: "'Martel Sans', sans-serif"
+
+        }
     }
 )
 
@@ -52,6 +109,25 @@ const PostContent = glamorous.div(
     }
 )
 
+const dropStyle = css({
+    width: 60,
+    height: 35,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontSize: 25,
+    background: 'white',
+    border: '2px solid #b3b3b3',
+    color: '#b3b3b3',
+    borderRadius: 3,
+    marginLeft: 15,
+    transition: 'all .2s',
+    ':hover': {
+        background: '#b3b3b3',
+        color: 'white',
+        cursor: 'pointer'
+    },
+})
 
 
 const CloudinaryURL = 'https://api.cloudinary.com/v1_1/dbuqor9no/image/upload'
@@ -155,46 +231,50 @@ class CreatePost extends Component {
                 <CreateWrapper>
                     {
                         this.props.post.id ?
-                            <div>
+                            <div style={{ width: '75%'}}>
                                 <h1>Title</h1>
                                 {/* <AddPostInput name='title' value={!this.state.title?title:this.state.title} onChange={this.handleChange}/> */}
                                 <AddPostInput name='title'
                                     value={this.state.title === 'x' ? title : this.state.title}
                                     onClick={this.resetState}
                                     onChange={this.handleChange} />
-                                <h1>Image</h1>
-                                <Dropzone
-                                    onDrop={this.handleDrop}
-                                    multiple
-                                    accept="image/*"
-                                    style={{ width: 100, height: 100, background: 'blue' }}
-                                >
-                                    <p>Drop your files or click here to upload</p>
-                                </Dropzone>
+                                <ImageDiv>
+                                    <h1>Image</h1>
+                                    <Dropzone
+                                        onDrop={this.handleDrop}
+                                        multiple
+                                        accept="image/*"
+                                        className={dropStyle}
+                                        
+                                    >
+                                        <i class="fa fa-plus"></i>
+                                    </Dropzone>
+                                </ImageDiv>
 
                                 <h1>Tell Your Story</h1>
                                 <ContentInput name='content'
                                     value={this.state.content === 'x' ? content : this.state.content}
                                     onClick={this.resetState}
                                     onChange={this.handleChange} />
-                                <SubmitButton onClick={() => this.editGame()}>edit</SubmitButton>
+                                <SubmitButton onClick={() => this.editGame()}>Save</SubmitButton>
                             </div>
                             :
-                            <div>
-                                <h1>Title</h1>
-                                <AddPostInput name='title' placeholder='title' onChange={this.handleChange} />
-                                <h1>Image</h1>
-                                <Dropzone
-                                    onDrop={this.handleDrop}
-                                    multiple
-                                    accept="image/*"
-                                    style={{ width: 100, height: 100, background: 'blue' }}
-                                >
-                                    <p>Drop your files or click here to upload</p>
-                                </Dropzone>
-                                <h1>Tell Your Story</h1>
-                                <ContentInput name='content' placeholder={'tell your story'} onChange={this.handleChange} />
-                                <SubmitButton onClick={() => this.addGame()}>button</SubmitButton>
+                            <div style={{ width: '75%'}}>
+                                <AddPostInput name='title' placeholder='Title' onChange={this.handleChange} />
+                                <ImageDiv>
+                                    <h1>Image</h1>
+                                    <Dropzone
+                                        onDrop={this.handleDrop}
+                                        multiple
+                                        className={dropStyle}
+                                        accept="image/*"
+                                        
+                                    >
+                                        <i class="fa fa-plus"></i>
+                                    </Dropzone>
+                                </ImageDiv>
+                                <ContentInput name='content' placeholder={'Tell your story...'} onChange={this.handleChange} />
+                                <SubmitButton onClick={() => this.addGame()}>Create</SubmitButton>
                             </div>
                     }
 
