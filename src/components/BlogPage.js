@@ -46,7 +46,7 @@ class BlogPage extends Component {
         })
         setTimeout(() => this.setState({
             resPosition: document.getElementById('resInput').offsetTop
-        }) , 500)
+        }) , 1000)
 
         this.props.shouldRender(true)
 
@@ -130,8 +130,8 @@ class BlogPage extends Component {
         return (
 
             <TransitionMotion
-                defaultStyles={ this.props.render && this.props.post.title ? [{key: 'blogPost', style: {top: 0, opacity: 0}}] : []}
-                styles={ this.props.render && this.props.post.title ? [{key: 'blogPost', style: {top: spring(40), opacity: spring(1)}}] : []}
+                defaultStyles={ this.props.render && ( this.props.post.title || this.state.activeIdx.title ) ? [{key: 'blogPost', style: {top: 0, opacity: 0}}] : []}
+                styles={ this.props.render && ( this.props.post.title || this.state.activeIdx.title ) ? [{key: 'blogPost', style: {top: spring(40), opacity: spring(1)}}] : []}
                 willEnter={() => ({top: 0, opacity: 0})}
                 willLeave={() => ({top: spring(70), opacity: spring(0)})}>
             {   styles =>
