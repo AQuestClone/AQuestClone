@@ -79,7 +79,7 @@ const globeFade = css.keyframes({
     '100%': {width: 150, height: 150, opacity: 0}
 })
 
-const GlobeBall = glamorous.div({
+const GlobeBall = glamorous.div('Globe', {
     borderRadius: '50%',
     backgroundColor: '#0083DD',
     height: 20,

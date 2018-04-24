@@ -1,10 +1,12 @@
 import axios from 'axios'
+import { type } from 'os';
+import { active } from 'glamor';
 
 const initialState = {
     blogs: [],
     user: {},
     post: {},
-    render: false
+    render: false,
 }
 
 const _FULFILLED ='_FULFILLED'
@@ -12,6 +14,7 @@ const GET_USER = 'GET_USER'
 const GET_POST = 'GET_POST'
 const GET_BLOGS = 'GET_BLOGS'
 const SHOULD_RENDER = 'SHOULD_RENDER'
+const EMPTY_POST = 'EMPTY_POST'
 
 
 export function getBlogs(){
@@ -50,6 +53,12 @@ export function shouldRender(bool){
     }
 }
 
+export function emptyPost(){
+    return {
+        type: EMPTY_POST
+    }
+}
+
 export default function reducer(state = initialState, action) { 
     switch (action.type) {
         case GET_USER + _FULFILLED:
@@ -60,6 +69,9 @@ export default function reducer(state = initialState, action) {
             return Object.assign({}, state, { blogs: action.payload })
         case SHOULD_RENDER:
             return Object.assign({}, state, {render: action.payload})
+        case EMPTY_POST: 
+            return Object .assign({}, state, {post: {}})
+
         default: return state;
     }
 }
