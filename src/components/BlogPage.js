@@ -60,6 +60,7 @@ class BlogPage extends Component {
             content: this.state.response,
             claps: 0
         }
+        console.log(obj)
         axios.post(`/api/responses/${this.props.post.id}`, obj).then(res => console.log(res))
 
     }
