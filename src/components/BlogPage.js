@@ -29,17 +29,7 @@ class BlogPage extends Component {
 
     }
    async componentDidMount() {
-        // Check to see if blogs exist on props, if they do display active post by its index
-        // if blogs do not exist on props, get them from the database
-        // let idx = this.props.blogs.findIndex((e) => +e.blog_id === +this.props.match.params.id)
-        // idx !== -1 ?
-        //     this.setState({
-        //         activeIdx: this.props.blogs[idx]
-        //     })
-        //     :
             await this.props.getPost(this.props.match.params.id)
-
-        //get responses by the url parameters.
         axios.get(`/api/responses/${this.props.match.params.id}`).then(res => {
             this.setState({ 
                 responses: res.data,
