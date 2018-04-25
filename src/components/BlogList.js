@@ -22,8 +22,8 @@ class BlogList extends Component {
 
     }
   }
-  componentDidMount() {
-    this.props.getBlogs()
+  async componentDidMount() {
+    await this.props.getBlogs()
     this.props.shouldRender(true)
   }
 
@@ -87,25 +87,38 @@ class BlogList extends Component {
               </div>
           }
         </TransitionMotion>
-        <BlogCardWrapper>
-            <MenuDiv style={{display:'flex',flexDirection:'row', justifyContent:'left'}}>
-              <MenuItem style={{ fontWeight: '900', fontSize:'25px' }}>Sort By</MenuItem>
-              <MenuItem onClick={() => this.sortClaps(this.props.blogs)}>Popularity</MenuItem>
-              <MenuItem onClick={() => this.sortDate(this.props.blogs)}>Latest</MenuItem>
-              <MenuItem onClick={() => this.sortResponses(this.props.blogs)}>Responses</MenuItem>
-            </MenuDiv>
-          {
-            this.props.blogs.map((e, i) => (
-              <CheckVisibility key={`blog${e.blog_id}_${e.title}`}>
-                {
-                  (isVisible) =>
-                    <BlogCard post={e} isVisible={isVisible} shouldRender={this.props.render} />
-                }
-              </CheckVisibility>
-            ))
+        <TransitionMotion
+          defaultStyles={shouldMount ? [{key:'filterMenu', style: {opacity: 0, top: 100}}] : []}
+          styles={shouldMount ? [{key: 'filterMenu', style: {opacity: spring(1), top: spring(55)}}] : []}
+          willEnter={() => ({opacity: 0, top: 100})}
+          willLeave={() => ({opacity: spring(0), top: spring(100)})}
+        >{
+          styles => 
+            <div>
+                {styles.map(({key, style}) => (
+                    <BlogCardWrapper key={key} style={style}>
+                      <MenuDiv style={{display:'flex',flexDirection:'row', justifyContent:'left'}}>
+                        <MenuItem style={{ fontWeight: '900', fontSize:'25px' }}>Sort By</MenuItem>
+                        <MenuItem onClick={() => this.sortClaps(this.props.blogs)}>Popularity</MenuItem>
+                        <MenuItem onClick={() => this.sortDate(this.props.blogs)}>Latest</MenuItem>
+                        <MenuItem onClick={() => this.sortResponses(this.props.blogs)}>Responses</MenuItem>
+                      </MenuDiv>
+                    {
+                      this.props.blogs.map((e, i) => (
+                        <CheckVisibility key={`blog${e.blog_id}_${e.title}`}>
+                          {
+                            (isVisible) =>
+                              <BlogCard post={e} isVisible={isVisible} shouldRender={this.props.render} />
+                          }
+                        </CheckVisibility>
+                      ))
+                    }
+                  </BlogCardWrapper>
+                ))
+              }
+            </div>
           }
-        </BlogCardWrapper>
-
+        </TransitionMotion>
       </div>
     )
   }
@@ -171,6 +184,7 @@ let Wrapper = glamorous.div(
 )
 
 let MenuDiv = glamorous.div(
+  'FilterMenu',
   {
     width: '70%',
     height: '80%',
@@ -178,7 +192,8 @@ let MenuDiv = glamorous.div(
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    overflow: 'hidden'
+    overflow: 'hidden',
+    position: 'relative',
   }
 )
 
