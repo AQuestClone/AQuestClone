@@ -28,12 +28,8 @@ class BlogPage extends Component {
         this.handleToggle = this.handleToggle.bind(this)
 
     }
-
-    async componentDidMount() {
-        // Get post from database using url param
-        await this.props.getPost(this.props.match.params.id)
-
-        //get responses by the url parameters.
+   async componentDidMount() {
+            await this.props.getPost(this.props.match.params.id)
         axios.get(`/api/responses/${this.props.match.params.id}`).then(res => {
             this.setState({ 
                 responses: res.data,
@@ -58,6 +54,7 @@ class BlogPage extends Component {
             content: this.state.response,
             claps: 0
         }
+        console.log(obj)
         axios.post(`/api/responses/${this.props.post.id}`, obj).then(res => console.log(res))
 
     }
