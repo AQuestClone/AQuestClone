@@ -40,7 +40,7 @@ class BlogPage extends Component {
             })
             setTimeout(() => document.getElementById('resInput') ? this.setState({resPosition: document.getElementById('resInput').offsetTop}) : null, 300)
         })
-
+        
         this.props.shouldRender(true)
 
     }
