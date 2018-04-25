@@ -29,7 +29,8 @@ class BlogPage extends Component {
 
     }
    async componentDidMount() {
-            await this.props.getPost(this.props.match.params.id)
+        await this.props.getPost(this.props.match.params.id)
+
         axios.get(`/api/responses/${this.props.match.params.id}`).then(res => {
             this.setState({ 
                 responses: res.data,

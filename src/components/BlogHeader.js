@@ -112,7 +112,7 @@ const GetStarted = glamorous.div(
         padding: '5px',
         borderColor: '#0083DD',
         color: '#0083DD',
-        minWidth: 100,
+        width: 100,
         height: 30,
         margin: 3
 
