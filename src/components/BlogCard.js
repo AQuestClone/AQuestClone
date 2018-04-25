@@ -5,7 +5,6 @@ import { TransitionMotion, spring } from 'react-motion';
 
 import CheckVisibility from './CheckVisibility';
 import PageChange from './PageChange';
-import padding from 'polished/lib/shorthands/padding';
 
 class BlogCard extends Component {
     constructor(props) {
