@@ -96,6 +96,7 @@ app.delete('/api/blogpost/:id', ctrl.deletePost) // this deletes all responses a
 app.get('/api/responses/:id', ctrl.getResponses)
 app.post('/api/responses/:id', ctrl.addResponse)
 app.put('/api/responses/:id', ctrl.editResponse)
+app.delete('/api/responses/:id', ctrl.deleteResponse)
 
 
 
