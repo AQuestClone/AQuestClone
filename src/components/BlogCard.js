@@ -277,10 +277,6 @@ const Svg = glamorous.svg(
         height: '35px',
         width: '35px',
         fill: '#1976D2',
-        // stroke: 'white'
-        // border: '1px solid',
-        // borderRadius: '50%',
-        // borderColor: 'black',
     }
 )
 
