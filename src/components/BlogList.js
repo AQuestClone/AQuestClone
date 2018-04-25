@@ -37,10 +37,6 @@ class BlogList extends Component {
     this.props.shouldRender(true)
   }
   shouldComponentUpdate(nextProps, nextState){
-    console.log(nextProps)
-    console.log(this.props);
-    
-    
     if (JSON.stringify(nextProps) === JSON.stringify(this.props)){
       return false;
     }
@@ -56,16 +52,14 @@ class BlogList extends Component {
           defaultStyles={shouldMount ?
             [{
               key: 'blogParticles',
-              style: { opacity: 0 }
+              style: {  opacity: 0 }
             }] : []}
           styles={shouldMount ?
             [{
               key: 'blogParticles',
-              style: { opacity: 1 }
+              style: {  opacity: spring(1) }
             }] : []}
           willEnter={() => ({ opacity: 0})}
-          willLeave={() => ({ opacity: 0})}
-
         >
           {
             (styles) =>
@@ -83,7 +77,7 @@ class BlogList extends Component {
                   />
 
                 ))}
-          </div>
+              </div>
                 }
         </TransitionMotion>
         <BlogCardWrapper>
