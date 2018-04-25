@@ -6,6 +6,7 @@ import { TransitionMotion, spring } from 'react-motion';
 import CheckVisibility from './CheckVisibility';
 import PageChange from './PageChange';
 
+
 class BlogCard extends Component {
     constructor(props) {
         super(props);
