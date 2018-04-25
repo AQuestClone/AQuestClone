@@ -1,0 +1,1 @@
+DELETE FROM "responses" WHERE "id"=$1
