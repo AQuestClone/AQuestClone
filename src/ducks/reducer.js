@@ -17,6 +17,7 @@ const SHOULD_RENDER = 'SHOULD_RENDER'
 const SORT_BY_CLAPS = 'SORT_BY_CLAPS'
 const SORT_BY_DATE = 'SORT_BY_DATE'
 const SORT_BY_RESPONSES = 'SORT_BY_RESPONSES'
+const EMPTY_POST = 'EMPTY_POST'
 
 export function sortByResponses(blogs) {
     let sortedBlogs = blogs.sort((a, b) => {
@@ -114,7 +115,13 @@ export function shouldRender(bool) {
     }
 }
 
-export default function reducer(state = initialState, action) {
+export function emptyPost(){
+    return {
+        type: EMPTY_POST
+    }
+}
+
+export default function reducer(state = initialState, action) { 
     switch (action.type) {
         case SORT_BY_DATE:
             return Object.assign({}, state, {blogs: action.payload})
@@ -128,6 +135,9 @@ export default function reducer(state = initialState, action) {
             return Object.assign({}, state, { blogs: action.payload })
         case SHOULD_RENDER:
             return Object.assign({}, state, { render: action.payload })
+            return Object.assign({}, state, {render: action.payload})
+        case EMPTY_POST: 
+            return Object .assign({}, state, {post: {}})
 
         default: return state;
     }

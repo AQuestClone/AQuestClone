@@ -57,12 +57,12 @@ class BlogList extends Component {
           defaultStyles={shouldMount ?
             [{
               key: 'blogParticles',
-              style: { opacity: 0 }
+              style: {  opacity: 0 }
             }] : []}
           styles={shouldMount ?
             [{
               key: 'blogParticles',
-              style: { opacity: 1 }
+              style: {  opacity: spring(1) }
             }] : []}
           willEnter={() => ({ opacity: 0 })}
           willLeave={() => ({ opacity: 0 })}
