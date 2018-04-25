@@ -45,7 +45,7 @@ class BlogHeader extends Component {
                                                 <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
                                                     {
                                                         this.props.user.admin ?
-                                                            <GetStarted> <Link to='/blog/create'>Create</Link></GetStarted>
+                                                            <GetStarted> <Link style={{ width: '100%', height: '100%', padding: 5, display: 'flex', alignItems: 'center', justifyContent: 'center'}} to='/blog/create'>Create</Link></GetStarted>
                                                             : ''
                                                     }
                                                     <GetStarted> {this.props.user.username}</GetStarted>
@@ -53,8 +53,8 @@ class BlogHeader extends Component {
 
                                                 :
                                                 <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
-                                                    <GetStarted style={{ border: 'none' }}><a href={process.env.REACT_APP_LOGIN}> Sign in </a></GetStarted>
-                                                    <GetStarted> <a href={process.env.REACT_APP_LOGIN}> Get started </a></GetStarted>
+                                                    <GetStarted style={{ border: 'none' }}><a href={process.env.REACT_APP_LOGIN} style={{ width: '100%', height: '100%', padding: 5, display: 'flex', alignItems: 'center', justifyContent: 'center'}}> Sign in </a></GetStarted>
+                                                    <GetStarted> <a href={process.env.REACT_APP_LOGIN} style={{ width: '100%', height: '100%', padding: 5, display: 'flex', alignItems: 'center', justifyContent: 'center'}}> Get started </a></GetStarted>
                                                 </div>
                                         }
                                     </div>
@@ -105,6 +105,7 @@ const GetStarted = glamorous.div(
     {
         display: 'flex',
         alignItems: 'center',
+        justifyContent: 'center',
         textAlign: 'center',
         border: '1px solid',
         borderRadius: '5px',
