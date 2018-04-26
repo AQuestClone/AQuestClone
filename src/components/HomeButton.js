@@ -47,7 +47,7 @@ const LogoWrapper = glamorous.div(
 class HomeButton extends Component {
     render() {
         return (
-            <a href='http://localhost:3000/' >
+            <a href={process.env.REACT_APP_HOMEPAGE} >
             <Wrapper>
                 <LogoWrapper>
                     <img src={logo} alt='homelogo' />

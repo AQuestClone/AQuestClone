@@ -7,6 +7,7 @@ const express = require('express')
     , Auth0Strategy = require('passport-auth0')
     , massive = require('massive')
     , ctrl = require('./ctrl')
+    , path = require('path')
 
 const {
     CONNECTION_STRING,
@@ -22,6 +23,7 @@ const {
 
 const app = express();
 app.use(bodyParser.json());
+app.use(express.static(`${__dirname}/../build`))
 
 massive(CONNECTION_STRING).then(db => {
     app.set('db', db);
@@ -98,6 +100,8 @@ app.post('/api/responses/:id', ctrl.addResponse)
 app.put('/api/responses/:id', ctrl.editResponse)
 app.delete('/api/responses/:id', ctrl.deleteResponse)
 
-
-
+app.get('*', (req, res)=>{
+    res.sendFile(path.join(__dirname, '../build/index.html'));
+})
+ 
 app.listen(SERVER_PORT, () => console.log(`listening on port ${SERVER_PORT}`))
