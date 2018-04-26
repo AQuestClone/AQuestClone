@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { css, active } from 'glamor';
 import glamorous from 'glamorous';
-import { getUser } from '../ducks/reducer'
+import { getUser, emptyPost } from '../ducks/reducer';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { spring, TransitionMotion } from 'react-motion'
+import { spring, TransitionMotion } from 'react-motion';
 
 class BlogHeader extends Component {
     constructor(props) {
@@ -45,7 +45,7 @@ class BlogHeader extends Component {
                                                 <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
                                                     {
                                                         this.props.user.admin ?
-                                                            <GetStarted> <Link to='/blog/create'>Create</Link></GetStarted>
+                                                            <GetStarted onClick={()=>this.props.emptyPost()}> <Link style={{ width: '100%', height: '100%', padding: 5, display: 'flex', alignItems: 'center', justifyContent: 'center'}} to='/blog/create'>Create</Link></GetStarted>
                                                             : ''
                                                     }
                                                     <GetStarted> {this.props.user.username}</GetStarted>
@@ -53,8 +53,8 @@ class BlogHeader extends Component {
 
                                                 :
                                                 <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
-                                                    <GetStarted style={{ border: 'none' }}><a href={process.env.REACT_APP_LOGIN}> Sign in </a></GetStarted>
-                                                    <GetStarted> <a href={process.env.REACT_APP_LOGIN}> Get started </a></GetStarted>
+                                                    <GetStarted style={{ border: 'none' }}><a href={process.env.REACT_APP_LOGIN} style={{ width: '100%', height: '100%', padding: 5, display: 'flex', alignItems: 'center', justifyContent: 'center'}}> Sign in </a></GetStarted>
+                                                    <GetStarted> <a href={process.env.REACT_APP_LOGIN} style={{ width: '100%', height: '100%', padding: 5, display: 'flex', alignItems: 'center', justifyContent: 'center'}}> Get started </a></GetStarted>
                                                 </div>
                                         }
                                     </div>
@@ -74,7 +74,7 @@ function mapStateToProps(state) {
         post: state.post
     }
 }
-export default connect(mapStateToProps, { getUser })(BlogHeader)
+export default connect(mapStateToProps, { getUser, emptyPost })(BlogHeader)
 
 const HeaderBar = glamorous.div(
     {
@@ -105,6 +105,7 @@ const GetStarted = glamorous.div(
     {
         display: 'flex',
         alignItems: 'center',
+        justifyContent: 'center',
         textAlign: 'center',
         border: '1px solid',
         borderRadius: '5px',
