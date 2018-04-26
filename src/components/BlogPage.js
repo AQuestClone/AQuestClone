@@ -46,7 +46,8 @@ class BlogPage extends Component {
 
     deletePost() {
         alert('are you sure?')
-        axios.delete(`/api/blogpost/${this.props.match.params.id}`).then((res) => console.log(res.data))
+        axios.delete(`/api/blogpost/${this.props.match.params.id}`).then(() => this.props.history.push('/blog'))
+        
     }
     handleChange(e) {
         this.setState({ [e.target.name]: e.target.value })
@@ -83,6 +84,7 @@ class BlogPage extends Component {
         })
         console.log(this.state.responses[x].res_id)
         axios.delete(`/api/responses/${this.state.responses[x].res_id}`).then((res) => console.log(res.data))
+
     }
     formatDate(fullDate) {
         const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];

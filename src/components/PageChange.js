@@ -18,18 +18,16 @@ class PageChange extends Component{
 
     changePage = (newPage) => {
 
-        console.log(this.props.match)
+    
 
-        if (this.props.match.path === newPage)
-
-       { this.afterScroll();
+        this.afterScroll();
 
         document.addEventListener('scroll', this.afterScroll)
 
         document.getElementById('root').scrollIntoView({block: "start", inline: "nearest", behavior: 'smooth'})
 
         this.setState({newPage})}
-    }
+    
 
     afterScroll = () => {
         if(this.scrollTimeout){clearTimeout(this.scrollTimeout)};
