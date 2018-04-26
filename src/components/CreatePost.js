@@ -132,7 +132,6 @@ const dropStyle = css({
 
 
 const CloudinaryURL = 'https://api.cloudinary.com/v1_1/dbuqor9no/image/upload'
-//aay8b9ww
 class CreatePost extends Component {
     constructor(props) {
         super(props);
@@ -289,4 +288,4 @@ function mapStateToProps(state) {
         post: state.post
     }
 }
-export default connect(mapStateToProps, { getPost })(CreatePost)
+export default connect(mapStateToProps, { getPost  })(CreatePost)

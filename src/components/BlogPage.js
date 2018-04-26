@@ -194,37 +194,41 @@ class BlogPage extends Component {
                                             </div>
                                         ))}
                                     </div>
-                                    }
-                                </TransitionMotion>
+                            }
+                            </TransitionMotion>
 
-                                <HashTag>{title}</HashTag>
-                                <img style={{ height: '50vh', backgroundPosition: 'center', backgroundSize: 'cover' }} src={`${image}`} />
-                                <HashTag id={'bodyText'} fontSize={'17px'}>{content}</HashTag>
+                            <HashTag fontWeight='400' lineHeight='1em' marginTop={65}>{title}</HashTag>
+                            <img style={{ height: '50vh', backgroundPosition: 'center', backgroundSize: 'cover' }} src={`${image}`} />
+                            <HashTag id={'bodyText'} fontSize={'21px'} fontWeight='200' lineHeight='1.6em'>{content}</HashTag>
 
-                                <div>
-                                    {
-                                        this.props.user ?
-                                            this.props.user.admin ?
-                                                <div>
-                                                    <Link to='/blog/create'><CardButton>edit</CardButton></Link>
-                                                    <CardButton onClick={this.deletePost}>delete</CardButton>
-                                                </div> : ''
-                                            : ''
-                                    }
-                                </div>
-                                <div id='resInput' style={{ boxShadow: '0 1px 4px rgba(44, 44, 46, 0.32)', padding: '10px', width: '28.8vw' }}>
-                                    {
-                                        this.props.user.id ?
-                                            <div  >
+                            <div>
+                                {
+                                    this.props.user ?
+                                        this.props.user.admin ?
+                                            <div style={{ textDecoration: 'none', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                                <Link style={{ textDecoration: 'none' }} to='/blog/create'><CardButton>Edit</CardButton></Link>
+                                                <CardButton onClick={this.deletePost}>Delete</CardButton>
+                                            </div> : ''
+                                        : ''
+                                }
+                            </div>
+                            
+                            <LineBreak />
+                            
 
-                                                <ResponseInput value={this.state.response} name='response' onChange={this.handleChange} placeholder='Write a response' />
+                            <div id='resInput' style={{ boxShadow: '0 1px 4px rgba(44, 44, 46, 0.32)', padding: '10px', width: '28.8vw' }}>
+                                {
+                                    this.props.user.id ?
+                                        <div  >
 
-                                                <Button onClick={this.handleSubmit} >Publish</Button>
-                                            </div>
-                                            :
-                                            <a href={process.env.REACT_APP_LOGIN}> <ResponseInput placeholder='Write a Response' /> </a>
-                                    }
-                                </div>
+                                            <ResponseInput value={this.state.response} name='response' onChange={this.handleChange} placeholder='Write a response' />
+
+                                            <Button onClick={this.handleSubmit} >Publish</Button>
+                                        </div>
+                                        :
+                                        <a href={process.env.REACT_APP_LOGIN}> <ResponseInput placeholder='Write a Response' /> </a>
+                                }
+                            </div>
 
                                 {resCard}
 
@@ -270,17 +274,35 @@ let HashTag = glamorous.h2(
     'HashTag',
     {
         fontFamily: "'Libre Baskerville', 'serif'",
+        fontFamily: "'Lora', serif",
         fontSize: '30px',
-        fontWeight: '400',
-        letterSpacing: '0.05em',
+        fontWeight: '200',
+        letterSpacing: '0.05em'
     },
     (props) => ({
-        fontSize: props.fontSize
+        fontSize: props.fontSize,
+        fontWeight: props.fontWeight,
+        lineHeight: props.lineHeight,
+        marginTop: props.marginTop
     })
 )
 const CardButton = glamorous.button(
     {
-        background: '#1976D2'
+        background: 'white',
+        border: '1px solid #b3b3b3',
+        color: '#b3b3b3',
+        borderRadius: 3,
+        margin: '0px 3px',
+        display: 'block',
+        fontFamily: "'Tinos', serif",
+        letterSpacing: 1,
+        transition: 'all .2s',
+        textDecoration: 'none',
+        ':hover': {
+            background: '#b3b3b3',
+            color: 'white',
+            cursor: 'pointer'
+        }
     }
 )
 const ResHeader = glamorous.div(
@@ -323,12 +345,29 @@ const Svg = glamorous.svg(
 const Button = glamorous.div(
     {
         boxSizing: 'border-box',
-        width: '52px',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: 75,
         border: '1px solid',
         borderRadius: '5px',
         padding: '5px',
         borderColor: '#0083DD',
-        color: '#0083DD'
+        color: '#0083DD',
+        cursor: 'pointer', 
+        ':hover': {
+            background: '#0083DD',
+            color: 'white'
+        }
+    }
+)
+
+const LineBreak = glamorous.div(
+    {
+        width: 500,
+        height: 1,
+        background: '#e3e3e3',
+        margin: '25px auto'
 
     }
 )
