@@ -144,15 +144,14 @@ class CreatePost extends Component {
         this.handleChange = this.handleChange.bind(this)
         this.resetState = this.resetState.bind(this)
     }
-    addGame() {
+    addPost() {
         let obj = {
             title: this.state.title,
             content: this.state.content,
             image: this.state.image,
             claps: 0
         }
-        console.log(obj)
-        axios.post(`/api/blogpost/${this.props.user.id}`, obj).then((res) => res)
+        axios.post(`/api/blogpost/${this.props.user.id}`, obj).then(() => this.props.history.push('/blog'))
     }
 
     editGame() {
@@ -218,6 +217,8 @@ class CreatePost extends Component {
         // Once all the files are uploaded 
         axios.all(uploaders).then(() => {
             // ... perform after upload is successful operation
+
+
         });
     }
 
@@ -274,7 +275,7 @@ class CreatePost extends Component {
                                     </Dropzone>
                                 </ImageDiv>
                                 <ContentInput name='content' placeholder={'Tell your story...'} onChange={this.handleChange} />
-                                <SubmitButton onClick={() => this.addGame()}>Create</SubmitButton>
+                                <SubmitButton onClick={() => this.addPost()}>Create</SubmitButton>
                             </div>
                     }
 
@@ -285,7 +286,8 @@ class CreatePost extends Component {
 };
 function mapStateToProps(state) {
     return {
-        post: state.post
+        post: state.post,
+        user: state.user
     }
 }
 export default connect(mapStateToProps, { getPost  })(CreatePost)
